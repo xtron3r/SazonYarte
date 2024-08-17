@@ -26,7 +26,23 @@ const routes: Routes = [
   {
     path: 'reservar',
     loadChildren: () => import('./pages/reservar/reservar.module').then( m => m.ReservarPageModule)
+  },  {
+    path: 'nosotros',
+    loadChildren: () => import('./pages/nosotros/nosotros.module').then( m => m.NosotrosPageModule)
   },
+  {
+    path: 'miperfil',
+    loadChildren: () => import('./pages/miperfil/miperfil.module').then( m => m.MiperfilPageModule)
+  },
+  {
+    path: 'rcontrasenia',
+    loadChildren: () => import('./pages/rcontrasenia/rcontrasenia.module').then( m => m.RcontraseniaPageModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule)
+  },
+
 
 
 ];

@@ -4,24 +4,30 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="cafe-toolbar">
-  <div class="ion-margin-start">
-    <ion-text>
-      <h1 class="ion-text-center">Sazón Y Arte <img src="../../../assets/icon/cheflogoo (2).png" alt="Imagen Chef"></h1>
-    </ion-text>
-  </div>
-  <ion-text class="">
-    <p class="ion-text-center">El mejor restaurante de Chile, donde disfrutarás de platos deliciosos y un ambiente único. ¡Te esperamos!</p>
+<ion-content [fullscreen]="true" class="">
+  <ion-text class="ion-margin">
+    <h1 class="ion-margin-start">Sazón Y Arte <img src="../../../assets/icon/cheflogoo (2).png" alt="Imagen Chef"></h1>
+  </ion-text>
+  <ion-text class="ion-margin-top">
+    <p class="ion-padding">El mejor restaurante de Chile, donde disfrutarás de platos deliciosos y un ambiente único. ¡Te esperamos!</p>
   </ion-text>
   <form action="">
-    <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input label="Usuario" label-placement="floating" fill="clear"></ion-input>
+    <ion-item class="ion-margin-end ion-margin-top ion-color">
+      <ion-input label="Usuario" label-placement="floating" fill="clear" color="dark"></ion-input>
     </ion-item>
-    
-    <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input type="password" label-placement="floating" label="Contraseña"  fill="clear">
-      </ion-input>
+    <ion-item class="ion-margin-end ion-margin-top ion-color">
+      <ion-input type="Password" label="Contraseña" label-placement="floating" fill="clear" color="dark"></ion-input>
       <ion-input-password-toggle slot="end"></ion-input-password-toggle>
     </ion-item>
+    <ion-text class="ion-text-end">
+      <p class="ion-margin-end ion-padding-top">Recuperar Contraseña?</p>
+    </ion-text>
+    <div class="ion-text-center">
+      <ion-button class="ion-margin-top ion-margin-bottom" color="dark" shape="round" [routerLink]="['/home']">Iniciar Sesión</ion-button>
+    </div>
   </form>
+
+  <ion-text class="ion-text-center">
+    <p>No tienes una cuenta? <span [routerLink]="['/register']"><b>Registrate</b></span></p>
+  </ion-text>
 </ion-content>

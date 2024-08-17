@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MesasPageRoutingModule } from './mesas-routing.module';
+import { RcontraseniaPageRoutingModule } from './rcontrasenia-routing.module';
 
-import { MesasPage } from './mesas.page';
+import { RcontraseniaPage } from './rcontrasenia.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MesasPageRoutingModule
+    RcontraseniaPageRoutingModule
   ],
-  declarations: [MesasPage]
+  declarations: [RcontraseniaPage]
 })
-export class MesasPageModule {}
+export class RcontraseniaPageModule {}

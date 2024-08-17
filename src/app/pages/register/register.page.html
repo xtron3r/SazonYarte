@@ -1,42 +1,43 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="cafe-toolbar">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button> 
+      <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">Registrarse</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="cafe-toolbar">
   <div class="ion-margin-start">
     <ion-text>
-      <h1 class="ion-text-center">Sazón Y Arte <img src="../../../assets/icon/cheflogoo (2).png" alt="Imagen Chef"></h1>
+      <h1 class="ion-text-center">Registro <img src="../../../assets/icon/cheflogoo (2).png" alt="Imagen Chef"></h1>
     </ion-text>
   </div>
 
   <form action="">
     <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input label="Nombre" label-placement="floating" fill="clear"></ion-input>
+      <ion-input label="Nombre Completo" label-placement="floating" fill="clear" color=dark></ion-input>
     </ion-item>
 
     <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input label="Apellido" label-placement="floating" fill="clear"></ion-input>
+      <ion-input label="Nombre de usuario" label-placement="floating" fill="clear" color=dark></ion-input>
     </ion-item>
 
     <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input label="Numero de telefono" label-placement="floating" fill="clear"></ion-input>
+      <ion-input label="Numero de telefono" label-placement="floating" fill="clear" color=dark></ion-input>
     </ion-item>
 
     <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input label="Correo electronico" label-placement="floating" fill="clear"></ion-input>
+      <ion-input label="Correo electronico" label-placement="floating" fill="clear" color=dark></ion-input>
     </ion-item>
 
     <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input type="password" label-placement="floating" label="Contraseña"  fill="clear">
+      <ion-input type="password" label-placement="floating" label="Contraseña"  fill="clear" color=dark>
       </ion-input>
       <ion-input-password-toggle slot="end"></ion-input-password-toggle>
     </ion-item>
-    <ion-button>Registrarse</ion-button>
+    <div class="ion-text-center">
+      <ion-button type="submit"  class="ion-margin-top" shape="round">Registrarse</ion-button>
+    </div>
   </form>
 </ion-content>
 
