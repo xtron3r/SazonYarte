@@ -1,12 +1,13 @@
 # Sazon y Arte
 
-## Descripción
-Este proyecto es para la asignatura Aplicación Móvil. Consiste en una aplicación que permite la reserva de mesas en un restaurante ficticio llamado "Sazon y Arte". El objetivo principal es mejorar la gestión de reservas, evitar largas filas y aumentar la satisfacción de los clientes.
-
 ## Índice
 1. [Descripción](#descripción)
 2. [Funcionalidades](#funcionalidades)
 3. [Contacto](#contacto)
+
+
+## Descripción
+Este proyecto es para la asignatura Aplicación Móvil. Consiste en una aplicación que permite la reserva de mesas en un restaurante ficticio llamado "Sazón y Arte". El objetivo principal es mejorar la gestión de reservas, evitar largas filas y aumentar la satisfacción de los clientes.
 
 ## Funcionalidades
 - **Registro e inicio de sesión**: Permite conocer la información del cliente.
