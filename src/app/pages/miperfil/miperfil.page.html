@@ -3,14 +3,50 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>miperfil</ion-title>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">miperfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <div class="img-fondo ion-no-margin">
+    <ion-thumbnail>
+      <img alt="FotoMarca" src="../../../assets/icon/ChefPerfil.png" />
+    </ion-thumbnail>
+    <ion-text class="ion-text-center">
+      <h5 class="usuario">Nombre Del Cliente</h5>
+    </ion-text>  
+  </div>
+ 
+
+  <ion-list class="ion-margin-top">
+
+    <ion-item>
+      <ion-icon aria-hidden="true" name="person-outline" slot="start"></ion-icon>
+      <ion-input label="Usuario" label-placement="floating" fill="solid"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
+      <ion-input label="Correo Electronico" label-placement="floating" fill="solid"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
+      <ion-input label="Telefono" label-placement="floating" fill="solid"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <div class="ion-text-center ion-margin">
+    <ion-button color="dark" expand="block" class="ion-margin">
+      Mis Reservas
+      <ion-icon slot="end" name="wine-outline"></ion-icon>
+    </ion-button>
+    <ion-button color="dark" expand="block" class="ion-margin">
+      Editar Contraseña
+      <ion-icon slot="end" name="key-outline"></ion-icon>
+    </ion-button>
+  </div>
+ 
 </ion-content>

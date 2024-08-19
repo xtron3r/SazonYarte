@@ -1,16 +1,47 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar class="cafe-toolbar">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>nosotros</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">nosotros</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="ion-margin-start">
+    <ion-text>
+      <h1 class="ion-text-center">Acerca de Nosotros 
+        <img src="../../../assets/icon/cheflogoo (2).png" alt="Imagen Chef">
+      </h1>
+    </ion-text>
+  </div>
+  
+  
+  <ion-text class="ion-margin-top">
+    <p class="ion-padding">
+      Somos uno de los mejores restaurantes del país, donde ofrecemos una amplia gama de platillos tanto chilenos como internacionales. Nuestro compromiso es brindar una experiencia culinaria excepcional que deleite todos los sentidos.
+    </p>
+  </ion-text>
+
+  <ion-text class="ion-text-center ion-margin-top">
+    <h2>Contacto</h2>
+  </ion-text>
+
+  <ion-list class="ion-padding ">
+    <ion-item>
+      <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
+      <ion-label>Correo</ion-label>
+      <ion-text>sazon.arte&#64;gmail.com</ion-text>
+    </ion-item>
+      
+    
+    <ion-item>
+      <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
+      <ion-label>Teléfono</ion-label>
+      <ion-text>+56 9 1234 5678</ion-text>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+<ion-footer>
+  <h5 class="ion-align-items-end">Sazon y Arte Company </h5>
+</ion-footer>
