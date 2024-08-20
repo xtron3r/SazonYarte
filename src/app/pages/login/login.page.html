@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" >
   <ion-toolbar class="cafe-toolbar">
     <ion-title class="ion-text-center">Inicio Sesión</ion-title>
   </ion-toolbar>
@@ -13,21 +13,25 @@
       <h2 class="titulo">Sazon y Arte</h2>
     </ion-text>
 </div>
+
   <ion-text class="ion-margin-top">
-    <p class="ion-padding">El mejor restaurante de Chile, donde disfrutarás de platos deliciosos y un ambiente único. ¡Te esperamos!</p>
+    <p class="ion-text-center">El mejor restaurante de Chile, donde disfrutarás de platos deliciosos y un ambiente único. ¡Te esperamos!</p>
   </ion-text>
   <form action="">
+    <div class="globo-texto"> 
     <ion-item class="ion-margin-end ion-margin-top ion-color">
       <ion-input label="Usuario" label-placement="floating" fill="clear" color="dark"></ion-input>
     </ion-item>
     <ion-item class="ion-margin-end ion-margin-top ion-color">
       <ion-input type="Password" label="Contraseña" label-placement="floating" fill="clear" color="dark"></ion-input>
     </ion-item>
+
     <ion-text class="ion-text-end">
-      <p class="ion-margin-end ion-padding-top">Recuperar Contraseña?</p>
+      <p class="ion-margin-end ion-padding-top" [routerLink]="['/rcontrasenia']">Recuperar Contraseña?</p>
     </ion-text>
     <div class="ion-text-center">
       <ion-button class="ion-margin-top ion-margin-bottom" color="dark" shape="round" [routerLink]="['/home']">Iniciar Sesión</ion-button>
+    </div>
     </div>
   </form>
 

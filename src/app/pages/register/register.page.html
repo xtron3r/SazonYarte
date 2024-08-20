@@ -7,13 +7,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="cafe-toolbar">
-  <div class="ion-margin-start">
-    <ion-text>
-      <h1 class="ion-text-center">Registro <img src="../../../assets/icon/cheflogoo (2).png" alt="Imagen Chef"></h1>
+  <div class="ion-no-margin">
+    <ion-thumbnail>
+      <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
+    </ion-thumbnail>
+    <ion-text class="ion-text-center">
+      <h1 class="titulo">Registro</h1>
     </ion-text>
   </div>
-
+  
   <form action="">
+    <div class="globo-texto">
     <ion-item class="ion-margin-horizontal ion-color">
       <ion-input label="Nombre Completo" label-placement="floating" fill="clear" color=dark></ion-input>
     </ion-item>
@@ -38,6 +42,7 @@
     <div class="ion-text-center">
       <ion-button type="submit"  class="ion-margin-top" shape="round">Registrarse</ion-button>
     </div>
+   </div>
   </form>
 </ion-content>
 

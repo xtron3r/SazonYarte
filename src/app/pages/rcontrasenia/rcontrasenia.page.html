@@ -3,14 +3,35 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Rcontrasenia</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Rcontrasenia</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="ion-margin-start">
+   
+        <ion-thumbnail>
+          <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
+        </ion-thumbnail>
+        <ion-text>
+          <h2 class="ion-text-center">Sazon Y Arte</h2>
+        </ion-text>
+  </div>
+  
+  <form action="">
+    <div class="globo-texto"> 
+      <ion-text>
+        <h2 class="ion-text-center">Recuperar Contraseña
+          </h2>
+          </ion-text>
+    <ion-item class="ion-margin-end ion-margin-top ion-color">
+      <ion-input label="Email" label-placement="floating" fill="clear" color="dark"></ion-input>
+    </ion-item>
+    <div class="ion-text-center">
+      <ion-button type="submit"  class="ion-margin-top" shape="round">Enviar</ion-button>
+    </div>
+    </div>
+  </form>
 </ion-content>
+<ion-footer>
+  <h5 class="ion-align-items-end">Sazon y Arte Company </h5>
+</ion-footer>
