@@ -3,20 +3,13 @@
     <ion-buttons slot="start" >
       <ion-menu-button></ion-menu-button> 
     </ion-buttons>
-    <ion-title>Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="cafe-toolbar">
-  <div class="ion-margin-start">
-        <ion-thumbnail>
-          <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
-        </ion-thumbnail>
-        <ion-text>
-          <h2 class="ion-text-center">Bienvenido a Sazon Y Arte</h2>
-        </ion-text>
+  <div class="ion-no-margin">
+    <h3 class="titulo">Bienvenido {{nombreUsuario}}</h3>
   </div>
-
   <div class="globo-texto">
     <ion-text class="ion-margin-top">
       <h5 class="ion-text-center">
@@ -24,6 +17,7 @@
       </h5>
     </ion-text>
   </div>
+</ion-content>
 
 <ion-footer>
 </ion-footer>
