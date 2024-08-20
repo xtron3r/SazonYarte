@@ -5,3 +5,11 @@
 ion-list.cafe-list{
     --background-color:rgb(156, 100, 16);
 }
+ion-thumbnail {
+    --size: 140px;
+    --border-radius: 14px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}

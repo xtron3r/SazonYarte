@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar >
+  <ion-toolbar class="cafe-toolbar">
     <ion-buttons slot="start" >
       <ion-menu-button></ion-menu-button> 
     </ion-buttons>
@@ -7,13 +7,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" id="rojo">
-  <ion-header collapse="condense" id="rojo">
-    <ion-toolbar id="rojo">
-      <ion-title size="large" id="rojo">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<ion-content [fullscreen]="true" class="cafe-toolbar">
+  <div class="ion-margin-start">
+        <ion-thumbnail>
+          <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
+        </ion-thumbnail>
+        <ion-text>
+          <h2 class="ion-text-center">Bienvenido a Sazon Y Arte</h2>
+        </ion-text>
+  </div>
+
+  <div class="globo-texto">
+    <ion-text class="ion-margin-top">
+      <h5 class="ion-text-center">
+        En donde cada plato es una obra de arte, cuidadosamente elaborado con ingredientes frescos y de alta calidad, para ofrecerte una experiencia culinaria que no solo satisface el paladar, sino que también despierta todos los sentidos.
+      </h5>
+    </ion-text>
+  </div>
 
 <ion-footer>
 </ion-footer>

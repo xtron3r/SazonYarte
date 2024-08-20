@@ -1,0 +1,27 @@
+.cafe-toolbar{
+    --background: rgb(156, 100, 16);
+}
+
+ion-list.cafe-list{
+    --background-color:rgb(156, 100, 16);
+}
+ion-thumbnail {
+    --size: 140px;
+    --border-radius: 14px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    justify-content: center;
+}
+
+.globo-texto {
+    background-color: rgba(68, 41, 0, 0.671); /* Color contrastante, azul-verdoso en este caso */
+    color: white; /* Color del texto para garantizar la legibilidad */
+    border: 1px solid #ccc; /* Opcional: Borde para definir el contorno */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    margin: 20px; /* Margen externo */
+    text-align: center;
+  }
+  
