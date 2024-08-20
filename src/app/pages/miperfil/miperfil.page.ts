@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MiperfilPage implements OnInit {
 
+
+  nombreCliente:string="JEJEEJ";
+
   constructor() { }
 
   ngOnInit() {
