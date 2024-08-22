@@ -1,5 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="cafe-toolbar">
+    <h3>Acerca de Nosotros </h3>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -7,44 +8,30 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="ion-margin-start">
-    <ion-text>
-      <h1 class="ion-text-center">Acerca de Nosotros 
-        </h1>
-        </ion-text>
-        <ion-thumbnail>
-          <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
-        </ion-thumbnail>
-        <ion-text>
-          <h2 class="ion-text-center">Sazon Y Arte</h2>
-        </ion-text>
+  <div>
+    <ion-thumbnail>
+        <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
+    </ion-thumbnail>
   </div>
   
   <div class="globo-texto">
   <ion-text class="ion-margin-top">
     <h5 class="ion-text-center">
-      Somos uno de los mejores restaurantes del país, donde ofrecemos una amplia gama de platillos tanto chilenos como internacionales. Nuestro compromiso es brindar una experiencia culinaria excepcional que deleite todos los sentidos.
+      Somos uno de los mejores restaurantes del país, donde ofrecemos una amplia gama de platillos tanto chilenos como internacionales. 
+      Nuestro compromiso es brindar una experiencia culinaria excepcional que deleite todos los sentidos.
     </h5>
   </ion-text>
   </div>
-  <ion-text class="ion-text-center ion-margin-top">
-    <h2>Contacto</h2>
-  </ion-text>
+  
+  <swiper-container [pagination]="true" [loop]="true" class="platos-cotizados">
+    <swiper-slide><img src="../../assets/fondos/cocina1.jpg" alt="plato1"></swiper-slide>
+    <swiper-slide><img src="../../assets/fondos/local1.jpg" alt="plato1"></swiper-slide>
+    <swiper-slide><img src="../../assets/fondos/comida3.jpg" alt="plato1"></swiper-slide>
+    <swiper-slide><img src="../../assets/fondos/comida4.jpg" alt="plato1"></swiper-slide>
+  </swiper-container>
 
-  <ion-list class="ion-padding ">
-    <ion-item>
-      <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
-      <ion-label>Correo</ion-label>
-      <ion-text>sazon.arte&#64;gmail.com</ion-text>
-    </ion-item>
-      
-    
-    <ion-item>
-      <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
-      <ion-label>Teléfono</ion-label>
-      <ion-text>+56 9 1234 5678</ion-text>
-    </ion-item>
-  </ion-list>
+
+  
 </ion-content>
 
 <ion-footer>

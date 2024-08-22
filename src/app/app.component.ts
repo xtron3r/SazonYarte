@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { Router, NavigationEnd } from '@angular/router';
+import { register } from 'swiper/element/bundle';
+register();
 
 @Component({
   selector: 'app-root',

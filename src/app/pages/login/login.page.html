@@ -1,45 +1,38 @@
-<ion-header [translucent]="true" >
-  <ion-toolbar class="cafe-toolbar">
-    <ion-title class="ion-text-center">Inicio Sesión</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <div class="ion-no-margin">
+<ion-content [fullscreen]="true" class="fondo">
+  <div>
     <ion-thumbnail>
       <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
     </ion-thumbnail>
     <ion-text>
       <h2 class="titulo">Sazon y Arte</h2>
     </ion-text>
-</div>
-
-  <ion-text class="ion-margin-top">
-    <p class="ion-text-center">El mejor restaurante de Chile, donde disfrutarás de platos deliciosos y un ambiente único. ¡Te esperamos!</p>
-  </ion-text>
-  <form action="">
-    <div class="globo-texto"> 
-    <ion-item class="ion-margin-end ion-margin-top ion-color">
-      <ion-input label="Usuario" label-placement="floating" fill="clear" color="dark"></ion-input>
-    </ion-item>
-    <ion-item class="ion-margin-end ion-margin-top ion-color">
-      <ion-input type="Password" label="Contraseña" label-placement="floating" fill="clear" color="dark"></ion-input>
-    </ion-item>
-
-    <ion-text class="ion-text-end">
-      <p class="ion-margin-end ion-padding-top" [routerLink]="['/rcontrasenia']">Recuperar Contraseña?</p>
+    <ion-text class="ion-margin-top">
+      <p class="ion-text-center ion-padding">El mejor restaurante de Chile, donde disfrutarás de platos deliciosos y un ambiente único. ¡Te esperamos!</p>
     </ion-text>
-    <div class="ion-text-center">
-      <ion-button class="ion-margin-top ion-margin-bottom" color="dark" shape="round" [routerLink]="['/home']">Iniciar Sesión</ion-button>
-    </div>
-    </div>
-  </form>
+  </div>
 
-  <ion-text class="ion-text-center">
-    <p>No tienes una cuenta? <span [routerLink]="['/register']"><b>Registrate</b></span></p>
-  </ion-text>
+  <div class="seccion-form">
+    <form action="" class="inicio-sesion">
+      <div> 
+        <ion-item class="ion-margin-end ion-margin-top ion-color">
+          <ion-input label="Usuario" label-placement="floating" fill="clear" ></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-end ion-margin-top ion-color">
+          <ion-input type="Password" label="Contraseña" label-placement="floating" fill="clear"></ion-input>
+        </ion-item>
+  
+        <div class="ion-text-center">
+          <ion-button class="ion-margin-top ion-margin-bottom boton-inicio txt-marcado" shape="round" [routerLink]="['/home']">Iniciar Sesión</ion-button>
+        </div>
+      </div>
+      <ion-text class="ion-text-end ion-margin-bottom">
+        <p class="ion-margin-end txt-marcado" [routerLink]="['/rcontrasenia']">Recuperar Contraseña?</p>
+      </ion-text>
+    
+      <ion-text class="ion-text-center">
+        <p class="ion-padding-top">No tienes una cuenta? <span [routerLink]="['/register']"><b>Registrate</b></span></p>
+      </ion-text>
+    </form>
+  </div>
+  
 </ion-content>
-
-<ion-footer>
-  <h5 class="ion-align-items-end">Sazon y Arte Company </h5>
-</ion-footer>

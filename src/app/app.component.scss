@@ -1,13 +1,13 @@
 ion-menu::part(backdrop) {
-    background-color: rgb(156, 100, 16);
+    background-color: #4e3725;
   }
   
   ion-menu::part(container) {
     border-radius: 0 20px 20px 0;
   
-    box-shadow: 4px 0px 16px rgb(156, 100, 16);
+    box-shadow: 4px 0px 16px #4e3725;
 }
 
 .menu-toolbar{
-    --background: rgb(156, 100, 16);
+    --background: #4e3725;
 }

@@ -8,15 +8,85 @@
 
 <ion-content [fullscreen]="true" class="cafe-toolbar">
   <div class="ion-no-margin">
-    <h3 class="titulo">Bienvenido {{nombreUsuario}}</h3>
+    <h1 class="titulo">Bienvenido {{nombreUsuario}}</h1>
   </div>
-  <div class="globo-texto">
-    <ion-text class="ion-margin-top">
-      <h5 class="ion-text-center">
-        En donde cada plato es una obra de arte, cuidadosamente elaborado con ingredientes frescos y de alta calidad, para ofrecerte una experiencia culinaria que no solo satisface el paladar, sino que también despierta todos los sentidos.
-      </h5>
-    </ion-text>
-  </div>
+
+  <ion-text>
+    <h5 class="ion-margin-horizontal ion-margin-top">Platos mas cotizados</h5>
+  </ion-text>
+
+  <swiper-container [pagination]="true" [loop]="true" class="platos-cotizados">
+    <swiper-slide><img src="../../assets/fondos/comida1.jpg" alt="plato1"></swiper-slide>
+    <swiper-slide><img src="../../assets/fondos/comida2.jpg" alt="plato1"></swiper-slide>
+    <swiper-slide><img src="../../assets/fondos/comida3.jpg" alt="plato1"></swiper-slide>
+    <swiper-slide><img src="../../assets/fondos/comida4.jpg" alt="plato1"></swiper-slide>
+  </swiper-container>
+
+  <ion-text>
+    <h5 class="ion-margin-horizontal ion-margin-top">Oferta de la Semana</h5>
+  </ion-text>
+
+  <ion-card class="ion-margin">
+    <img alt="Promocion" src="../../assets/fondos/promocion.png"/>
+    <ion-card-header>
+      <ion-card-title>Promocion Especial de la Semana</ion-card-title>
+      <ion-card-subtitle>Entrada, Plato de fondo y Postre</ion-card-subtitle>
+      <ion-card-subtitle>Pide lo que quieras!</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Disfruta de un menu inspirado en la cocina mediterranea, cuidadosamente elaborado por nuestros chefs. ¡Perfecto para una cena especial!
+    </ion-card-content>
+
+    <ion-card-footer>
+      <ion-button expand="block" class="ion-margin">Reserva tu mesa ahora!</ion-button>
+    </ion-card-footer>
+  </ion-card>
+
+  <ion-text>
+    <h5 class="ion-margin-horizontal ion-margin-top">Clientes Satisfechos</h5>
+  </ion-text>
+  
+  <ion-card class="ion-margin">
+    <img alt="Familia1" src="../../assets/fondos/familia1.png"/>
+    <ion-card-header>
+      <ion-card-title>Familia Toledo</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      La mejor comida que he probado 100% recomendado!
+    </ion-card-content>
+  </ion-card>
+    
+  <ion-card class="ion-margin">
+    <img alt="Familia" src="../../assets/fondos/familia2.png"/>
+    <ion-card-header>
+      <ion-card-title>Familia Rosendo</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      La mejor comida que he probado 100% recomendado!
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="ion-margin">
+    <ion-card-header>
+      <ion-item lines="none">
+        <ion-avatar class="ion-margin-end"><img src="../../assets/icon/favicon.png" alt="imagencliente"></ion-avatar>
+        <ion-card-title>Andy Madrid</ion-card-title>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      Un servicio increible y la mejor gastronomia de chile
+    </ion-card-content>
+  </ion-card>
+
+
+
+  <ion-infinite-scroll>
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
 <ion-footer>

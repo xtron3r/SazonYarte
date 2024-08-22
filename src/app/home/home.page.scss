@@ -1,19 +1,41 @@
 .cafe-toolbar{
-    --background: rgb(156, 100, 16);
+    --background: linear-gradient(to right, #4e3725, #2d1b14);
 }
 
 .titulo{
     font-weight: bold;
-    font-size: 25px;
+    font-size: 30px;
     margin-top: 30px;
     margin-left: 10px;
 }
-.globo-texto {
-    background-color: rgba(68, 41, 0, 0.671); 
-    color: white; 
-    border: 1px solid #ccc; 
-    border-radius: 10px; 
-    padding: 10px; 
-    margin: 20px; 
-    text-align: center;
-  }
+
+// Platos Cotizados
+swiper-container {
+    --swiper-pagination-bullet-inactive-color: var(--ion-text-color-step-800, #cccccc);
+    --swiper-pagination-color: rgb(70, 42, 0);
+    --swiper-pagination-progressbar-bg-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.25);
+    --swiper-scrollbar-bg-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.1);
+    --swiper-scrollbar-drag-bg-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5);
+}
+  
+.platos-cotizados{
+    width: 80%;
+    height: 20%;
+}
+.platos-cotizados swiper-slide{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Clientes
+
+.clientes{
+    width: 100%;
+    height: auto;
+}
+.clientes swiper-slide{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

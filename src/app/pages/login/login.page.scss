@@ -1,36 +1,47 @@
-.cafe-toolbar{
-    --background: rgb(156, 100, 16);
+//Seccion texto
+.fondo{
+    --background: linear-gradient(to right, #4e3725, #2d1b14);
 }
 ion-thumbnail {
     --size: 200px;
     --border-radius: 14px;
-    margin: auto;
     margin-top: 10px;
+    margin: auto;
     margin-bottom: 10px;
-    padding: 10px;
     justify-content: center;
 }
 .titulo{
-    color: rgb(156, 100, 16);
     margin-top: -20px;
     font-weight: bold;
     font-size: 35px;
     text-align: center;
 }
 
-.globo-texto {
-    background-color: rgba(68, 41, 0, 0.671); 
-    color: white; 
-    border: 1px solid #ccc; 
-    border-radius: 10px; 
-    padding: 10px; 
-    margin: 20px; 
-    text-align: center;
-  }
+//seccion formulario
 
-  .fondos {
-    background-image: url('../../../assets/fondos/fondo.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-  }
+.seccion-form{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.inicio-sesion{
+    background: rgb(211, 210, 210);
+    color: #4e3725;
+    border-radius: 50px 50px 0px 0px;
+    padding: 10px; 
+    text-align: center;
+    height: 30rem;
+}
+.ion-color{
+    color: #4e3725;
+}
+.boton-inicio{
+    margin-top: 30px;
+    --ion-color-primary: #4e3725;
+    color: #fff;
+}
+.txt-marcado{
+    font-weight: bold;
+}
+
