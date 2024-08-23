@@ -1,5 +1,6 @@
 <ion-header [translucent]="true"  >
   <ion-toolbar  class="fondo">
+    <ion-title>Registro</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -7,44 +8,39 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="fondo">
-  <div>
-    <ion-thumbnail>
-      <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
-    </ion-thumbnail>
-    <ion-text class="ion-text-center">
-      <h1 class="titulo">Registro</h1>
-    </ion-text>
+  <div class="img-logo">
+    <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
   </div>
-  
+    
   <div class="seccion-form">
-  <form action="" class="registro">
-    <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input label="Nombre Completo" label-placement="floating" fill="clear" color=dark></ion-input>
-    </ion-item>
+    <form action="" class="registro">
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-input label="Nombre Completo" label-placement="floating" fill="clear" color=dark></ion-input>
+      </ion-item>
 
-    <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input label="Nombre de usuario" label-placement="floating" fill="clear" color=dark></ion-input>
-    </ion-item>
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-input label="Nombre de usuario" label-placement="floating" fill="clear" color=dark></ion-input>
+      </ion-item>
 
-    <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input type="password" label-placement="floating" label="Contraseña"  fill="clear" color=dark></ion-input>
-      <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-    </ion-item>
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-input type="password" label-placement="floating" label="Contraseña"  fill="clear" color=dark></ion-input>
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-item>
 
-    <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input label="Numero de telefono" label-placement="floating" fill="clear" color=dark></ion-input>
-    </ion-item>
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-input label="Numero de telefono" label-placement="floating" fill="clear" color=dark></ion-input>
+      </ion-item>
 
-    <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input label="Correo electronico" label-placement="floating" fill="clear" color=dark></ion-input>
-    </ion-item>
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-input label="Correo electronico" label-placement="floating" fill="clear" color=dark></ion-input>
+      </ion-item>
 
-    <div class="ion-text-center">
-      <ion-button class="ion-margin-top ion-margin-bottom boton-inicio txt-marcado" shape="round">Registrarse</ion-button>
-    </div>
-   
-  </form>
-</div>
+      <div class="ion-text-center">
+        <ion-button class="ion-margin-top ion-margin-bottom boton-inicio txt-marcado" shape="round">Registrarse</ion-button>
+      </div>
+    
+    </form>
+  </div>
 </ion-content>
 
 

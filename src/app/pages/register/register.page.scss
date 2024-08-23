@@ -1,13 +1,13 @@
 .fondo{
     --background: linear-gradient(to right, #4e3725, #2d1b14);
 }
-ion-thumbnail {
-    --size: 200px;
-    --border-radius: 14px;
-    margin-top: 10px;
-    margin: auto;
-    margin-bottom: 10px;
-    justify-content: center;
+.img-logo{
+    text-align: center;
+    img{
+        width: 200px;
+        margin-right: 18px;
+        margin-top: 10px;
+    }
 }
 .titulo{
     margin-top: -20px;
@@ -20,12 +20,10 @@ ion-thumbnail {
 
 .seccion-form{
     position: fixed;
-    top: 35%; /* Ajusta según sea necesario */
     bottom: 0;
+    left: 0;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    height: 60vh;
 }
 .registro{
     background: rgb(211, 210, 210);
@@ -33,7 +31,7 @@ ion-thumbnail {
     border-radius: 50px 50px 0px 0px;
     padding: 10px; 
     text-align: center;
-    height: 50rem;
+    height: 100%;
 }
 
 .ion-color{

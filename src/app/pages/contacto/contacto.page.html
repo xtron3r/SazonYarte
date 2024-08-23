@@ -1,5 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar class="cafe-toolbar" class="fondo">
+  <ion-toolbar class="fondo">
+    <ion-title>Contacto</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -7,55 +8,32 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="fondo">
-  <div>
-    <ion-text>
-      <h1 class="ion-text-center">Contacto
-        </h1>
-        </ion-text>
-        <ion-thumbnail>
-          <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
-        </ion-thumbnail>
-        <ion-text>
-          <h1 class="ion-text-center">Sazon y Arte
-            </h1>
-            </ion-text>
+  <div class="img-logo">
+    <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
   </div>
 
-
   <div class="seccion-form">
-  <form action="" class="contacto">
-    <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input label="Nombre" label-placement="floating" fill="clear" color=dark></ion-input>
-    </ion-item>
+    <form action="" class="contacto">
+      <h4>Tienes un mensaje? Envialo!</h4>
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-input label="Nombre" label-placement="floating" fill="clear" color=dark></ion-input>
+      </ion-item>
 
-    <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input label="Telefono" label-placement="floating" fill="clear" color=dark></ion-input>
-    </ion-item>
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-input label="Telefono" label-placement="floating" fill="clear" color=dark></ion-input>
+      </ion-item>
 
-    <ion-item class="ion-margin-horizontal ion-color">
-      <ion-input label="Correo electronico" label-placement="floating" fill="clear" color=dark></ion-input>
-    </ion-item>
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-input label="Correo electronico" label-placement="floating" fill="clear" color=dark></ion-input>
+      </ion-item>
 
-    <div class="ion-text-center">
-      <ion-button type="submit"   class="ion-margin-top ion-margin-bottom boton-inicio txt-marcado" shape="round">Enviar Formulario</ion-button>
-    </div> 
-     
-  </form>
-   
-      <ion-list class="list-contacto">
-        <ion-text class="ion-text-center ion-margin-top">
-      <h1>Para un contacto mas directo</h1>
-    </ion-text>
-        <ion-item class="ion-margin-horizontal ion-color">
-          <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
-          <ion-label>Correo</ion-label>
-          <ion-text>sazon.arte&#64;gmail.com</ion-text>
-        </ion-item>      
-        <ion-item class="ion-margin-horizontal ion-color">
-          <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
-          <ion-label>Teléfono</ion-label>
-          <ion-text>+56 9 1234 5678</ion-text>
-        </ion-item>
-    </ion-list>
-  </div>  
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-input label="Mensaje" label-placement="floating" fill="clear" color=dark></ion-input>
+      </ion-item>
+      <div class="ion-text-center">
+        <ion-button type="submit" class="ion-margin boton-inicio txt-marcado" shape="round">Enviar Formulario</ion-button>
+      </div>
+      <p>O llama al <b>+569 1234 5678</b></p>
+    </form>
+  </div>
 </ion-content>
