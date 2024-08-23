@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
-  <ion-toolbar class="cafe-toolbar">
+  <ion-toolbar class="cafe-toolbar" class="fondo">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="fondo">
   <div>
     <ion-text>
       <h1 class="ion-text-center">Contacto
@@ -15,10 +15,15 @@
         <ion-thumbnail>
           <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
         </ion-thumbnail>
+        <ion-text>
+          <h1 class="ion-text-center">Sazon y Arte
+            </h1>
+            </ion-text>
   </div>
 
-  <form action="">
-    <div class="globo-texto">
+
+  <div class="seccion-form">
+  <form action="" class="contacto">
     <ion-item class="ion-margin-horizontal ion-color">
       <ion-input label="Nombre" label-placement="floating" fill="clear" color=dark></ion-input>
     </ion-item>
@@ -32,31 +37,25 @@
     </ion-item>
 
     <div class="ion-text-center">
-      <ion-button type="submit"  class="ion-margin-top" shape="round">Enviar Formulario</ion-button>
-    </div>
-   </div>
+      <ion-button type="submit"   class="ion-margin-top ion-margin-bottom boton-inicio txt-marcado" shape="round">Enviar Formulario</ion-button>
+    </div> 
+     
   </form>
-
-  <ion-text class="ion-text-center ion-margin-top">
-    <h2>Para un contacto mas directo</h2>
-  </ion-text>
-    <ion-list class="ion-padding ">
-      <ion-item>
-        <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
-        <ion-label>Correo</ion-label>
-        <ion-text>sazon.arte&#64;gmail.com</ion-text>
-      </ion-item>
-      
-      <ion-item>
-        <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
-        <ion-label>Teléfono</ion-label>
-        <ion-text>+56 9 1234 5678</ion-text>
-      </ion-item>
-
-  </ion-list>
-  
+   
+      <ion-list class="list-contacto">
+        <ion-text class="ion-text-center ion-margin-top">
+      <h1>Para un contacto mas directo</h1>
+    </ion-text>
+        <ion-item class="ion-margin-horizontal ion-color">
+          <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
+          <ion-label>Correo</ion-label>
+          <ion-text>sazon.arte&#64;gmail.com</ion-text>
+        </ion-item>      
+        <ion-item class="ion-margin-horizontal ion-color">
+          <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
+          <ion-label>Teléfono</ion-label>
+          <ion-text>+56 9 1234 5678</ion-text>
+        </ion-item>
+    </ion-list>
+  </div>  
 </ion-content>
-
-<ion-footer>
-  <h5 class="ion-align-items-end">Sazon y Arte Company </h5>
-</ion-footer>

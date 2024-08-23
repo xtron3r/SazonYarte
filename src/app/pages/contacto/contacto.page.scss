@@ -1,5 +1,5 @@
-.cafe-toolbar{
-    --background: rgb(156, 100, 16);
+.fondo{
+    --background: linear-gradient(to right, #4e3725, #2d1b14);
 }
 
 ion-list.cafe-list{
@@ -21,3 +21,42 @@ ion-thumbnail {
     margin: 20px; 
     text-align: center;
   }
+  .seccion-form{
+    position: fixed;
+    top: 40%; 
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .contacto{
+    background: rgb(211, 210, 210);
+    color: #4e3725;
+    border-radius: 50px 50px 0px 0px;
+    padding: 10px; 
+    text-align: center;
+    height: 40rem;
+  }
+  .ion-color{
+      color: #4e3725;
+  }
+  .boton-inicio{
+      margin-top: 30px;
+      --ion-color-primary: #4e3725;
+      color: #fff;
+  }
+  .txt-marcado{
+      font-weight: bold;
+  }
+
+  .list-contacto{
+    background-color: rgb(211, 210, 210);
+    color: #4e3725;
+    top:25px;
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0px; 
+    bottom: 0;
+}

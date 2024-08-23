@@ -1,12 +1,12 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="true"  >
+  <ion-toolbar  class="fondo">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="fondo">
   <div>
     <ion-thumbnail>
       <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
@@ -16,8 +16,8 @@
     </ion-text>
   </div>
   
-  <form action="">
-    <div class="globo-texto">
+  <div class="seccion-form">
+  <form action="" class="registro">
     <ion-item class="ion-margin-horizontal ion-color">
       <ion-input label="Nombre Completo" label-placement="floating" fill="clear" color=dark></ion-input>
     </ion-item>
@@ -40,14 +40,12 @@
     </ion-item>
 
     <div class="ion-text-center">
-      <ion-button type="submit"  class="ion-margin-top" shape="round">Registrarse</ion-button>
+      <ion-button class="ion-margin-top ion-margin-bottom boton-inicio txt-marcado" shape="round">Registrarse</ion-button>
     </div>
-   </div>
+   
   </form>
+</div>
 </ion-content>
 
-<ion-footer>
-  <h5 class="ion-align-items-end">Sazon y Arte Company </h5>
-</ion-footer>
 
 

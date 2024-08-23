@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar class="cafe-toolbar">
+  <ion-toolbar class="fondo">
     <h3>Acerca de Nosotros </h3>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -7,7 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="fondo">
+  
   <div>
     <ion-thumbnail>
         <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
@@ -21,14 +22,17 @@
       Nuestro compromiso es brindar una experiencia culinaria excepcional que deleite todos los sentidos.
     </h5>
   </ion-text>
-  </div>
-  
-  <swiper-container [pagination]="true" [loop]="true" class="platos-cotizados">
+ <swiper-container [pagination]="true" [loop]="true" class="platos-cotizados">
     <swiper-slide><img src="../../assets/fondos/cocina1.jpg" alt="plato1"></swiper-slide>
     <swiper-slide><img src="../../assets/fondos/local1.jpg" alt="plato1"></swiper-slide>
     <swiper-slide><img src="../../assets/fondos/comida3.jpg" alt="plato1"></swiper-slide>
     <swiper-slide><img src="../../assets/fondos/comida4.jpg" alt="plato1"></swiper-slide>
   </swiper-container>
+
+
+  </div>
+  
+ 
 
 
   

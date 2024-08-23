@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar class="fondo">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="fondo">
   <div class="ion-margin-start">
    
         <ion-thumbnail>
@@ -15,23 +15,23 @@
         <ion-text>
           <h2 class="ion-text-center">Sazon Y Arte</h2>
         </ion-text>
+        <ion-text class="ion-text-center">
+          <h1>Recuperar contraseña</h1>
+        </ion-text>
   </div>
   
-  <form action="">
-    <div class="globo-texto"> 
-      <ion-text>
-        <h2 class="ion-text-center">Recuperar Contraseña
-          </h2>
-          </ion-text>
-    <ion-item class="ion-margin-end ion-margin-top ion-color">
-      <ion-input label="Email" label-placement="floating" fill="clear" color="dark"></ion-input>
-    </ion-item>
-    <div class="ion-text-center">
-      <ion-button type="submit"  class="ion-margin-top" shape="round">Enviar</ion-button>
-    </div>
-    </div>
-  </form>
+
+  <div class="seccion-form">
+    <form action="" class="recuperar">
+
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-input label="Correo electronico" label-placement="floating" fill="clear" color=dark></ion-input>
+      </ion-item>
+  
+      <div class="ion-text-center">
+        <ion-button class="ion-margin-top ion-margin-bottom boton-inicio txt-marcado" shape="round">Enviar</ion-button>
+      </div>
+     
+    </form>
+  </div>
 </ion-content>
-<ion-footer>
-  <h5 class="ion-align-items-end">Sazon y Arte Company </h5>
-</ion-footer>
