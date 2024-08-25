@@ -15,14 +15,13 @@
     <form action="" class="inicio-sesion">
       <div> 
         <ion-item class="ion-margin-end ion-margin-top ion-color">
-          <ion-input name="usuario" label="Usuario" label-placement="floating" fill="clear" [(ngModel)]="nombre"></ion-input>
+          <ion-input name="usuario" label="Usuario" label-placement="floating" fill="clear" [(ngModel)]="nombre" required></ion-input>
         </ion-item>
         <ion-item class="ion-margin-end ion-margin-top ion-color">
-          <ion-input type="Password" name="contrasenia"  label="Contraseña" label-placement="floating" fill="clear" [(ngModel)]="contrasenia"></ion-input>
+          <ion-input type="Password" name="contrasenia"  label="Contraseña" label-placement="floating" fill="clear" [(ngModel)] ="contrasenia" required></ion-input>
         </ion-item>
-  
         <div class="ion-text-center">
-          <ion-button class="ion-margin-top ion-margin-bottom boton-inicio txt-marcado" shape="round" (click)="irPagina()" >Iniciar Sesión</ion-button>
+          <ion-button class="ion-margin-top ion-margin-bottom boton-inicio txt-marcado" shape="round" (click)="irPagina()" [disabled]="!nombre || !contrasenia">Iniciar Sesión</ion-button>
         </div>
       </div>
       <ion-text class="ion-text-end ion-margin-bottom">
