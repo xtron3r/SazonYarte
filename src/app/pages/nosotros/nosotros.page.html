@@ -1,6 +1,5 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="fondo">
-    <ion-title>Acerca de Nosotros</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -8,25 +7,54 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="fondo">
-  
-  <div>
-    <ion-thumbnail>
-        <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
-    </ion-thumbnail>
-  </div>
-  
-  <div class="globo-texto">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h1 class="titulo">Acerca de nosotros</h1>
+      </ion-col>
+      <ion-col>
+        <img class="logo" src="../../assets/icon/ChefPerfil.png" alt="LogoSazon"> 
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <div class="Conteiner-nosotros">
   <ion-text class="ion-margin-top">
     <h5 class="ion-text-center">
       Somos uno de los mejores restaurantes del país, donde ofrecemos una amplia gama de platillos tanto chilenos como internacionales. 
       Nuestro compromiso es brindar una experiencia culinaria excepcional que deleite todos los sentidos.
     </h5>
   </ion-text>
- <swiper-container [pagination]="true" [loop]="true" class="platos-cotizados">
-    <swiper-slide><img src="../../assets/fondos/cocina1.jpg" alt="plato1"></swiper-slide>
-    <swiper-slide><img src="../../assets/fondos/local1.jpg" alt="plato1"></swiper-slide>
-    <swiper-slide><img src="../../assets/fondos/comida3.jpg" alt="plato1"></swiper-slide>
-    <swiper-slide><img src="../../assets/fondos/comida4.jpg" alt="plato1"></swiper-slide>
+
+  <swiper-container [pagination]="true" [loop]="true" class="nosotros-text">
+    <swiper-slide>
+      <ion-card class="ion-margin">
+        <img alt="Promocion" src="../../assets/fondos/local1.jpg"/>
+        <ion-card-header>
+          <ion-card-title class="texto">Local Sazon y Arte </ion-card-title>
+          <ion-card-subtitle class="texto">Nuestro orgullo</ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content>
+          <p class="texto">Gracias a nuestro esfuerzo y pasion por la cocina, el local sazon y arte es una realidad, 
+            donde siempre nos enfocamos en brindar la mejor experiencia a nuestros clientes.</p>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+ <swiper-slide>
+        <ion-card class="ion-margin">
+          <img alt="Promocion" src="../../assets/fondos/cocina1.jpg"/>
+          <ion-card-header>
+            <ion-card-title class="texto">Cocina</ion-card-title>
+            <ion-card-subtitle class="texto">En donde la magia y el arte surge</ion-card-subtitle>
+            <ion-card-content>
+              <p class="texto">En nuestros nuestros cocineros altamente capacitados, se esfuerzan arduamente cada dia para brindar la mejor experiencia al paladar de nuestros consumidores</p>
+            </ion-card-content>
+          </ion-card-header>
+  </ion-card>        
+  </swiper-slide>
   </swiper-container>
 
 
@@ -37,7 +65,3 @@
 
   
 </ion-content>
-
-<ion-footer>
-  <h5 class="ion-align-items-end">Sazon y Arte Company </h5>
-</ion-footer>
