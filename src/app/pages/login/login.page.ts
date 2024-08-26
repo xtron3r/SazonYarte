@@ -8,13 +8,14 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
   contrasenia: string = "";
-  nombre: string = "  ";
+  nombre: string = "";
 
   constructor(private router: Router) { }
 
   ngOnInit() {}
 
   irPagina() {
+    //crear mi variable de contexto
     let navigationextras: NavigationExtras = {
       state: {
         nom: this.nombre,

@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reservar.page.scss'],
 })
 export class ReservarPage implements OnInit {
-
+  tipomesa: string = "";
+  
   constructor() { }
 
   ngOnInit() {

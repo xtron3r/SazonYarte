@@ -3,46 +3,131 @@
     <ion-buttons slot="start" >
       <ion-menu-button></ion-menu-button> 
     </ion-buttons>
+    <ion-title>Sazon y Arte</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="fondo">
-  <div class="ion-no-margin">
-    <h1 class="titulo">Bienvenido {{nombre}}</h1>
+  <div>
+    <h1 class="titulo">Hola,</h1>
+    <h1 class="nombre">{{nombre | titlecase}}</h1>
   </div>
 
-  <ion-text>
-    <h5 class="ion-margin-horizontal ion-margin-top">Platos mas cotizados</h5>
-  </ion-text>
+  <div class="container-platos">
+    <h5>Lo mas destacado</h5>
+    <swiper-container [pagination]="true" [loop]="true" class="platos-cotizados">
+      <swiper-slide>
+        <ion-card class="ion-margin">
+          <img alt="Promocion" src="../../assets/fondos/comida1.jpg"/>
+          <ion-card-header>
+            <ion-card-title class="texto">Pastel De Choclo</ion-card-title>
+            <ion-card-subtitle class="texto">Tipico Chileno</ion-card-subtitle>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p class="texto">Ingredientes: Choclo, Albahaca fresca, Cebolla, Carne de res molida, Carne de pollo, Huevos duros, Pasas, Aceitunas negras, Azúcar.</p>
+          </ion-card-content>
 
-  <swiper-container [pagination]="true" [loop]="true" class="platos-cotizados">
-    <swiper-slide><img src="../../assets/fondos/comida1.jpg" alt="plato1"></swiper-slide>
-    <swiper-slide><img src="../../assets/fondos/comida2.jpg" alt="plato1"></swiper-slide>
-    <swiper-slide><img src="../../assets/fondos/comida3.jpg" alt="plato1"></swiper-slide>
-    <swiper-slide><img src="../../assets/fondos/comida4.jpg" alt="plato1"></swiper-slide>
-  </swiper-container>
+          <ion-card-footer>
+            <ion-button expand="block" class="ion-margin botonreserva">Reserva aqui!</ion-button>
+          </ion-card-footer>
+        </ion-card>
+      </swiper-slide>
+      <swiper-slide>
+        <ion-card class="ion-margin">
+          <img alt="Promocion" src="../../assets/fondos/comida2.jpg"/>
+          <ion-card-header>
+            <ion-card-title class="texto">Cazuela de vacuno</ion-card-title>
+            <ion-card-subtitle class="texto">Tipico Chileno</ion-card-subtitle>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p class="texto">Ingredientes: Carne de Vacuno, Papas, Zapallo, Choclo, Zanahoria entre otros.</p>
+          </ion-card-content>
 
-  <ion-text>
-    <h5 class="ion-margin-horizontal ion-margin-top">Oferta de la Semana</h5>
-  </ion-text>
+          <ion-card-footer>
+            <ion-button expand="block" class="ion-margin botonreserva">Reserva aqui!</ion-button>
+          </ion-card-footer>
+        </ion-card>
+      </swiper-slide>
+      <swiper-slide>
+        <ion-card class="ion-margin">
+          <img alt="Promocion" src="../../assets/fondos/arepaven.jpg"/>
+          <ion-card-header>
+            <ion-card-title class="texto">Arepas Tipicas</ion-card-title>
+            <ion-card-subtitle class="texto">Delicias Venezolanas</ion-card-subtitle>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p class="texto">Ingredientes: Harina de maíz, Agua, Sal, Aceite, Rellenos variados como queso, carne, o pollo.</p>
+          </ion-card-content>
 
-  <ion-card class="ion-margin">
-    <img alt="Promocion" src="../../assets/fondos/promocion.png"/>
-    <ion-card-header>
-      <ion-card-title>Promocion Especial de la Semana</ion-card-title>
-      <ion-card-subtitle>Entrada, Plato de fondo y Postre</ion-card-subtitle>
-      <ion-card-subtitle>Pide lo que quieras!</ion-card-subtitle>
-    </ion-card-header>
+          <ion-card-footer>
+            <ion-button expand="block" class="ion-margin botonreserva">Reserva aqui!</ion-button>
+          </ion-card-footer>
+        </ion-card>
+      </swiper-slide>
+      <swiper-slide>
+        <ion-card class="ion-margin">
+          <img alt="Promocion" src="../../assets/fondos/costillarconpapas.png"/>
+          <ion-card-header>
+            <ion-card-title class="texto">Costillar Con Papas</ion-card-title>
+            <ion-card-subtitle class="texto">Tipico Bajon</ion-card-subtitle>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p class="texto">Ingredientes: Costillar de cerdo, papas, especias, hierbas frescas y salsa BBQ. Servido con ensalada.</p>
+          </ion-card-content>
+
+          <ion-card-footer>
+            <ion-button expand="block" class="ion-margin botonreserva">Reserva aqui!</ion-button>
+          </ion-card-footer>
+        </ion-card>
+      </swiper-slide>
+      <swiper-slide>
+        <ion-card class="ion-margin">
+          <img alt="Promocion" src="../../assets/fondos/pizza.png"/>
+          <ion-card-header>
+            <ion-card-title class="texto">Pizza Italiana</ion-card-title>
+            <ion-card-subtitle class="texto">Tipico Bajon</ion-card-subtitle>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p class="texto">Ingredientes: Masa de pizza a la piedra, salsa de tomate casera, queso mozzarella, y variedades a elección. Cocida en horno de leña para un sabor auténtico.</p>
+          </ion-card-content>
+
+          <ion-card-footer>
+            <ion-button expand="block" class="ion-margin botonreserva">Reserva aqui!</ion-button>
+          </ion-card-footer>
+        </ion-card>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
+  <div class="oferta-semana">
+    <h5 class="ion-margin-horizontal">Oferta de la Semana</h5>
   
-    <ion-card-content>
-      Disfruta de un menu inspirado en la cocina mediterranea, cuidadosamente elaborado por nuestros chefs. ¡Perfecto para una cena especial!
-    </ion-card-content>
+    <ion-card class="ion-margin">
+      <img alt="Promocion" src="../../assets/fondos/promocion.png"/>
+      <ion-card-header>
+        <ion-card-title class="texto">Promocion Especial de la Semana</ion-card-title>
+        <ion-card-subtitle class="texto">Entrada, Plato de fondo y Postre</ion-card-subtitle>
+        <ion-card-subtitle class="texto">Pide lo que quieras!</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <p class="texto">Disfruta de un menu inspirado en la cocina mediterranea, cuidadosamente elaborado por nuestros chefs. ¡Perfecto para una cena especial!</p>
+      </ion-card-content>
+  
+      <ion-card-footer>
+        <ion-button expand="block" class="ion-margin" class="boton-reserva">Reservar</ion-button>
+      </ion-card-footer>
+    </ion-card>
+  
 
-    <ion-card-footer>
-      <ion-button expand="block" class="ion-margin">Reserva tu mesa ahora!</ion-button>
-    </ion-card-footer>
-  </ion-card>
 
+  </div>
+  
   <ion-text>
     <h5 class="ion-margin-horizontal ion-margin-top">Clientes Satisfechos</h5>
   </ion-text>

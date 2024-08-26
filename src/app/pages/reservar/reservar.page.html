@@ -1,16 +1,49 @@
-<ion-header>
-  <ion-toolbar class="cafe-toolbar">
+<ion-header [translucent]="true">
+  <ion-toolbar class="fondo">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Agenda tu messa</ion-title>
+    <ion-title>Reservas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="cafe-toolbar">
-  <div class="ion-margin-start">
-    <ion-text>
-      <h1 class="ion-text-center">Agenda tu mesa <img src="../../../assets/icon/cheflogoo (2).png" alt="Imagen Chef"></h1>
-    </ion-text>
+<ion-content [fullscreen]="true" class="fondo">
+  
+  <div class="ion-no-margin">
+    <div class="img-logo">
+      
+      <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
+      <ion-text class="ion-text-center">
+        <h5 class="usuario">¿Dónde desea comer?</h5>
+      </ion-text>
+    </div>
+
+  </div>
+
+  <div class="seccion-form">
+    <div class="miperfil">
+      <img *ngIf="tipomesa === 'dentro'" src="assets/fondos/local1.jpg" alt="Cocina Dentro" class="segmento">
+      <img *ngIf="tipomesa === 'fuera'" src="assets/fondos/comida1.jpg" alt="Terraza" class="segmento">
+  
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-segment [(ngModel)]="tipomesa">
+          <ion-segment-button value="dentro">
+            <ion-label>Dentro</ion-label>
+            <ion-icon name="restaurant-outline"></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="fuera">
+            <ion-label>Terraza</ion-label>
+            <ion-icon name="sunny-outline"></ion-icon>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-item>
+
+      <div class="ion-text-center ion-margin">
+        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado">
+          Confirmar Selección
+          <ion-icon slot="end" name="checkmark-done-outline"></ion-icon>
+        </ion-button>
+      </div> 
+    </div>
   </div>
 </ion-content>
