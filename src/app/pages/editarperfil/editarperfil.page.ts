@@ -12,10 +12,14 @@ export class EditarperfilPage implements OnInit {
   usuario: string = 'Usuario Predefinido';
   telefono: string = '123-456-7890';
   correo: string = 'correo@ejemplo.com';
+  router: any;
   constructor(private menu:MenuController,router: Router) { 
     
   }
-
+ 
+  ngOnInit() {
+    this.menu.enable(false);
+  }
   irPerfil() {
     let navigationExtras: NavigationExtras = {
       state: {
@@ -27,10 +31,5 @@ export class EditarperfilPage implements OnInit {
     };
     this.router.navigate(['/miperfil'], navigationExtras);
   }
- 
-  ngOnInit() {
-    this.menu.enable(false);
-  }
-
 
 }

@@ -16,37 +16,36 @@
       <h5 class="usuario">EDITAR PERFIL</h5>
     </ion-text>
   </div>
- 
 
   <div class="seccion-form">
-    <form action="" class="miperfil">
-
+    <form class="miperfil">
+      
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="person-outline" slot="start"></ion-icon>
-        <ion-input label="Nombre y Apellido" label-placement="floating" fill="clear" color="dark"></ion-input>
+        <ion-input label="Nombre y Apellido" label-placement="floating" fill="clear" color="dark" name="nombre" [(ngModel)]="nombre"></ion-input>
       </ion-item>
 
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="people-outline" slot="start"></ion-icon>
-        <ion-input label="Nombre Usuario" label-placement="floating" fill="clear" color="dark"></ion-input>
+        <ion-input label="Nombre Usuario" label-placement="floating" fill="clear" color="dark" name="usuario" [(ngModel)]="usuario"></ion-input>
       </ion-item>
       
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
-        <ion-input label="Correo Electronico" label-placement="floating" fill="clear" color="dark"></ion-input>
+        <ion-input label="Correo Electrónico" label-placement="floating" fill="clear" color="dark" name="correo" [(ngModel)]="correo"></ion-input>
       </ion-item>
       
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
-        <ion-input label="Telefono" label-placement="floating" fill="clear" color="dark"></ion-input>
+        <ion-input label="Teléfono" label-placement="floating" fill="clear" color="dark" name="telefono" [(ngModel)]="telefono"></ion-input>
       </ion-item>
     
       <div class="ion-text-center ion-margin">
-        <ion-button  expand="block" class="ion-margin boton-inicio txt-marcado">
+        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" (click)="irPerfil()">
           Confirmar
           <ion-icon slot="end" name="checkmark-done-outline"></ion-icon>
         </ion-button>
-        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado">
+        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" [routerLink]="['/miperfil']">
           Cancelar
           <ion-icon slot="end" name="close-outline"></ion-icon>
         </ion-button>
