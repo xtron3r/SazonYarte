@@ -14,7 +14,7 @@
       <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
     </div>
     <ion-text class="ion-text-center">
-      <h5 class="usuario">{{nombre}}</h5>
+      <h5 class="usuario">{{usuario}}</h5>
     </ion-text>  
   </div>
 
@@ -36,7 +36,7 @@
       </ion-item>
     
       <div class="ion-text-center ion-margin">
-        <ion-button  expand="block" class="ion-margin boton-inicio txt-marcado" [routerLink]="['/editarperfil']">
+        <ion-button  expand="block" class="ion-margin boton-inicio txt-marcado" (click)="irEditarperfil()">
           Editar Perfil
           <ion-icon slot="end" name="create-outline"></ion-icon>
         </ion-button>

@@ -23,17 +23,17 @@
 
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="key-outline" slot="start"></ion-icon>
-        <ion-input label="Contraseña Actual" label-placement="floating" fill="clear" color="dark"></ion-input>
+        <ion-input label="Contraseña Actual" label-placement="floating" fill="clear" color="dark" [(ngModel)] ="validarContraAntigua"></ion-input>
       </ion-item>
 
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon slot="start" name="lock-open-outline"></ion-icon>
-        <ion-input label="Nueva Contraseña" label-placement="floating" fill="clear" color="dark"></ion-input>
+        <ion-input label="Nueva Contraseña" label-placement="floating" fill="clear" color="dark" ></ion-input>
       </ion-item>
       
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
-        <ion-input label="Confirmar Contraseña" label-placement="floating" fill="clear" color="dark"></ion-input>
+        <ion-input label="Confirmar Contraseña" label-placement="floating" fill="clear" color="dark" ></ion-input>
       </ion-item>
     
       <div class="ion-text-center ion-margin">
@@ -41,7 +41,7 @@
           Confirmar
           <ion-icon slot="end" name="checkmark-done-outline"></ion-icon>
         </ion-button>
-        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado">
+        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" [routerLink]="['/miperfil']">
           Cancelar
           <ion-icon slot="end" name="close-outline"></ion-icon>
         </ion-button>
