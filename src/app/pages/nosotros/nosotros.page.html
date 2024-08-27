@@ -3,65 +3,74 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-title>Nosotros</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="fondo">
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <h1 class="titulo">Acerca de nosotros</h1>
-      </ion-col>
-      <ion-col>
-        <img class="logo" src="../../assets/icon/ChefPerfil.png" alt="LogoSazon"> 
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="img-logo">
+    <img src="../../../assets/icon/ChefPerfil.png" alt="LogoSazon" c>
+  </div>
 
+  <div class="container-info">
+    <ion-text>
+      <h2 class="ion-text-center">Descubre Nuestra Historia</h2>
+      <p class="ion-text-center">Explora nuestras tarjetas y conoce Sazon y Arte</p>
+    </ion-text>
 
-
-  <div class="Conteiner-nosotros">
-  <ion-text class="ion-margin-top">
-    <h5 class="ion-text-center">
-      Somos uno de los mejores restaurantes del país, donde ofrecemos una amplia gama de platillos tanto chilenos como internacionales. 
-      Nuestro compromiso es brindar una experiencia culinaria excepcional que deleite todos los sentidos.
-    </h5>
-  </ion-text>
-
-  <swiper-container [pagination]="true" [loop]="true" class="nosotros-text">
-    <swiper-slide>
-      <ion-card class="ion-margin">
-        <img alt="Promocion" src="../../assets/fondos/local1.jpg"/>
-        <ion-card-header>
-          <ion-card-title class="texto">Local Sazon y Arte </ion-card-title>
-          <ion-card-subtitle class="texto">Nuestro orgullo</ion-card-subtitle>
-        </ion-card-header>
-      
-        <ion-card-content>
-          <p class="texto">Gracias a nuestro esfuerzo y pasion por la cocina, el local sazon y arte es una realidad, 
-            donde siempre nos enfocamos en brindar la mejor experiencia a nuestros clientes.</p>
-        </ion-card-content>
-      </ion-card>
-    </swiper-slide>
- <swiper-slide>
+    <swiper-container [pagination]="true" [loop]="true" class="nosotros-text">
+      <swiper-slide>
         <ion-card class="ion-margin">
-          <img alt="Promocion" src="../../assets/fondos/cocina1.jpg"/>
+          <img alt="Nosotros" src="../../assets/fondos/Historia-rest.jpg"/>
+          <ion-card-header>
+            <ion-card-title class="texto">Historia</ion-card-title>
+            <ion-card-subtitle class="texto">Nacimiento de Sazon y Arte</ion-card-subtitle>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p class="texto">En 2006, el recién titulado en gastronomía, Benjamín Maureli, fundó su primera panadería, "El Arte de la Masa". Gracias a su éxito, en 2010 abrió el restaurante "Sazón y Arte", el cual rápidamente ganó fama por sus platillos únicos y el ambiente excepcional que ofrecía tanto a clientes como a empleados.</p>
+          </ion-card-content>
+        </ion-card>
+      </swiper-slide>
+      <swiper-slide>
+        <ion-card class="ion-margin">
+          <img alt="Nosotros" src="../../assets/fondos/local1.jpg"/>
+          <ion-card-header>
+            <ion-card-title class="texto">Local Sazon y Arte </ion-card-title>
+            <ion-card-subtitle class="texto">Nuestro orgullo</ion-card-subtitle>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <p class="texto">Gracias a nuestro esfuerzo y pasion por la cocina, el local sazon y arte es una realidad, 
+              donde siempre nos enfocamos en brindar la mejor experiencia a nuestros clientes.</p>
+          </ion-card-content>
+        </ion-card>
+      </swiper-slide>
+      <swiper-slide>
+        <ion-card class="ion-margin">
+          <img alt="Nosotros" src="../../assets/fondos/cocina1.jpg"/>
           <ion-card-header>
             <ion-card-title class="texto">Cocina</ion-card-title>
             <ion-card-subtitle class="texto">En donde la magia y el arte surge</ion-card-subtitle>
-            <ion-card-content>
-              <p class="texto">En nuestros nuestros cocineros altamente capacitados, se esfuerzan arduamente cada dia para brindar la mejor experiencia al paladar de nuestros consumidores</p>
-            </ion-card-content>
           </ion-card-header>
-  </ion-card>        
-  </swiper-slide>
-  </swiper-container>
-
-
+          <ion-card-content>
+            <p class="texto">nuestros cocineros altamente capacitados, se esfuerzan arduamente cada dia para brindar la mejor experiencia al paladar de nuestros consumidores</p>
+          </ion-card-content>
+        </ion-card>        
+      </swiper-slide>
+      <swiper-slide>
+        <ion-card class="ion-margin">
+          <img alt="Nosotros" src="../../assets/fondos/Maps.png"/>
+          <ion-card-header>
+            <ion-card-title class="texto">Direccion</ion-card-title>
+            <ion-card-subtitle class="texto">Visitanos!</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p class="texto">Ven y disfruta de nuestros platillos y de una experiencia única apta para todo publico,
+              nuestra dirección es bellavista 112, comuna de Providencia. Te esperamos</p>
+          </ion-card-content>
+        </ion-card>        
+      </swiper-slide>
+    </swiper-container>
   </div>
-  
- 
-
-
-  
 </ion-content>

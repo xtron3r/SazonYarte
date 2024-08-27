@@ -9,5 +9,50 @@ ion-menu::part(backdrop) {
 }
 
 .menu-toolbar{
+  --background: #4e3725;
+}
+
+.cuerpo-menu{
+  --background: white;
+
+  ion-list{
+    margin-top: 20px;
+    padding: 0;
+
+  }
+
+  ion-item{
+    color: #4e3725;
+    --background: white;
+    font-weight: bold;
+
+    ion-icon{
+      color: #4e3725;
+      font-weight: bold;
+      
+    }
+  }
+}
+.menu-footer{
+  --background: #4e3725;
+  color: white;
+
+  ion-item{
+    color: white;
     --background: #4e3725;
+    font-weight: bold;
+    text-align: center;
+    
+    ion-label{
+      margin-right: 30px;
+    }
+  }
+
+  ion-icon{
+    color: white;
+    font-weight: bold;
+  }
+}
+.color{
+  color:white;
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ export class HomePage implements OnInit {
   nombre: string = "";
   contrasenia: string = "";
 
-  constructor(private router: Router, private activedrouter: ActivatedRoute) { 
+  constructor(private router: Router, private activedrouter: ActivatedRoute, private menu:MenuController) { 
     // Subscribirnos a la lectura de los parametros
     this.activedrouter.queryParams.subscribe(param =>{
       //valido si viene o no informacion en la ruta
@@ -21,5 +22,11 @@ export class HomePage implements OnInit {
     }) 
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.menu.enable(true);
+  }
+
+  ionViewWillEnter() {
+    this.menu.enable(true);
+  }
 }

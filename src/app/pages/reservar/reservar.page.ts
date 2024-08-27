@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reservar',
@@ -8,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class ReservarPage implements OnInit {
   tipomesa: string = "";
   
-  constructor() { }
+  constructor(private menu:MenuController) { }
 
   ngOnInit() {
+    this.menu.enable(false);
   }
 
 }

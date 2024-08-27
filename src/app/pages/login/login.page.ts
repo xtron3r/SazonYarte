@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -10,9 +11,12 @@ export class LoginPage implements OnInit {
   contrasenia: string = "";
   nombre: string = "";
 
-  constructor(private router: Router) { }
+  constructor(private router:Router, private menu:MenuController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.menu.enable(false);
+  }
+
 
   irPagina() {
     //crear mi variable de contexto
@@ -22,6 +26,12 @@ export class LoginPage implements OnInit {
         com: this.contrasenia
       }
     };
-    this.router.navigate(['/home'], navigationextras);
+
+    if(this.nombre == "admin"){
+      this.router.navigate(['/admin'], navigationextras);
+    }else{
+      this.router.navigate(['/home'], navigationextras);
+    }
+ 
   }
 }

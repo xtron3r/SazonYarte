@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-miperfil',
@@ -7,18 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./miperfil.page.scss'],
 })
 export class MiperfilPage implements OnInit {
+  
+  nombre: string = "";
+  contrasenia: string = "";
 
+  constructor(private menu:MenuController) { }
 
-  nombre: string = '';
-  contrasenia: string = '';
-
-  constructor(private router: Router) {
-    const navigation = this.router.getCurrentNavigation();
-    if (navigation?.extras?.state) {
-      this.nombre = navigation.extras.state['nom'];
-      this.contrasenia = navigation.extras.state['com'];
-    }
+  ngOnInit() {
+    this.menu.enable(false);
   }
 
-  ngOnInit() {}
 }
