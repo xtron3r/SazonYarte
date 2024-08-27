@@ -1,13 +1,49 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>mesasterraza</ion-title>
+  <ion-toolbar class="fondo">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mesas Terraza</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">mesasterraza</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="fondo">
+
+  <div class="ion-no-margin">
+    <div class="img-logo">
+      <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
+      <ion-text class="ion-text-center">
+        <h5 class="usuario">Selecciona una mesa</h5>
+      </ion-text>
+    </div>
+  </div>
+
+  <div class="seccion-form">
+    <div class="miperfil">
+
+      <div class="asientos-disponibles">
+        <ion-grid>
+          <ion-row *ngFor="let fila of asientosTerraza">
+            <ion-col *ngFor="let asiento of fila">
+              <ion-button class="asiento-button"
+                
+                (click)="seleccionarAsiento(asiento)">
+                <ion-icon name="restaurant-outline"></ion-icon>
+                {{ asiento.numero }}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div class="ion-text-center ion-margin">
+        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" [routerLink]="['/reservar']">
+          Confirmar Selección
+          <ion-icon slot="end" name="checkmark-done-outline"></ion-icon>
+        </ion-button>
+      </div> 
+    </div>
+  </div>
+
+  
+
 </ion-content>
