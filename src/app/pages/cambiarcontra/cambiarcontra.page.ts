@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AlertController, MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cambiarcontra',
@@ -14,7 +14,7 @@ export class CambiarcontraPage implements OnInit {
   nuevaContra: string = "";
   confirmContra: string = "";
 
-  constructor(private menu:MenuController,private router: Router) {
+  constructor(private menu:MenuController,private router: Router,private alertController: AlertController) {
 
   }
 
@@ -22,29 +22,41 @@ export class CambiarcontraPage implements OnInit {
     this.menu.enable(false);
   }
 
-  irPerfil(){
+  async irPerfil(){
 
-    if(this.validarContraAntigua != this.contraAntigua){
-      alert("Contraseña antigua no coincide.");
+      // Validacion contraseña terminada
+      
+    if (this.nuevaContra == "" || this.validarContraAntigua == "" || this.confirmContra == ""){
+      const alert = await this.alertController.create({
+        header: 'El campo no puede estar vacio',
+        message: 'Por favor intente de nuevo.',
+        buttons: ['OK'],
+      });
+      await alert.present();
+    } else if(this.contraAntigua != this.validarContraAntigua ){
+        const alert = await this.alertController.create({
+          header: 'La contraseña no coincide con la actual',
+          message: 'Por favor intente de nuevo.',
+          buttons: ['Action'],
+        });
+      await alert.present();
     } else if (this.nuevaContra != this.confirmContra){
-      alert("Las contraseñas no coinciden.");
-    }else{
-      //crear mi variable de contexto
-      let navigationExtras: NavigationExtras = {
-        state: {
-          con :this.nuevaContra
-        }
-      };
-      this.router.navigate(['/miperfil'], navigationExtras);
-      }
+        const alert = await this.alertController.create({
+          header: 'Las contraseñas no coinciden',
+          message: 'Por favor intente de nuevo.',
+          buttons: ['OK'],
+        });
+      await alert.present();
+    } else if (this.nuevaContra == this.contraAntigua){
+      const alert = await this.alertController.create({
+        header: 'La contraseña no puede ser igual a la actual',
+        message: 'Por favor intente de nuevo.',
+        buttons: ['OK'],
+      });
+      await alert.present();
+    } else{ 
+      this.router.navigate(['/miperfil']);
+    }
    
   }
-
-  /*constructor(private menu:MenuController) { }
-
-  ngOnInit() {
-    this.menu.enable(false);
-  }*/
-
-
 }

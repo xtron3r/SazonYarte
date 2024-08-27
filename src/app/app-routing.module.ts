@@ -54,6 +54,14 @@ const routes: Routes = [
     path: 'misreservas',
     loadChildren: () => import('./pages/misreservas/misreservas.module').then( m => m.MisreservasPageModule)
   },
+  {
+    path: 'mesasterraza',
+    loadChildren: () => import('./pages/mesasterraza/mesasterraza.module').then( m => m.MesasterrazaPageModule)
+  },
+  {
+    path: 'mesaslocal',
+    loadChildren: () => import('./pages/mesaslocal/mesaslocal.module').then( m => m.MesaslocalPageModule)
+  },
 
 
 

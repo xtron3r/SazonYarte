@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -8,10 +8,10 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  contrasenia: string = "";
+  contrasenia: string = "sazon123";
   nombre: string = "";
 
-  constructor(private router:Router, private menu:MenuController) { }
+  constructor(private router:Router, private menu:MenuController,private alertController: AlertController) { }
 
   ngOnInit() {
     this.menu.enable(false);
@@ -26,6 +26,11 @@ export class LoginPage implements OnInit {
         com: this.contrasenia
       }
     };
+    
+
+
+
+
 
     if(this.nombre == "admin"){
       this.router.navigate(['/admin'], navigationextras);
