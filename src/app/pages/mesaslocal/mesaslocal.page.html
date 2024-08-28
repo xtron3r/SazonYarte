@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Mesas Local</ion-title>
+    <ion-title>Mesas Terraza</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -21,221 +21,83 @@
     <div class="miperfil">
       <div class="asientos-disponibles">
         <ion-grid>
-         
           <ion-row>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L1')"
-                color="primary"
-                (click)="seleccionarAsiento('L1')">
-                <ion-icon name="restaurant-outline"></ion-icon> L1
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L1')"
-                color="danger"
-                (click)="seleccionarAsiento('L1')">
+              <ion-button (click)="seleccionarAsiento('L1')" [color]="L1Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L1
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L2')"
-                color="primary"
-                (click)="seleccionarAsiento('L2')">
-                <ion-icon name="restaurant-outline"></ion-icon> L2
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L2')"
-                color="danger"
-                (click)="seleccionarAsiento('L2')">
+              <ion-button (click)="seleccionarAsiento('L2')" [color]="L2Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L2
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L3')"
-                color="primary"
-                (click)="seleccionarAsiento('L3')">
-                <ion-icon name="restaurant-outline"></ion-icon> L3
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L3')"
-                color="danger"
-                (click)="seleccionarAsiento('L3')">
+              <ion-button (click)="seleccionarAsiento('L3')" [color]="L3Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L3
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L4')"
-                color="primary"
-                (click)="seleccionarAsiento('L4')">
-                <ion-icon name="restaurant-outline"></ion-icon> L4
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L4')"
-                color="danger"
-                (click)="seleccionarAsiento('L4')">
+              <ion-button (click)="seleccionarAsiento('L4')" [color]="L4Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L4
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L5')"
-                color="primary"
-                (click)="seleccionarAsiento('L5')">
-                <ion-icon name="restaurant-outline"></ion-icon> L5
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L5')"
-                color="danger"
-                (click)="seleccionarAsiento('L5')">
+              <ion-button (click)="seleccionarAsiento('L5')" [color]="L5Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L5
               </ion-button>
             </ion-col>
           </ion-row>
-        
           <ion-row>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L6')"
-                color="primary"
-                (click)="seleccionarAsiento('L6')">
-                <ion-icon name="restaurant-outline"></ion-icon> L6
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L6')"
-                color="danger"
-                (click)="seleccionarAsiento('L6')">
+              <ion-button (click)="seleccionarAsiento('L6')" [color]="L6Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L6
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L7')"
-                color="primary"
-                (click)="seleccionarAsiento('L7')">
-                <ion-icon name="restaurant-outline"></ion-icon> L7
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L7')"
-                color="danger"
-                (click)="seleccionarAsiento('L7')">
+              <ion-button (click)="seleccionarAsiento('L7')" [color]="L7Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L7
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L8')"
-                color="primary"
-                (click)="seleccionarAsiento('L8')">
-                <ion-icon name="restaurant-outline"></ion-icon> L8
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L8')"
-                color="danger"
-                (click)="seleccionarAsiento('L8')">
+              <ion-button (click)="seleccionarAsiento('L8')" [color]="L8Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L8
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L9')"
-                color="primary"
-                (click)="seleccionarAsiento('L9')">
-                <ion-icon name="restaurant-outline"></ion-icon> L9
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L9')"
-                color="danger"
-                (click)="seleccionarAsiento('L9')">
+              <ion-button (click)="seleccionarAsiento('L9')" [color]="L9Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L9
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L10')"
-                color="primary"
-                (click)="seleccionarAsiento('L10')">
-                <ion-icon name="restaurant-outline"></ion-icon> L10
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L10')"
-                color="danger"
-                (click)="seleccionarAsiento('L10')">
+              <ion-button (click)="seleccionarAsiento('L10')" [color]="L10Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L10
               </ion-button>
             </ion-col>
           </ion-row>
-          
           <ion-row>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L11')"
-                color="primary"
-                (click)="seleccionarAsiento('L11')">
-                <ion-icon name="restaurant-outline"></ion-icon> L11
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L11')"
-                color="danger"
-                (click)="seleccionarAsiento('L11')">
+              <ion-button (click)="seleccionarAsiento('L11')" [color]="L11Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L11
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L12')"
-                color="primary"
-                (click)="seleccionarAsiento('L12')">
-                <ion-icon name="restaurant-outline"></ion-icon> L12
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L12')"
-                color="danger"
-                (click)="seleccionarAsiento('L12')">
+              <ion-button (click)="seleccionarAsiento('L12')" [color]="L12Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L12
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L13')"
-                color="primary"
-                (click)="seleccionarAsiento('L13')">
-                <ion-icon name="restaurant-outline"></ion-icon> L13
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L13')"
-                color="danger"
-                (click)="seleccionarAsiento('L13')">
+              <ion-button (click)="seleccionarAsiento('L13')" [color]="L13Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L13
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L14')"
-                color="primary"
-                (click)="seleccionarAsiento('L14')">
-                <ion-icon name="restaurant-outline"></ion-icon> L14
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L14')"
-                color="danger"
-                (click)="seleccionarAsiento('L14')">
+              <ion-button (click)="seleccionarAsiento('L14')" [color]="L14Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L14
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button 
-                *ngIf="!isSelected('L15')"
-                color="primary"
-                (click)="seleccionarAsiento('L15')">
-                <ion-icon name="restaurant-outline"></ion-icon> L15
-              </ion-button>
-              <ion-button 
-                *ngIf="isSelected('L15')"
-                color="danger"
-                (click)="seleccionarAsiento('L15')">
+              <ion-button (click)="seleccionarAsiento('L15')" [color]="L15Elegido ? 'danger' : 'primary'">
                 <ion-icon name="restaurant-outline"></ion-icon> L15
               </ion-button>
             </ion-col>
@@ -243,7 +105,7 @@
         </ion-grid>
       </div>
       <div class="ion-text-center ion-margin">
-        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" [routerLink]="['/reservar']">
+        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" (click)="confirmarSeleccion()">
           Confirmar Selección
           <ion-icon slot="end" name="checkmark-done-outline"></ion-icon>
         </ion-button>
