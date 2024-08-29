@@ -8,7 +8,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="fondo">
-  <div class="ion-padding">
+  <div class="ion-no-margin">
+    <div class="img-logo">
+      <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
+    </div>
+    <ion-text class="ion-text-center">
+      <h5 class="titulo">Mis Reservas</h5>
+    </ion-text>
+  </div>
+
+  <div class="ion-padding mis-reservas">
     <ion-card *ngIf="reservaConfirmada">
       <ion-card-header>
         <ion-card-title>Detalles de la Reserva</ion-card-title>

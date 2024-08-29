@@ -2,59 +2,47 @@
     --background: linear-gradient(to right, #4e3725, #2d1b14);
     min-height: 100%;
 }
-  
+
+
 .img-logo{
     text-align: center;
     img{
         width: 170px;
         margin-right: 10px;
         margin-top: 10px;
-    }
-}
-.usuario{
-    margin-top: -10px;
-    font-weight: bold;
-    font-size: 30px;
-}
-  
-.seccion-form{
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    }}
+
+.mis-reservas {
     width: 100%;
-    height: 60vh;
+    height: auto;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}
 
-    .color{
+.mis-reservas ion-card {
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    max-height: 490px; 
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(circle, #ffffff, #d3c6b1); 
+    border-radius: 10px; 
+    margin-bottom: 15px; 
+    p{
+        margin-top: 20px;
         color: #4e3725;
-        --indicator-color: #4e3725;
+        font-weight: bold;
+    }
+    ion-card-title{
+        color: #4e3725;
     }
 }
-.miperfil{
-    background: rgb(211, 210, 210);
-    color: #4e3725;
-    border-radius: 50px 50px 0px 0px;
-    padding: 10px;
-    text-align: center;
-    height: 100%;
-}
-  
-.ion-color{
-    color: #4e3725;
-}
-.boton-inicio{
-    --ion-color-primary: #4e3725;
-    color: #fff;
-}
-.txt-marcado{
-    font-weight: bold;
-}
-  
-.asiento-button {
-    --background: #4e3725;}
 
-
-.mesa-select{
-    --background: green; 
-    
-    color: white;
+.mis-reservas ion-button {
+    width: 90%;
+    max-width: 500px;
 }
