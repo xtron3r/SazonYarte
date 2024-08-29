@@ -37,9 +37,9 @@
         <p>No tienes ninguna reserva activa.</p>
       </ion-card-content>
     </ion-card>
-
-    <ion-button expand="block" color="danger" *ngIf="reservaConfirmada" (click)="cancelarReserva()">
+    <button mat-fab class="cancelar-button"*ngIf="reservaConfirmada" (click)="cancelarReserva()">
+      <mat-icon class="color-button">delete</mat-icon>
       Cancelar Reserva
-    </ion-button>
+    </button>
   </div>
 </ion-content>
