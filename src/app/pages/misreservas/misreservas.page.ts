@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, MenuController } from '@ionic/angular';
+import { MenuController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-misreservas',
@@ -9,25 +9,27 @@ import { AlertController, MenuController } from '@ionic/angular';
 })
 export class MisreservasPage implements OnInit {
 
-
   reservaConfirmada = false;
   mesaReservada: string = '';
   diaReserva: string = '';
   ubicacionReserva: string = '';
 
-  constructor(private router: Router, private alertController: AlertController, private menu:MenuController) {}
+  constructor(private router: Router, private activedrouter: ActivatedRoute, private menu: MenuController,private alertController: AlertController) { 
+    this.activedrouter.queryParams.subscribe(param => {
+      if(this.router.getCurrentNavigation()?.extras.state){
+        const state = this.router.getCurrentNavigation()?.extras.state;
+        this.mesaReservada = `Mesa ${state?.['mesa']?.numero}`;
+        this.diaReserva = state?.['fecha'];
+        this.ubicacionReserva = state?.['ubicacion'];
+        this.reservaConfirmada = true;
+      }
+    });
+  }
 
   ngOnInit() {
     this.menu.enable(false);
-    const estadomesa = this.router.getCurrentNavigation()?.extras.state;
-    if (estadomesa) {
-      this.mesaReservada = estadomesa['mesa'];
-      this.diaReserva = estadomesa['fecha'];
-      this.ubicacionReserva = estadomesa['ubicacion'];
-      this.reservaConfirmada = true;
-    }
   }
- 
+
   cancelarReserva() {
     this.reservaConfirmada = false;
     this.mesaReservada = '';
@@ -40,5 +42,4 @@ export class MisreservasPage implements OnInit {
       buttons: ['OK'],
     }).then(alert => alert.present());
   }
-  
 }

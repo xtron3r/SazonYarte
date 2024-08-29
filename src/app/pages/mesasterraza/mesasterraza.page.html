@@ -9,7 +9,7 @@
 
 <ion-content [fullscreen]="true" class="fondo">
   <div class="ion-no-margin calendario">
-    <ion-datetime presentation="date" [preferWheel]="true"></ion-datetime>
+    <ion-datetime [(ngModel)]="fechaReserva" presentation="date" [preferWheel]="true"></ion-datetime>
   </div>
 
   <div class="seccion-form">
@@ -17,7 +17,7 @@
       <ion-grid>
         <ion-row>
           <ion-col *ngFor="let mesa of mesas">
-            <ion-button expand="block" class="boton-inicio" [disabled]="mesa.reservada" (click)="reservarMesa(mesa)" >
+            <ion-button expand="block" class="boton-inicio" [disabled]="mesa.reservada" (click)="reservarMesa(mesa)">
               M{{mesa.numero}}
               <ion-icon name="restaurant-outline" slot="end"></ion-icon>
             </ion-button>

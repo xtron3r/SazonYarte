@@ -15,7 +15,7 @@
       </ion-card-header>
       <ion-card-content>
         <p><strong>Mesa Reservada:</strong> {{ mesaReservada }}</p>
-        <p><strong>Fecha de la Reserva:</strong> {{ diaReserva }}</p>
+        <p><strong>Fecha de la Reserva:</strong> {{ diaReserva | date:'yyyy-MM-dd' }}</p>
         <p><strong>Ubicación:</strong> {{ ubicacionReserva }}</p>
       </ion-card-content>
     </ion-card>

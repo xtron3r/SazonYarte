@@ -1,18 +1,17 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
 import { AlertController, MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-mesasterraza',
   templateUrl: './mesasterraza.page.html',
   styleUrls: ['./mesasterraza.page.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class MesasterrazaPage implements OnInit {
 
   mesaSeleccionada: any = null;
-
-  mesas : any = [
+  fechaReserva: string = ''; // Variable para almacenar la fecha seleccionada
+  mesas: any = [
     {numero: 1, reservada: false },
     {numero: 2, reservada: false },
     {numero: 3, reservada: false },
@@ -28,9 +27,9 @@ export class MesasterrazaPage implements OnInit {
     {numero: 13, reservada: true },
     {numero: 14, reservada: false },
     {numero: 15, reservada: false },
-  ]
+  ];
 
-  constructor(private menu: MenuController, private alertController: AlertController, private router: Router) { }
+  constructor(private router: Router, private menu: MenuController, private alertController: AlertController) { }
 
   ngOnInit() {
     this.menu.enable(false);
@@ -40,35 +39,32 @@ export class MesasterrazaPage implements OnInit {
     if (this.mesaSeleccionada == mesa) {
         mesa.reservada = false;
         this.mesaSeleccionada = null;
-
+    } else {
+        if (this.mesaSeleccionada !== null) {
+            this.mesaSeleccionada.reservada = false;
+        }
+        mesa.reservada = true;
+        this.mesaSeleccionada = mesa;
     }
-
-    if (this.mesaSeleccionada !== null) {
-        this.mesaSeleccionada.reservada = false;
-
-    }
-
-    mesa.reservada = true;
-    this.mesaSeleccionada = mesa;
-  
   }
 
   async confirmarReserva() {
-    
-    if (this.mesaSeleccionada != null) {
-
-
-        this.router.navigate(['/home']);
-
+    if (this.mesaSeleccionada != null && this.fechaReserva) {
+      let navigationExtras: NavigationExtras = {
+        state: {
+          mesa: this.mesaSeleccionada,
+          fecha: this.fechaReserva,
+          ubicacion: 'Terraza'
+        }
+      };
+      this.router.navigate(['/misreservas'], navigationExtras);
     } else {
-        const alert = await this.alertController.create({
-            header: 'Advertencia',
-            message: 'Por favor, seleccione una mesa antes de confirmar.',
-            buttons: ['OK']
-        });
-        await alert.present();
+      const alert = await this.alertController.create({
+        header: 'Advertencia',
+        message: 'Por favor, seleccione una mesa y una fecha antes de confirmar.',
+        buttons: ['OK']
+      });
+      await alert.present();
     }
   }
 }
-
-
