@@ -8,104 +8,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="fondo">
-  <div class="ion-no-margin">
-    <div class="img-logo">
-      <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
-      <ion-text class="ion-text-center">
-        <h5 class="usuario">Selecciona una mesa</h5>
-      </ion-text>
-    </div>
+  <div class="ion-no-margin calendario">
+    <ion-datetime presentation="date" [preferWheel]="true"></ion-datetime>
   </div>
 
   <div class="seccion-form">
-    <div class="miperfil">
-      <div class="asientos-disponibles">
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T1')" [color]="T1Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T1
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T2')" [color]="T2Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T2
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T3')" [color]="T3Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T3
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T4')" [color]="T4Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T4
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T5')" [color]="T5Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T5
-              </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T6')" [color]="T6Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T6
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T7')" [color]="T7Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T7
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T8')" [color]="T8Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T8
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T9')" [color]="T9Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T9
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T10')" [color]="T10Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T10
-              </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T11')" [color]="T11Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T11
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T12')" [color]="T12Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T12
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T13')" [color]="T13Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T13
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T14')" [color]="T14Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T14
-              </ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button (click)="seleccionarAsiento('T15')" [color]="T15Elegido ? 'danger' : 'primary'">
-                <ion-icon name="restaurant-outline"></ion-icon> T15
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
+    <div class="mesas-menu">
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let mesa of mesas">
+            <ion-button expand="block" class="boton-inicio" [disabled]="mesa.reservada" (click)="reservarMesa(mesa)" >
+              M{{mesa.numero}}
+              <ion-icon name="restaurant-outline" slot="end"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <div class="ion-text-center ion-margin">
-        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" (click)="confirmarSeleccion()">
+        <ion-button expand="block" class="ion-margin btn boton-inicio txt-marcado" (click)="confirmarReserva()">
           Confirmar Selección
           <ion-icon slot="end" name="checkmark-done-outline"></ion-icon>
         </ion-button>
