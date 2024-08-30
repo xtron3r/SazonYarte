@@ -1,27 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
+import { IonicModule } from '@ionic/angular';
+import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 
-import { HomePageRoutingModule } from './home-routing.module';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { UsuariosPageRoutingModule } from './usuarios-routing.module';
 
+import { UsuariosPage } from './usuarios.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    UsuariosPageRoutingModule,
+    MatCardModule,
+    MatButtonModule,
     MatIconModule,
-    MatDividerModule,
-    MatButtonModule
+    MatDividerModule
+    
   ],
-  declarations: [HomePage],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  declarations: [UsuariosPage]
 })
-export class HomePageModule {}
+export class UsuariosPageModule {}

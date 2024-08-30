@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
 
 
     if(this.nombre == "admin"){
-      this.router.navigate(['/admin'], navigationextras);
+      this.router.navigate(['/homeadmin'], navigationextras);
     }else{
       this.router.navigate(['/home'], navigationextras);
     }

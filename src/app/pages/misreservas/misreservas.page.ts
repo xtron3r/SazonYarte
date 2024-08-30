@@ -10,17 +10,17 @@ import { MenuController, AlertController } from '@ionic/angular';
 export class MisreservasPage implements OnInit {
 
   reservaConfirmada = false;
-  mesaReservada: string = '';
-  diaReserva: string = '';
-  ubicacionReserva: string = '';
+  mesaReservada: any;
+  diaReserva: string = "";
+  ubicacionReserva: string = "";
 
   constructor(private router: Router, private activedrouter: ActivatedRoute, private menu: MenuController,private alertController: AlertController) { 
+    
     this.activedrouter.queryParams.subscribe(param => {
       if(this.router.getCurrentNavigation()?.extras.state){
-        const state = this.router.getCurrentNavigation()?.extras.state;
-        this.mesaReservada = `Mesa ${state?.['mesa']?.numero}`;
-        this.diaReserva = state?.['fecha'];
-        this.ubicacionReserva = state?.['ubicacion'];
+        this.mesaReservada = this.router.getCurrentNavigation()?.extras?.state?.['mesa'];
+        this.diaReserva = this.router.getCurrentNavigation()?.extras?.state?.['fecha'];;
+        this.ubicacionReserva = this.router.getCurrentNavigation()?.extras?.state?.['ubicacion'];
         this.reservaConfirmada = true;
       }
     });
@@ -32,9 +32,9 @@ export class MisreservasPage implements OnInit {
 
   cancelarReserva() {
     this.reservaConfirmada = false;
-    this.mesaReservada = '';
-    this.diaReserva = '';
-    this.ubicacionReserva = '';
+    this.mesaReservada = "";
+    this.diaReserva = "";
+    this.ubicacionReserva = "";
 
     this.alertController.create({
       header: 'Reserva Cancelada',

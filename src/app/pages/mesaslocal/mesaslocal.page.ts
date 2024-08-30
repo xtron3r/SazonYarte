@@ -10,7 +10,7 @@ import { AlertController, MenuController } from '@ionic/angular';
 export class MesaslocalPage implements OnInit {
 
   mesaSeleccionada: any = null;
-  fechaReserva: string = ''; // Variable para almacenar la fecha seleccionada
+  fechaReserva: string = ""; 
   mesas: any = [
     {numero: 1, reservada: false },
     {numero: 2, reservada: false },
@@ -49,7 +49,7 @@ export class MesaslocalPage implements OnInit {
   }
 
   async confirmarReserva() {
-    if (this.mesaSeleccionada != null && this.fechaReserva) {
+    if (this.mesaSeleccionada != null && this.fechaReserva != null) {
       let navigationExtras: NavigationExtras = {
         state: {
           mesa: this.mesaSeleccionada,

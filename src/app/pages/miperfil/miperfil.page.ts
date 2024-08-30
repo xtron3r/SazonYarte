@@ -15,6 +15,7 @@ export class MiperfilPage implements OnInit {
   contrasenia: string = "sazon123";
 
   constructor(private menu:MenuController,private router: Router,private activedrouter: ActivatedRoute) {
+    
     // Subscribirnos a la lectura de los parametros
     this.activedrouter.queryParams.subscribe(param =>{
       //valido si viene o no informacion en la ruta

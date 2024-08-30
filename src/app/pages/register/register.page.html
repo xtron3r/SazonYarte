@@ -15,24 +15,29 @@
   <div class="seccion-form">
     <form action="" class="registro">
       <ion-item class="ion-margin-horizontal ion-color">
-        <ion-input label="Nombre y Apellido" label-placement="floating" fill="clear" color=dark maxlength="50"></ion-input>
+        <ion-input placeholder="Nombre y Apellido" fill="clear" color=dark maxlength="50"></ion-input>
       </ion-item>
 
       <ion-item class="ion-margin-horizontal ion-color">
-        <ion-input label="Nombre de usuario" label-placement="floating" fill="clear" color=dark maxlength="15"></ion-input>
+        <ion-input placeholder="Rut" maxlength="9" fill="clear" color=dark></ion-input>
       </ion-item>
 
       <ion-item class="ion-margin-horizontal ion-color">
-        <ion-input type="password" label-placement="floating" label="Contraseña"  fill="clear" color=dark></ion-input>
-        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        <ion-input placeholder="Nombre Usuario" fill="clear" color=dark maxlength="15"></ion-input>
       </ion-item>
 
       <ion-item class="ion-margin-horizontal ion-color">
-        <ion-input type="tel" label="Telefono" label-placement="floating" maxlength="9" fill="clear" color=dark></ion-input>
+        <ion-input type="password" placeholder="Contraseña"  fill="clear" color=dark>
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
       </ion-item>
 
       <ion-item class="ion-margin-horizontal ion-color">
-        <ion-input type="email" label="Correo electronico" label-placement="floating" fill="clear" color=dark></ion-input>
+        <ion-input type="tel" placeholder="Telefono" maxlength="9" fill="clear" color=dark></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-input type="email" placeholder="Correo Electronico" fill="clear" color=dark></ion-input>
       </ion-item>
 
       <div class="ion-text-center">

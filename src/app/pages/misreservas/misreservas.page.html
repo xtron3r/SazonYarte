@@ -1,8 +1,5 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="fondo">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
     <ion-title>Mis Reservas</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,24 +9,27 @@
     <div class="img-logo">
       <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
     </div>
-    <ion-text class="ion-text-center">
-      <h5 class="titulo">Mis Reservas</h5>
-    </ion-text>
   </div>
 
   <div class="ion-padding mis-reservas">
-    <ion-card *ngIf="reservaConfirmada">
+    <ion-card *ngIf="reservaConfirmada == true">
       <ion-card-header>
         <ion-card-title>Detalles de la Reserva</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p><strong>Mesa Reservada:</strong> {{ mesaReservada }}</p>
-        <p><strong>Fecha de la Reserva:</strong> {{ diaReserva | date:'yyyy-MM-dd' }}</p>
-        <p><strong>Ubicación:</strong> {{ ubicacionReserva }}</p>
+        <p><strong>Mesa Reservada:</strong> Nro {{ mesaReservada.numero }}</p>
+        <p><strong>Fecha de la Reserva:</strong> {{ diaReserva | date:'dd-MM-yyyy' }}</p>
+        <p><strong>Ubicacion:</strong> {{ ubicacionReserva }}</p>
       </ion-card-content>
+      <div>
+        <button mat-fab class="cancelar-button" (click)="cancelarReserva()">
+          <mat-icon class="color-button espacio" fontIcon="delete"></mat-icon>
+          Cancelar Reserva
+        </button>
+      </div>
     </ion-card>
 
-    <ion-card *ngIf="!reservaConfirmada">
+    <ion-card *ngIf="reservaConfirmada == false">
       <ion-card-header>
         <ion-card-title>No hay reservas</ion-card-title>
       </ion-card-header>
@@ -37,9 +37,13 @@
         <p>No tienes ninguna reserva activa.</p>
       </ion-card-content>
     </ion-card>
-    <button mat-fab class="cancelar-button"*ngIf="reservaConfirmada" (click)="cancelarReserva()">
-      <mat-icon class="color-button">delete</mat-icon>
-      Cancelar Reserva
+  </div>
+
+  <div>
+    <button mat-fab class="boton-inicio" [routerLink]="['/home']">
+      Volver al inicio
+      <mat-icon class="color-inicio espacio" fontIcon="home"></mat-icon>
     </button>
   </div>
+
 </ion-content>

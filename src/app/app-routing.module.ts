@@ -36,9 +36,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/rcontrasenia/rcontrasenia.module').then( m => m.RcontraseniaPageModule)
   },
   {
-    path: 'admin',
-    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule)
-  },  {
     path: 'contacto',
     loadChildren: () => import('./pages/contacto/contacto.module').then( m => m.ContactoPageModule)
   },
@@ -62,8 +59,30 @@ const routes: Routes = [
     path: 'mesaslocal',
     loadChildren: () => import('./pages/mesaslocal/mesaslocal.module').then( m => m.MesaslocalPageModule)
   },
-
-
+  {
+    path: 'usuarios',
+    loadChildren: () => import('./pagesadm/usuarios/usuarios.module').then( m => m.UsuariosPageModule)
+  },
+  {
+    path: 'reservas',
+    loadChildren: () => import('./pagesadm/reservas/reservas.module').then( m => m.ReservasPageModule)
+  },
+  {
+    path: 'mesas',
+    loadChildren: () => import('./pagesadm/mesas/mesas.module').then( m => m.MesasPageModule)
+  },
+  {
+    path: 'homeadmin',
+    loadChildren: () => import('./pagesadm/homeadmin/homeadmin.module').then( m => m.HomeadminPageModule)
+  },
+  {
+    path: 'editarusuario',
+    loadChildren: () => import('./pagesadm/editarusuario/editarusuario.module').then( m => m.EditarusuarioPageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
+  }
 
 
 ];
