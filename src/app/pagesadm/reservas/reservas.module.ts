@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
 
 import { ReservasPageRoutingModule } from './reservas-routing.module';
 
@@ -13,7 +17,11 @@ import { ReservasPage } from './reservas.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ReservasPageRoutingModule
+    ReservasPageRoutingModule,
+    MatCardModule,
+    MatIconModule,
+    MatDividerModule,
+    MatButtonModule
   ],
   declarations: [ReservasPage]
 })

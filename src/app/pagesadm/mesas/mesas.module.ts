@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +17,11 @@ import { MesasPage } from './mesas.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    MesasPageRoutingModule
+    MesasPageRoutingModule,
+    MatCardModule,
+    MatIconModule,
+    MatDividerModule,
+    MatButtonModule,
   ],
   declarations: [MesasPage]
 })

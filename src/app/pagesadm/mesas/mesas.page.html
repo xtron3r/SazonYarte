@@ -1,13 +1,63 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>mesas</ion-title>
+  <ion-toolbar class="fondo">
+    <ion-buttons>
+      <button mat-mini-fab aria-label="boton home" class="btn-home" [routerLink]="['/homeadmin']">
+        <mat-icon>home</mat-icon>
+      </button>
+      <ion-title>Gestionar Mesas</ion-title>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">mesas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="fondo">
+  <ion-toolbar class="fondo">
+    <ion-segment [(ngModel)]="buscarMesa">
+      <ion-segment-button value="Local">
+        <ion-label>Mesas Local</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Terraza">
+        <ion-label>Mesas Terraza</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <p *ngIf="buscarMesa == ''" class="ion-text-center ion-margin-top"> SELECCIONE UNA CATEGORIA</p>
+
+  <div class="container-mesas" *ngIf="buscarMesa == 'Terraza'" >
+    <mat-card *ngFor="let mesa of mesasTerraza" class="container-mesa">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>event</mat-icon>
+        <mat-card-title>Mesas Terraza</mat-card-title>
+      </mat-card-header>
+        <mat-card-content>
+          <p>Nro Mesa: {{mesa.numero}}</p>
+          <p>Ubicacion: Terraza</p>
+          <p>Reservada: {{mesa.reservada}}</p>
+          <p>Status: {{mesa.disponible}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="botones-accion-des" > Deshabilitar<mat-icon mat-card-avatar class="icon-des">visibility_off</mat-icon></button>
+          <button mat-button class="botones-accion-visi"> Habilitar<mat-icon mat-card-avatar class="icon-visi">visibility</mat-icon></button>
+        </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="container-mesas" *ngIf="buscarMesa == 'Local'">
+    <mat-card *ngFor="let mesa of mesasLocal" class="container-mesa">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>event</mat-icon>
+        <mat-card-title>Mesas Local</mat-card-title>
+      </mat-card-header>
+        <mat-card-content>
+          <p>Nro Mesa: {{mesa.numero}}</p>
+          <p>Ubicacion: Local</p>
+          <p>Reservada: {{mesa.reservada}}</p>
+          <p>Status: {{mesa.disponible}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="botones-accion-des" > Deshabilitar<mat-icon mat-card-avatar class="icon-des">visibility_off</mat-icon></button>
+          <button mat-button class="botones-accion-visi"> Habilitar<mat-icon mat-card-avatar class="icon-visi">visibility</mat-icon></button>
+        </mat-card-actions>
+    </mat-card>
+  </div>
 </ion-content>
