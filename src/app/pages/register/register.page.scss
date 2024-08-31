@@ -32,6 +32,10 @@
     padding: 10px; 
     text-align: center;
     height: 100%;
+
+    .quitar-linea{
+        --border-width: 0;
+    }
 }
 
 .ion-color{

@@ -8,6 +8,13 @@ import { MenuController } from '@ionic/angular';
 })
 export class RegisterPage implements OnInit {
 
+  nombreyApellido: string ="";
+  rut : string ="";
+  usuario: string ="";
+  contrasenia: string ="";
+  telefono: string ="";
+  correo: string ="";
+
   constructor(private menu:MenuController) { }
 
   ngOnInit() {

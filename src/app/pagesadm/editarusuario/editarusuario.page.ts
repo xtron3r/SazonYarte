@@ -17,7 +17,7 @@ export class EditarusuarioPage implements OnInit {
   correo: string = "";
   correoNuevo: string = "";
   rut: string = "";
-  rutnuevo: string = "";
+  rutNuevo: string = "";
 
   constructor(private menu: MenuController, private router: Router, private activedrouter: ActivatedRoute, private alertController: AlertController) {
     
@@ -34,7 +34,7 @@ export class EditarusuarioPage implements OnInit {
         this.usuarioNuevo = this.usuario;
         this.telefonoNuevo = this.telefono;
         this.correoNuevo = this.correo;
-        this.rutnuevo = this.rut;
+        this.rutNuevo = this.rut;
       }
     });
   }
@@ -44,25 +44,27 @@ export class EditarusuarioPage implements OnInit {
   }
 
   async irUsuarios() {
-    if (this.nombreNuevo === "" || this.usuarioNuevo === "" || this.telefonoNuevo === "" || this.correoNuevo === "" || this.rutnuevo === "") {
+    if (this.nombreNuevo == "" || this.usuarioNuevo == "" || this.telefonoNuevo == "" || this.correoNuevo == "" || this.rutNuevo == "") {
       const alert = await this.alertController.create({
-        header: 'Campos vacíos',
+        header: 'Campos vacios',
         message: 'Por favor, inténtelo de nuevo',
         buttons: ['OK'],
+        cssClass: 'estilo-alertas'
       });
       await alert.present();
-    } else if (this.nombreNuevo === this.nombre && this.usuarioNuevo === this.usuario && this.telefonoNuevo === this.telefono && this.correoNuevo === this.correo && this.rutnuevo === this.rut) {
+    } else if (this.nombreNuevo == this.nombre && this.usuarioNuevo == this.usuario && this.telefonoNuevo == this.telefono && this.correoNuevo == this.correo && this.rutNuevo == this.rut) {
       const alert = await this.alertController.create({
         header: 'Los datos no pueden ser iguales a los anteriores',
-        message: 'Por favor, inténtelo de nuevo',
+        message: 'Por favor, intentelo de nuevo',
         buttons: ['OK'],
+        cssClass: 'estilo-alertas'
       });
       await alert.present();
     } else {
       let navigationExtras: NavigationExtras = {
         state: {
           nom: this.nombreNuevo,
-          run: this.rutnuevo,
+          run: this.rutNuevo,
           us: this.usuarioNuevo,
           cor: this.correoNuevo,
           te: this.telefonoNuevo

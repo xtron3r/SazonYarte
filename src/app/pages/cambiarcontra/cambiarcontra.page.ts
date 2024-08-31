@@ -28,16 +28,18 @@ export class CambiarcontraPage implements OnInit {
       
     if (this.nuevaContra == "" || this.validarContraAntigua == "" || this.confirmContra == ""){
       const alert = await this.alertController.create({
-        header: 'El campo no puede estar vacio',
+        header: 'Campos Vacios',
         message: 'Por favor intente de nuevo.',
         buttons: ['OK'],
+        cssClass: 'estilo-alertas'
       });
       await alert.present();
     } else if(this.contraAntigua != this.validarContraAntigua ){
         const alert = await this.alertController.create({
           header: 'La contraseña no coincide con la actual',
           message: 'Por favor intente de nuevo.',
-          buttons: ['Action'],
+          buttons: ['OK'],
+          cssClass: 'estilo-alertas'
         });
       await alert.present();
     } else if (this.nuevaContra != this.confirmContra){
@@ -45,6 +47,7 @@ export class CambiarcontraPage implements OnInit {
           header: 'Las contraseñas no coinciden',
           message: 'Por favor intente de nuevo.',
           buttons: ['OK'],
+          cssClass: 'estilo-alertas'
         });
       await alert.present();
     } else if (this.nuevaContra == this.contraAntigua){
@@ -52,6 +55,7 @@ export class CambiarcontraPage implements OnInit {
         header: 'La contraseña no puede ser igual a la actual',
         message: 'Por favor intente de nuevo.',
         buttons: ['OK'],
+        cssClass: 'estilo-alertas'
       });
       await alert.present();
     } else{ 

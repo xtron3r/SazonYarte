@@ -24,17 +24,21 @@
     width: 100%;
     height: 60vh;
 }
-.miperfil{
+.edit-usuario{
     background: rgb(211, 210, 210);
     color: #4e3725;
     border-radius: 50px 50px 0px 0px;
     padding: 10px; 
     text-align: center;
     height: 100%;
+    
+    .quitar-linea{
+        --border-width: 0;
+    }
 }
 
 .ion-color{
-    color: #4e3725;
+    color: black;
 }
 .boton-inicio{
     --ion-color-primary: #4e3725;

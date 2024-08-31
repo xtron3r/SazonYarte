@@ -30,16 +30,18 @@ export class MisreservasPage implements OnInit {
     this.menu.enable(false);
   }
 
-  cancelarReserva() {
+  async cancelarReserva() {
     this.reservaConfirmada = false;
     this.mesaReservada = "";
     this.diaReserva = "";
     this.ubicacionReserva = "";
 
-    this.alertController.create({
+    const alert = await this.alertController.create({
       header: 'Reserva Cancelada',
-      message: 'Tu reserva ha sido cancelada.',
+      message: 'Reserva Cancelada con exito',
       buttons: ['OK'],
-    }).then(alert => alert.present());
+      cssClass: 'estilo-alertas'
+    });
+    await alert.present();
   }
 }

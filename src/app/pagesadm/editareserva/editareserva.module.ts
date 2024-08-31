@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { EditareservaPageRoutingModule } from './editareserva-routing.module';
 
 import { EditareservaPage } from './editareserva.page';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditareservaPageRoutingModule
+    EditareservaPageRoutingModule,
+    MatIconModule
   ],
   declarations: [EditareservaPage]
 })

@@ -21,7 +21,8 @@
     <form action="" class="recuperar">
 
       <ion-item class="ion-margin-horizontal ion-color">
-        <ion-input label="Correo electronico" label-placement="floating" fill="clear" color=dark></ion-input>
+        <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
+        <ion-input type="email" placeholder="Ingresa Correo valido" label="Correo Electronico" label-placement="floating" class="quitar-linea" errorText="Invalid email" name="correo" [(ngModel)]="correo" ngModel email></ion-input>
       </ion-item>
   
       <div class="ion-text-center">

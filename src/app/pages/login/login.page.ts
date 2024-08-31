@@ -8,8 +8,8 @@ import { AlertController, MenuController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  contrasenia: string = "sazon123";
-  nombre: string = "";
+  contrasenia: string = "";
+  usuario: string = "";
 
   constructor(private router:Router, private menu:MenuController,private alertController: AlertController) { }
 
@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
     //crear mi variable de contexto
     let navigationextras: NavigationExtras = {
       state: {
-        nom: this.nombre,
+        nom: this.usuario,
         com: this.contrasenia
       }
     };
@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
 
 
 
-    if(this.nombre == "admin"){
+    if(this.usuario == "admin"){
       this.router.navigate(['/homeadmin'], navigationextras);
     }else{
       this.router.navigate(['/home'], navigationextras);

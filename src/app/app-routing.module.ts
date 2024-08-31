@@ -80,12 +80,14 @@ const routes: Routes = [
     loadChildren: () => import('./pagesadm/editarusuario/editarusuario.module').then( m => m.EditarusuarioPageModule)
   },
   {
-    path: '**',
-    loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
-  },  {
     path: 'editareserva',
     loadChildren: () => import('./pagesadm/editareserva/editareserva.module').then( m => m.EditareservaPageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
   }
+ 
 
 
 

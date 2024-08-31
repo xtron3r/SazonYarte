@@ -8,6 +8,8 @@ import { MenuController } from '@ionic/angular';
 })
 export class RcontraseniaPage implements OnInit {
 
+  correo: string = "";
+
   constructor(private menu:MenuController) { }
 
   ngOnInit() {

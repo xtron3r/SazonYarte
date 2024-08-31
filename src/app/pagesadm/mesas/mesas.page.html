@@ -12,10 +12,10 @@
 <ion-content [fullscreen]="true" class="fondo">
   <ion-toolbar class="fondo">
     <ion-segment [(ngModel)]="buscarMesa">
-      <ion-segment-button value="Local">
+      <ion-segment-button value="Local" class="color-blanco">
         <ion-label>Mesas Local</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="Terraza">
+      <ion-segment-button value="Terraza" class="color-blanco">
         <ion-label>Mesas Terraza</ion-label>
       </ion-segment-button>
     </ion-segment>
@@ -33,7 +33,7 @@
           <p>Nro Mesa: {{mesa.numero}}</p>
           <p>Ubicacion: Terraza</p>
           <p>Reservada: {{mesa.reservada}}</p>
-          <p>Status: {{mesa.disponible}}</p>
+          <p>Estado: {{mesa.disponible}}</p>
         </mat-card-content>
         <mat-card-actions>
           <button mat-button class="botones-accion-des" > Deshabilitar<mat-icon mat-card-avatar class="icon-des">visibility_off</mat-icon></button>
@@ -52,7 +52,7 @@
           <p>Nro Mesa: {{mesa.numero}}</p>
           <p>Ubicacion: Local</p>
           <p>Reservada: {{mesa.reservada}}</p>
-          <p>Status: {{mesa.disponible}}</p>
+          <p>Estado: {{mesa.disponible}}</p>
         </mat-card-content>
         <mat-card-actions>
           <button mat-button class="botones-accion-des" > Deshabilitar<mat-icon mat-card-avatar class="icon-des">visibility_off</mat-icon></button>

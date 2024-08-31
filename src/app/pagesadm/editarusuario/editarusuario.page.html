@@ -18,31 +18,31 @@
   </div>
 
   <div class="seccion-form">
-    <form class="miperfil">
+    <form class="edit-usuario">
       
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="person-outline" slot="start"></ion-icon>
-        <ion-input label="Nombre y Apellido" label-placement="floating" fill="clear" color="dark" name="nombreNuevo" [(ngModel)]="nombreNuevo"></ion-input>
+        <ion-input placeholder="Maximo 25 caracteres" label="Nombre y Apellido" label-placement="floating" maxlength="25" color="dark" name="nombreNuevo" [(ngModel)]="nombreNuevo"></ion-input>
       </ion-item>
 
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="people-outline" slot="start"></ion-icon>
-        <ion-input label="Nombre Usuario" label-placement="floating" fill="clear" color="dark" name="usuarioNuevo" [(ngModel)]="usuarioNuevo"></ion-input>
+        <ion-input placeholder="Maximo 15 caracteres" label="Nombre Usuario" label-placement="floating" maxlength="15" color="dark" name="usuarioNuevo" [(ngModel)]="usuarioNuevo"></ion-input>
       </ion-item>
       
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
-        <ion-input label="Correo Electrónico" label-placement="floating" fill="clear" color="dark" name="correoNuevo" [(ngModel)]="correoNuevo"></ion-input>
+        <ion-input type="email" placeholder="Ingresa Correo valido" label="Correo Electronico" label-placement="floating" class="quitar-linea" errorText="Invalid email" name="correoNuevo" [(ngModel)]="correoNuevo" ngModel email></ion-input>
       </ion-item>
       
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
-        <ion-input label="Teléfono" label-placement="floating" fill="clear" color="dark" name="telefonoNuevo" [(ngModel)]="telefonoNuevo"></ion-input>
+        <ion-input type="tel" label="Telefono" label-placement="floating" placeholder="EJ : 123456789" color="dark" maxlength="9" name="telefonoNuevo" [(ngModel)]="telefonoNuevo"></ion-input>
       </ion-item>
       
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="id-card-outline" slot="start"></ion-icon>
-        <ion-input label="RUT" label-placement="floating" fill="clear" color="dark" name="rutnuevo" [(ngModel)]="rutnuevo"></ion-input>
+        <ion-input placeholder="EJ : 213781145 (Sin guion)" label="Rut" label-placement="floating" maxlength="9" color="dark" name="rutNuevo" [(ngModel)]="rutNuevo"></ion-input>
       </ion-item>
     
       <div class="ion-text-center ion-margin">

@@ -26,6 +26,7 @@ export class ReservarPage implements OnInit {
         header: 'Tiene que seleccionar una opcion',
         message: 'Por favor intentelo de nuevo',
         buttons: ['OK'],
+        cssClass: 'estilo-alertas'
       });
       await alert.present();
     }

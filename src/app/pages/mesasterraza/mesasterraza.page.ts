@@ -62,7 +62,8 @@ export class MesasterrazaPage implements OnInit {
       const alert = await this.alertController.create({
         header: 'Advertencia',
         message: 'Por favor, seleccione una mesa y una fecha antes de confirmar.',
-        buttons: ['OK']
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas'
       });
       await alert.present();
     }

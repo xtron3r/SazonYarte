@@ -8,6 +8,11 @@ import { MenuController } from '@ionic/angular';
 })
 export class ContactoPage implements OnInit {
 
+  nombreyApellido: string="";
+  telefono!: number ;
+  correo: string="";
+  mensaje: string="";
+
   constructor(private menu:MenuController) { }
 
   ngOnInit() {

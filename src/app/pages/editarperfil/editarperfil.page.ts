@@ -47,6 +47,7 @@ export class EditarperfilPage implements OnInit {
         header: 'Campos vacios',
         message: 'Por Favor intentelo de nuevo',
         buttons: ['OK'],
+        cssClass: 'estilo-alertas'
       });
   
       await alert.present();
@@ -55,6 +56,7 @@ export class EditarperfilPage implements OnInit {
         header: 'Los datos no pueden ser igual a los anteriores',
         message: 'Por favor intentelo de nuevo',
         buttons: ['OK'],
+        cssClass: 'estilo-alertas'
       });
       await alert.present();
     }

@@ -8,10 +8,10 @@ import { MenuController } from '@ionic/angular';
 })
 export class MiperfilPage implements OnInit {
 
-  nombre: string = "Basthian";
-  usuario: string = "user";
-  telefono: string = "123-456-7890";
-  correo: string = "correo@ejemplo.com";
+  nombre: string = "Basthian Bascuñan";
+  usuario: string = "Asadomaster";
+  telefono: string = "123456789";
+  correo: string = "bas.cunan@duocuc.cl";
   contrasenia: string = "sazon123";
 
   constructor(private menu:MenuController,private router: Router,private activedrouter: ActivatedRoute) {
