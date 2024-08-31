@@ -1,13 +1,61 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>editarusuario</ion-title>
+  <ion-toolbar class="fondo">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">editarusuario</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="fondo">
+  
+  <div class="ion-no-margin">
+    <div class="img-logo">
+      <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
+    </div>
+    <ion-text class="ion-text-center">
+      <h5 class="usuario">EDITAR PERFIL</h5>
+    </ion-text>
+  </div>
+
+  <div class="seccion-form">
+    <form class="miperfil">
+      
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-icon aria-hidden="true" name="person-outline" slot="start"></ion-icon>
+        <ion-input label="Nombre y Apellido" label-placement="floating" fill="clear" color="dark" name="nombreNuevo" [(ngModel)]="nombreNuevo"></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-icon aria-hidden="true" name="people-outline" slot="start"></ion-icon>
+        <ion-input label="Nombre Usuario" label-placement="floating" fill="clear" color="dark" name="usuarioNuevo" [(ngModel)]="usuarioNuevo"></ion-input>
+      </ion-item>
+      
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
+        <ion-input label="Correo Electrónico" label-placement="floating" fill="clear" color="dark" name="correoNuevo" [(ngModel)]="correoNuevo"></ion-input>
+      </ion-item>
+      
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
+        <ion-input label="Teléfono" label-placement="floating" fill="clear" color="dark" name="telefonoNuevo" [(ngModel)]="telefonoNuevo"></ion-input>
+      </ion-item>
+      
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-icon aria-hidden="true" name="id-card-outline" slot="start"></ion-icon>
+        <ion-input label="RUT" label-placement="floating" fill="clear" color="dark" name="rutnuevo" [(ngModel)]="rutnuevo"></ion-input>
+      </ion-item>
+    
+      <div class="ion-text-center ion-margin">
+        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" (click)="irUsuarios()">
+          Confirmar
+          <ion-icon slot="end" name="checkmark-done-outline"></ion-icon>
+        </ion-button>
+        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" [routerLink]="['/usuarios']">
+          Cancelar
+          <ion-icon slot="end" name="close-outline"></ion-icon>
+        </ion-button>
+      </div> 
+    </form>
+  </div>
+ 
 </ion-content>

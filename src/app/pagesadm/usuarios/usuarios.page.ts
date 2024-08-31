@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 
 @Component({
@@ -15,10 +16,21 @@ export class UsuariosPage implements OnInit {
     { id: 3, nombreyApellido: "Andy Madrid", rut: "214547740" ,nombreUsuario: "Papelucho", correo: "a.madrid@duocuc.cl", telefono: "1234567890"},
    
   ]
-  constructor(private menu: MenuController) { }
+  constructor(private menu: MenuController, private router: Router, private activedrouter: ActivatedRoute) { }
 
   ngOnInit() {
     this.menu.enable(false);
-  }
 
+   
+    this.activedrouter.queryParams.subscribe(() => {
+      if (this.router.getCurrentNavigation()?.extras.state) {
+        
+        this.usuarios[0].nombreyApellido = this.router.getCurrentNavigation()?.extras?.state?.['nom'];
+        this.usuarios[0].nombreUsuario = this.router.getCurrentNavigation()?.extras?.state?.['us'];
+        this.usuarios[0].rut = this.router.getCurrentNavigation()?.extras?.state?.['run'];
+        this.usuarios[0].correo = this.router.getCurrentNavigation()?.extras?.state?.['cor'];
+        this.usuarios[0].telefono = this.router.getCurrentNavigation()?.extras?.state?.['te'];
+      }
+    });
+  }
 }
