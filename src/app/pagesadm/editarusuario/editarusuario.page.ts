@@ -20,9 +20,9 @@ export class EditarusuarioPage implements OnInit {
   rutnuevo: string = "";
 
   constructor(private menu: MenuController, private router: Router, private activedrouter: ActivatedRoute, private alertController: AlertController) {
-    // Subscribirnos a la lectura de los parametros
+    
     this.activedrouter.queryParams.subscribe(param => {
-      // Valido si viene o no informacion en la ruta
+    
       if (this.router.getCurrentNavigation()?.extras.state) {
         this.nombre = this.router.getCurrentNavigation()?.extras?.state?.['nom'];
         this.usuario = this.router.getCurrentNavigation()?.extras?.state?.['us'];
@@ -30,7 +30,6 @@ export class EditarusuarioPage implements OnInit {
         this.correo = this.router.getCurrentNavigation()?.extras?.state?.['cor'];
         this.rut = this.router.getCurrentNavigation()?.extras?.state?.['run'];
 
-        // Asignar los valores recibidos a las variables "nuevas"
         this.nombreNuevo = this.nombre;
         this.usuarioNuevo = this.usuario;
         this.telefonoNuevo = this.telefono;
