@@ -9,7 +9,6 @@ import { AlertController, MenuController } from '@ionic/angular';
 })
 export class MesasterrazaPage implements OnInit {
 
-  mesaSeleccionada: any = null;
   fechaReserva: string = ""; 
   mesas: any = [
     {numero: 1, reservada: false },
@@ -28,6 +27,7 @@ export class MesasterrazaPage implements OnInit {
     {numero: 14, reservada: false },
     {numero: 15, reservada: false },
   ];
+  mesaSeleccionada: any = null;
 
   constructor(private router: Router, private menu: MenuController, private alertController: AlertController) { }
 

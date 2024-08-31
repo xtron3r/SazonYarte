@@ -84,9 +84,17 @@ const routes: Routes = [
     loadChildren: () => import('./pagesadm/editareserva/editareserva.module').then( m => m.EditareservaPageModule)
   },
   {
+    path: 'contactocli',
+    loadChildren: () => import('./pagesadm/contactocli/contactocli.module').then( m => m.ContactocliPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
-  }
+  },
+ 
+
+
+
  
 
 
