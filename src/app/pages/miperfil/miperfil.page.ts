@@ -9,14 +9,14 @@ import { MenuController } from '@ionic/angular';
 export class MiperfilPage implements OnInit {
 
   nombre: string = "Basthian Bascuñan";
-  usuario: string = "Asadomaster";
+  usuario: string = "RayCL";
   telefono: string = "123456789";
-  correo: string = "bas.cunan@duocuc.cl";
-  contrasenia: string = "sazon123";
+  correo: string = "bast.bascunan@duocuc.cl";
+  contrasenia: string = "Hola123";
 
   constructor(private menu:MenuController,private router: Router,private activedrouter: ActivatedRoute) {
     
-    // Subscribirnos a la lectura de los parametros
+    // Subscribirnos a la lectura de los parametros de editar perfil
     this.activedrouter.queryParams.subscribe(param =>{
       //valido si viene o no informacion en la ruta
       if(this.router.getCurrentNavigation()?.extras.state){

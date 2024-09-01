@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { AlertController, MenuController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-contacto',
@@ -9,14 +9,39 @@ import { MenuController } from '@ionic/angular';
 export class ContactoPage implements OnInit {
 
   nombreyApellido: string="";
-  telefono!: number ;
+  telefono: string="";
   correo: string="";
   mensaje: string="";
 
-  constructor(private menu:MenuController) { }
+  constructor(private menu:MenuController, private alertController: AlertController, private toastController: ToastController) { }
 
   ngOnInit() {
     this.menu.enable(false);
+  }
+
+  async enviarFormulario(){
+    if(this.nombreyApellido == "" || this.telefono == "" || this.mensaje == "" || this.correo == ""){
+      const alert = await this.alertController.create({
+        header: 'Campos Vacios',
+        message: 'Por favor intente de nuevo',
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas'
+      });
+      await alert.present(); 
+    }
+    else{
+      this.mensajeContacto('bottom');
+      
+    }  
+  }
+  async mensajeContacto(position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: 'Mensaje enviado con exito !',
+      duration: 2000,
+      position: position,
+      cssClass: 'estilo-alertas'
+    });
+    await toast.present();
   }
 
 

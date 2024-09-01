@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AlertController, MenuController } from '@ionic/angular';
 
 @Component({
@@ -8,10 +8,25 @@ import { AlertController, MenuController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+
+  contraRegistro: string = "";
+  usuarioRegistro: string = "";
+
   contrasenia: string = "";
   usuario: string = "";
 
-  constructor(private router:Router, private menu:MenuController,private alertController: AlertController) { }
+  constructor(private router:Router, private menu:MenuController,private alertController: AlertController,private activedrouter: ActivatedRoute ) { 
+
+    // Subscribirnos a la lectura de los parametros
+    this.activedrouter.queryParams.subscribe(param =>{
+      //valido si viene o no informacion en la ruta
+      if(this.router.getCurrentNavigation()?.extras.state){
+        this.usuarioRegistro = this.router.getCurrentNavigation()?.extras?.state?.['usu'];
+        this.contraRegistro = this.router.getCurrentNavigation()?.extras?.state?.['con'];
+      }
+    }) 
+  }
 
   ngOnInit() {
     this.menu.enable(false);
@@ -19,13 +34,6 @@ export class LoginPage implements OnInit {
 
 
   async irPagina() {
-    //crear mi variable de contexto
-    let navigationextras: NavigationExtras = {
-      state: {
-        nom: this.usuario,
-        com: this.contrasenia
-      }
-    };
 
     if (this.usuario == "" || this.contrasenia == ""){
       const alert = await this.alertController.create({
@@ -35,26 +43,29 @@ export class LoginPage implements OnInit {
         cssClass: 'estilo-alertas'
       });
       await alert.present();
-    } else{
+    } else if (this.usuario == "admin" && this.contrasenia == "admin"){
 
-      const validaMayuscula = this.contrasenia  != this.contrasenia.toLowerCase();
+      this.router.navigate(['/homeadmin']);
 
-      if (validaMayuscula == false){
-        const alert = await this.alertController.create({
-          header: 'Contraseña Incorrecta',
-          message: 'Intente de nuevo',
-          buttons: ['OK'],
-          cssClass: 'estilo-alertas'
-        });
-        await alert.present();
-      } else {
+    } else if (this.usuario == this.usuarioRegistro && this.contrasenia == this.contraRegistro){
 
-        if(this.usuario == "admin"){
-          this.router.navigate(['/homeadmin'], navigationextras);
-        }else {
-          this.router.navigate(['/home'], navigationextras);
+      let navigationExtras: NavigationExtras = {
+        state: {
+          'usu': this.usuarioRegistro,
+          'con': this.contraRegistro
         }
-      }
+      };
+      this.router.navigate(['/home'], navigationExtras);
+
+    } else {
+
+      const alert = await this.alertController.create({
+        header: 'Error al iniciar Sesion',
+        message: 'Usuario o Contraseña incorrecta',
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas'
+      });
+      await alert.present();
     }
   }
 }

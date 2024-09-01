@@ -18,7 +18,7 @@
   </div>
 
   <div class="seccion-form">
-    <form class="edit-usuario">
+    <form class="edit-usuario" #form="ngForm">
       
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="person-outline" slot="start"></ion-icon>
@@ -32,7 +32,7 @@
       
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
-        <ion-input type="email" placeholder="Ingresa Correo valido" label="Correo Electronico" label-placement="floating" class="quitar-linea" errorText="Invalid email" name="correoNuevo" [(ngModel)]="correoNuevo" ngModel email></ion-input>
+        <ion-input type="email" placeholder="Ingresa Correo valido" label="Correo Electronico" label-placement="floating" class="quitar-linea" errorText="Email invalido" name="correoNuevo" [(ngModel)]="correoNuevo" ngModel email></ion-input>
       </ion-item>
       
       <ion-item class="ion-margin-horizontal ion-color">
@@ -46,7 +46,7 @@
       </ion-item>
     
       <div class="ion-text-center ion-margin">
-        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" (click)="irUsuarios()">
+        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" (click)="irUsuarios()" [disabled]="form.invalid">
           Confirmar
           <ion-icon slot="end" name="checkmark-done-outline"></ion-icon>
         </ion-button>

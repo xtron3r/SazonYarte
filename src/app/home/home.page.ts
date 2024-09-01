@@ -8,7 +8,7 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  nombre: string = "";
+  usuario: string = "";
   contrasenia: string = "";
 
   constructor(private router: Router, private activedrouter: ActivatedRoute, private menu:MenuController) { 
@@ -16,8 +16,8 @@ export class HomePage implements OnInit {
     this.activedrouter.queryParams.subscribe(param =>{
       //valido si viene o no informacion en la ruta
       if(this.router.getCurrentNavigation()?.extras.state){
-        this.nombre = this.router.getCurrentNavigation()?.extras?.state?.['nom'];
-        this.contrasenia = this.router.getCurrentNavigation()?.extras?.state?.['com'];
+        this.usuario = this.router.getCurrentNavigation()?.extras?.state?.['usu'];
+        this.contrasenia = this.router.getCurrentNavigation()?.extras?.state?.['con'];
       }
     }) 
   }

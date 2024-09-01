@@ -18,15 +18,15 @@
   
 
   <div class="seccion-form">
-    <form action="" class="recuperar">
+    <form action="" class="recuperar" #form="ngForm">
 
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
-        <ion-input type="email" placeholder="Ingresa Correo valido" label="Correo Electronico" label-placement="floating" class="quitar-linea" errorText="Invalid email" name="correo" [(ngModel)]="correo" ngModel email></ion-input>
+        <ion-input type="email" placeholder="Ingresa Correo valido" label="Correo Electronico" label-placement="floating" class="quitar-linea" errorText="Email invalido" name="correo" [(ngModel)]="correo" ngModel email></ion-input>
       </ion-item>
   
       <div class="ion-text-center">
-        <ion-button class="ion-margin-top ion-margin-bottom boton-inicio txt-marcado" shape="round">Enviar</ion-button>
+        <ion-button class="ion-margin-top ion-margin-bottom boton-inicio txt-marcado" shape="round" [disabled]="form.invalid" (click)="enviarCorreo()">Enviar</ion-button>
       </div>
      
     </form>

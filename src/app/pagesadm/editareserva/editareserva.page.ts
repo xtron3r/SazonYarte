@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-editareserva',
@@ -8,10 +8,30 @@ import { MenuController } from '@ionic/angular';
 })
 export class EditareservaPage implements OnInit {
 
-  constructor(private menu:MenuController) { }
+
+
+  nombreCLiente: string ="";
+  telefono: string ="";
+  fecha: string ="";
+  nroMesa: string ="";
+  tipoMesa: string ="";
+  constructor(private menu:MenuController, private alertController: AlertController) { }
 
   ngOnInit() {
     this.menu.enable(false);
+  }
+
+  async editarReserva(){
+
+    if(this.nombreCLiente == "" || this.telefono == "" || this.fecha == "" || this.nroMesa == "" || this.tipoMesa == ""){
+      const alert = await this.alertController.create({
+        header: 'Campos Vacios',
+        message: 'Por favor intente de nuevo',
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas'
+      });
+      await alert.present(); 
+    }
   }
 
 }

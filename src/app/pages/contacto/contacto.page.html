@@ -13,7 +13,7 @@
   </div>
 
   <div class="seccion-form">
-    <form action="" class="contacto">
+    <form action="" class="contacto" #form="ngForm">
       <h5 class="ion-margin-top">Tienes un mensaje? Envialo!</h5>
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="person-outline" slot="start"></ion-icon>
@@ -27,7 +27,7 @@
 
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
-        <ion-input type="email" placeholder="Ingresa Correo valido" label="Correo Electronico" label-placement="floating" class="quitar-linea" errorText="Invalid email" name="correo" [(ngModel)]="correo" ngModel email></ion-input>
+        <ion-input type="email" placeholder="Ingresa Correo valido" label="Correo Electronico" label-placement="floating" class="quitar-linea" errorText="Email invalido" name="correo" [(ngModel)]="correo" ngModel email></ion-input>
       </ion-item>
 
       <ion-item class="ion-margin-horizontal ion-color">
@@ -35,7 +35,7 @@
         <ion-textarea label="Mensaje" label-placement="floating" placeholder="Escribe tu mensaje" color="dark" name="mensaje" [(ngModel)]="mensaje"></ion-textarea>
       </ion-item>
       <div class="ion-text-center ion-margin-bottom">
-        <ion-button type="submit" class="ion-margin boton-inicio txt-marcado" shape="round">Enviar Formulario</ion-button>
+        <ion-button type="submit" class="ion-margin boton-inicio txt-marcado" shape="round" [disabled]="form.invalid" (click)="enviarFormulario()">Enviar Formulario</ion-button>
       </div>
       <p>O llama al <b>+569 1234 5678</b></p>
     </form>
