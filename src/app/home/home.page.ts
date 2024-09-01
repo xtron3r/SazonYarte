@@ -26,6 +26,7 @@ export class HomePage implements OnInit {
     this.menu.enable(true);
   }
 
+  /*Antes de cargar la pagina, activa el menu*/
   ionViewWillEnter() {
     this.menu.enable(true);
   }

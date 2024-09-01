@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-contactocli',
@@ -30,9 +31,10 @@ export class ContactocliPage implements OnInit {
       mensaje: "Estoy probando la app se ve buenisima!"
     }
   ];
-  constructor() { }
+  constructor(private menu:MenuController) { }
 
   ngOnInit() {
+    this.menu.enable(false);
   }
 
 }

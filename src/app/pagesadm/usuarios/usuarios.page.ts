@@ -16,13 +16,9 @@ export class UsuariosPage implements OnInit {
     { id: 3, nombreyApellido: "Andy Madrid", rut: "214547740" ,nombreUsuario: "Papelucho", correo: "a.madrid@duocuc.cl", telefono: "1234567890"},
    
   ]
-  constructor(private menu: MenuController, private router: Router, private activedrouter: ActivatedRoute) { }
-
-  ngOnInit() {
-    this.menu.enable(false);
-
-   
-    this.activedrouter.queryParams.subscribe(() => {
+  constructor(private menu: MenuController, private router: Router, private activedrouter: ActivatedRoute) { 
+    
+    this.activedrouter.queryParams.subscribe(param => {
       if (this.router.getCurrentNavigation()?.extras.state) {
         
         this.usuarios[0].nombreyApellido = this.router.getCurrentNavigation()?.extras?.state?.['nom'];
@@ -32,5 +28,9 @@ export class UsuariosPage implements OnInit {
         this.usuarios[0].telefono = this.router.getCurrentNavigation()?.extras?.state?.['te'];
       }
     });
+  }
+
+  ngOnInit() {
+    this.menu.enable(false);
   }
 }
