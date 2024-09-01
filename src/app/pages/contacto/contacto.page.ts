@@ -31,7 +31,10 @@ export class ContactoPage implements OnInit {
     }
     else{
       this.mensajeContacto('bottom');
-      
+      this.nombreyApellido = "";
+      this.telefono = "";
+      this.correo = "";
+      this.mensaje = "";
     }  
   }
   async mensajeContacto(position: 'top' | 'middle' | 'bottom') {
