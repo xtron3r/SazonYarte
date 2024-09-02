@@ -3,6 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-title>Edita Usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,9 +13,6 @@
     <div class="img-logo">
       <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
     </div>
-    <ion-text class="ion-text-center">
-      <h5 class="usuario">EDITAR USUARIO</h5>
-    </ion-text>
   </div>
 
   <div class="seccion-form">
@@ -33,6 +31,13 @@
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
         <ion-input type="email" placeholder="Ingresa Correo valido" label="Correo Electronico" label-placement="floating" class="quitar-linea" errorText="Email invalido" name="correoNuevo" [(ngModel)]="correoNuevo" ngModel email></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin-horizontal ion-color">
+        <ion-icon aria-hidden="true" name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input type="password" placeholder="Contraseña (MAX 12 C.)" color=dark name="contrasenia" maxlength="12" [(ngModel)]="contraseniaNueva">
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
       </ion-item>
       
       <ion-item class="ion-margin-horizontal ion-color">

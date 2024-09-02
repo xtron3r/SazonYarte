@@ -12,6 +12,8 @@ export class EditarusuarioPage implements OnInit {
   nombreNuevo: string = "";
   usuario: string = "";
   usuarioNuevo: string = "";
+  contrasenia: string = "";
+  contraseniaNueva: string = "";
   telefono: string = "";
   telefonoNuevo: string = "";
   correo: string = "";
@@ -29,12 +31,14 @@ export class EditarusuarioPage implements OnInit {
         this.telefono = this.router.getCurrentNavigation()?.extras?.state?.['te'];
         this.correo = this.router.getCurrentNavigation()?.extras?.state?.['cor'];
         this.rut = this.router.getCurrentNavigation()?.extras?.state?.['run'];
+        this.contrasenia = this.router.getCurrentNavigation()?.extras?.state?.['con'];
 
         this.nombreNuevo = this.nombre;
         this.usuarioNuevo = this.usuario;
         this.telefonoNuevo = this.telefono;
         this.correoNuevo = this.correo;
         this.rutNuevo = this.rut;
+        this.contraseniaNueva = this.contrasenia;
       }
     });
   }
@@ -44,7 +48,10 @@ export class EditarusuarioPage implements OnInit {
   }
 
   async irUsuarios() {
-    if (this.nombreNuevo == "" || this.usuarioNuevo == "" || this.telefonoNuevo == "" || this.correoNuevo == "" || this.rutNuevo == "") {
+
+    const validaMayuscula = /[A-Z]/;
+
+    if (this.nombreNuevo == "" || this.usuarioNuevo == "" || this.telefonoNuevo == "" || this.correoNuevo == "" || this.rutNuevo == "" || this.contraseniaNueva == "") {
       const alert = await this.alertController.create({
         header: 'Campos vacios',
         message: 'Por favor, inténtelo de nuevo',
@@ -52,7 +59,7 @@ export class EditarusuarioPage implements OnInit {
         cssClass: 'estilo-alertas'
       });
       await alert.present();
-    } else if (this.nombreNuevo == this.nombre && this.usuarioNuevo == this.usuario && this.telefonoNuevo == this.telefono && this.correoNuevo == this.correo && this.rutNuevo == this.rut) {
+    } else if (this.nombreNuevo == this.nombre && this.usuarioNuevo == this.usuario && this.telefonoNuevo == this.telefono && this.correoNuevo == this.correo && this.rutNuevo == this.rut && this.contraseniaNueva == this.contrasenia) {
       const alert = await this.alertController.create({
         header: 'Los datos no pueden ser iguales a los anteriores',
         message: 'Por favor, intentelo de nuevo',
@@ -60,14 +67,26 @@ export class EditarusuarioPage implements OnInit {
         cssClass: 'estilo-alertas'
       });
       await alert.present();
+    } else if (validaMayuscula.test(this.contraseniaNueva) == false) {
+
+      const alert = await this.alertController.create({
+        header: 'Error Contraseña',
+        message: 'La contraseña debe tener una mayuscula',
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas'
+      });
+      await alert.present();
+
     } else {
+      
       let navigationExtras: NavigationExtras = {
         state: {
           nom: this.nombreNuevo,
           run: this.rutNuevo,
           us: this.usuarioNuevo,
           cor: this.correoNuevo,
-          te: this.telefonoNuevo
+          te: this.telefonoNuevo,
+          con: this.contraseniaNueva
         }
       };
       this.router.navigate(['/usuarios'], navigationExtras);
