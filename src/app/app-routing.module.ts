@@ -76,10 +76,6 @@ const routes: Routes = [
     loadChildren: () => import('./pagesadm/homeadmin/homeadmin.module').then( m => m.HomeadminPageModule)
   },
   {
-    path: 'editarusuario',
-    loadChildren: () => import('./pagesadm/editarusuario/editarusuario.module').then( m => m.EditarusuarioPageModule)
-  },
-  {
     path: 'editareserva',
     loadChildren: () => import('./pagesadm/editareserva/editareserva.module').then( m => m.EditareservaPageModule)
   },
@@ -88,9 +84,15 @@ const routes: Routes = [
     loadChildren: () => import('./pagesadm/contactocli/contactocli.module').then( m => m.ContactocliPageModule)
   },
   {
+    path: 'agregarmesa',
+    loadChildren: () => import('./pagesadm/agregarmesa/agregarmesa.module').then( m => m.AgregarmesaPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
-  },
+  }
+
+
  
 
 

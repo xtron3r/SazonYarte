@@ -13,6 +13,7 @@ export class RegisterPage implements OnInit {
   rut : string ="";
   usuario: string ="";
   contrasenia: string ="";
+  nuevaContrasenia: string ="";
   telefono: string ="";
   correo: string ="";
 
@@ -41,6 +42,15 @@ export class RegisterPage implements OnInit {
       const alert = await this.alertController.create({
         header: 'Error en contraseña',
         message: 'La contraseña debe tener al menos una mayuscula',
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas'
+      });
+      await alert.present();
+    } else if (this.contrasenia != this.nuevaContrasenia){
+
+      const alert = await this.alertController.create({
+        header: 'Error en contraseña',
+        message: 'Las contraseñas no coinciden',
         buttons: ['OK'],
         cssClass: 'estilo-alertas'
       });

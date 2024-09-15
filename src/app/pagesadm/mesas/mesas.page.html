@@ -10,6 +10,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="fondo">
+  <button mat-fab class="boton-agregarmesa" [routerLink]="['/agregarmesa']">
+    AGREGAR MESA
+    <mat-icon class="color-inicio espacio" fontIcon="table_bar"></mat-icon>
+  </button>
   <ion-toolbar class="fondo">
     <ion-segment [(ngModel)]="buscarMesa">
       <ion-segment-button value="Local" class="color-blanco">
@@ -22,8 +26,9 @@
   </ion-toolbar>
 
   <p *ngIf="buscarMesa == ''" class="ion-text-center ion-margin-top"> SELECCIONE UNA CATEGORIA</p>
-
+  
   <div class="container-mesas" *ngIf="buscarMesa == 'Terraza'" >
+    <ion-searchbar animated="true" placeholder="Ingrese N° de mesa" class=" search-bar"></ion-searchbar>
     <mat-card *ngFor="let mesa of mesasTerraza" class="container-mesa">
       <mat-card-header>
         <mat-icon mat-card-avatar>event</mat-icon>
@@ -43,6 +48,7 @@
   </div>
 
   <div class="container-mesas" *ngIf="buscarMesa == 'Local'">
+    <ion-searchbar animated="true" placeholder="Ingrese N° de mesa" class=" search-bar"></ion-searchbar>
     <mat-card *ngFor="let mesa of mesasLocal" class="container-mesa">
       <mat-card-header>
         <mat-icon mat-card-avatar>event</mat-icon>

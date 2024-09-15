@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content class="fondo">
-  <ion-searchbar animated="true" placeholder="Ingrese el rut" class="ion-margin-top search-bar"></ion-searchbar>
+  <ion-searchbar animated="true" placeholder="Ingrese el Rut" class="ion-margin-top search-bar"></ion-searchbar>
   <div class="container-usuarios">
     <mat-card *ngFor="let usuario of usuarios" class="container-usuario">
       <mat-card-header>
@@ -20,13 +20,11 @@
       <mat-card-content>
         <p>Rut: {{ usuario.rut }}</p>
         <p>Usuario: {{ usuario.nombreUsuario }}</p>
-        <p>Contraseña: {{ usuario.contrasenia }}</p>
         <p>Correo: {{ usuario.correo }}</p>
         <p>Teléfono: {{ usuario.telefono }}</p>
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-button class="botones-accion-ed" (click)="irEditarusuario()"> Editar<mat-icon mat-card-avatar class="icon-edit">edit</mat-icon></button>
-        <button mat-button class="botones-accion-del"> Eliminar<mat-icon mat-card-avatar class="icon-del">delete</mat-icon></button>
+      <mat-card-actions class="">
+        <button mat-button class="botones-accion-del"> Restablecer<mat-icon mat-card-avatar class="icon-del">delete</mat-icon></button>
       </mat-card-actions>
     </mat-card>
   </div>

@@ -56,3 +56,22 @@
         margin-right: 5px;
     }
 }
+
+.boton-agregarmesa{
+    width: 100%;
+    height: 45px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: #4e3725;
+    background-color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    .color-inicio{
+        color: #4e3725;
+    }
+}
+.search-bar{
+    margin-bottom: 20px;
+    --background: #f0f0f0;
+    color: black;
+}

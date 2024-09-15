@@ -37,6 +37,13 @@
       </ion-item>
 
       <ion-item class="ion-margin-horizontal ion-color">
+        <ion-icon aria-hidden="true" name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input type="password" placeholder="Repetir Contraseña" color=dark name="nuevaContrasenia" maxlength="12" [(ngModel)]="nuevaContrasenia">
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
         <ion-input type="tel" label="Telefono" label-placement="floating" placeholder="EJ : 123456789" color="dark" maxlength="9" name="telefono" [(ngModel)]="telefono"></ion-input>
       </ion-item>

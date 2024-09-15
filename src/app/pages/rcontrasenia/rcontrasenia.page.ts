@@ -17,13 +17,24 @@ export class RcontraseniaPage implements OnInit {
   }
 
   async enviarCorreo() {
-    const alert = await this.alertController.create({
-      header: 'Solicitud enviada',
-      message: 'Se envio el link de recuperar contraseña al correo',
-      buttons: ['OK'],
-      cssClass: 'estilo-alertas'
-    });
-    await alert.present();
+
+    if (this.correo == "") {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Debe ingresar un correo',
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas'
+      });
+      await alert.present();
+    } else{
+      const alert = await this.alertController.create({
+        header: 'Solicitud enviada',
+        message: 'Se envio el link de recuperar contraseña al correo',
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas'
+      });
+      await alert.present();
+    }
   }
 
 
