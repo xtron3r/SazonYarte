@@ -15,7 +15,7 @@
     <mat-card *ngFor="let contacto of contactos" class="container-contacto">
       <mat-card-header>
         <mat-icon mat-card-avatar>alternate_email</mat-icon>
-        <mat-card-title>{{ contacto.nombreyApellido }}</mat-card-title>
+        <mat-card-title>{{ contacto.nombreCompleto }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <p>Correo: {{contacto.correo}}</p>

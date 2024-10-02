@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { ServicioBDService } from 'src/app/services/servicio-bd.service';
 
 @Component({
   selector: 'app-contactocli',
@@ -10,31 +11,27 @@ export class ContactocliPage implements OnInit {
 
   contactos: any = [
     {
-      id: 1,
-      nombreyApellido: "Daryen Fernandez",
-      telefono: "1234567890",
-      correo: "da.fernandez@duocuc.cl",
-      mensaje: "Necesito cambiar mi reserva y no se cómo hacerlo."
+      id: '',
+      nombreCompleto: '',
+      telefono: '',
+      correo: '',
+      mensaje: ''
     },
-    {
-      id: 2,
-      nombreyApellido: "Esteban Toledo",
-      telefono: "1234567890",
-      correo: "este.toledo@duocuc.cl",
-      mensaje: "Necesito ayuda para reservar"
-    },
-    {
-      id: 3,
-      nombreyApellido: "Andy Madrid",
-      telefono: "1234567890",
-      correo: "a.madrid@duocuc.cl",
-      mensaje: "Estoy probando la app se ve buenisima!"
-    }
   ];
-  constructor(private menu:MenuController) { }
+  constructor(private menu:MenuController, private bd: ServicioBDService) { }
 
   ngOnInit() {
     this.menu.enable(false);
+
+    this.bd.dbState().subscribe(data=>{
+      //validar si la bd esta lista
+      if(data){
+        //subscribir al observable de la listaNoticias
+        this.bd.fetchContacto().subscribe(res=>{
+          this.contactos = res;
+        })
+      }
+    })
   }
 
 }

@@ -22,15 +22,15 @@ export class ServicioBDService {
 
   // Tabla de contacto
 
-  tablaContacto: string = "CREATE TABLE IF NOT EXISTS contacto ( id_contacto INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombrecompleto VARCHAR(100) NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, mensaje TEXT NOT NULL);";
+  tablaContacto: string = "CREATE TABLE IF NOT EXISTS contacto ( id_contacto INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombrecompleto VARCHAR NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, mensaje TEXT NOT NULL);";
 
-  registroContacto: string = "INSERT or IGNORE INTO contacto(id_contacto, nombrecompleto, telefono, correo, mensaje) VALUES (1,'Estebandido Toledo', '959808217', 'este.toledo@duocuc.cl', 'Este es un mensaje de prueba')";
+  registroContacto: string = "INSERT or IGNORE INTO contacto(id_contacto, nombrecompleto, telefono, correo, mensaje) VALUES (1,'Esteban', '959808217', 'este.toledo@duocuc.cl', 'Este es un mensaje de prueba')";
 
   // Tabla Bloque
 
   tablaBloque: string = "CREATE TABLE IF NOT EXISTS bloque (id_bloque INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, h_inicio DATETIME NOT NULL, h_fin DATETIME NOT NULL, dia DATE NOT NULL,mes DATE NOT NULL);";
 
-  registroBloque: string = "INSERT or IGNORE INTO bloque(id_bloque, h_inicio, h_fin, dia, mes) VALUES (1, '10:45', '11:45', '02', '10'";
+  registroBloque: string = "INSERT or IGNORE INTO bloque(id_bloque, h_inicio, h_fin, dia, mes) VALUES (1, '10:45', '11:45', '02', '10')";
 
   // Tabla Ubicacion
 
@@ -171,8 +171,7 @@ export class ServicioBDService {
       
       //llamamos a la función para seleccionar los datos de las tablas
 
-
-      //this.seleccionarNoticias();
+      this.listarContactos();
       
       //modifico el estado de la Base de Datos
       this.isDBReady.next(true);
@@ -181,4 +180,32 @@ export class ServicioBDService {
       this.Alerta('Creación de Tablas', 'Error en crear las tablas: ' + JSON.stringify(e));
     }
   }
+
+  // funciones de contacto
+  listarContactos(){
+    return this.database.executeSql('SELECT * FROM contacto', []).then(res=>{
+      //variable para almacenar el resultado de la consulta
+      let items: Contacto[] = [];
+      //valido si trae al menos un registro
+      if(res.rows.length > 0){
+       //recorro mi resultado
+       for(var i=0; i < res.rows.length; i++){
+         //agrego los registros a mi lista
+         items.push({
+          id_contacto: res.rows.item(i).id_contacto,
+          nombreCompleto: res.rows.item(i).nombrecompleto,
+          telefono: res.rows.item(i).telefono,
+          correo: res.rows.item(i).correo,
+          mensaje: res.rows.item(i).mensaje
+         })
+       }
+       
+      }
+      //actualizar el observable
+      this.listadoContacto.next(items as any);
+
+   })
+  }
+
+  eliminarContacto(){}
 }
