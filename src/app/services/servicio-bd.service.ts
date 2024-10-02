@@ -1,0 +1,186 @@
+import { Injectable } from '@angular/core';
+import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
+import { AlertController, Platform } from '@ionic/angular';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Contacto } from './contacto';
+import { Bloque } from './bloque';
+import { Ubicacion } from './ubicacion';
+import { Mesas } from './mesas';
+import { Reserva } from './reserva';
+import { Rol } from './rol';
+import { Usuario } from './usuario';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ServicioBDService {
+
+  // Variable de conexion a Base de Datos
+  public database!: SQLiteObject;
+
+  // Variable de creacion de Tablas
+
+  // Tabla de contacto
+
+  tablaContacto: string = "CREATE TABLE IF NOT EXISTS contacto ( id_contacto INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombrecompleto VARCHAR(100) NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, mensaje TEXT NOT NULL);";
+
+  registroContacto: string = "INSERT or IGNORE INTO contacto(id_contacto, nombrecompleto, telefono, correo, mensaje) VALUES (1,'Estebandido Toledo', '959808217', 'este.toledo@duocuc.cl', 'Este es un mensaje de prueba')";
+
+  // Tabla Bloque
+
+  tablaBloque: string = "CREATE TABLE IF NOT EXISTS bloque (id_bloque INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, h_inicio DATETIME NOT NULL, h_fin DATETIME NOT NULL, dia DATE NOT NULL,mes DATE NOT NULL);";
+
+  registroBloque: string = "INSERT or IGNORE INTO bloque(id_bloque, h_inicio, h_fin, dia, mes) VALUES (1, '10:45', '11:45', '02', '10'";
+
+  // Tabla Ubicacion
+
+  tablaUbicacion: string = "CREATE TABLE IF NOT EXISTS ubicacion (id_ubicacion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre VARCHAR NOT NULL);";
+
+  registroUbicacion: string = "INSERT or IGNORE INTO ubicacion(id_ubicacion, nombre) VALUES (1, 'Terraza')";
+  registroUbicacion2: string = "INSERT or IGNORE INTO ubicacion(id_ubicacion, nombre) VALUES (2, 'Local')";
+
+  // Tabla Mesas
+
+  tablaMesas: string = "CREATE TABLE IF NOT EXISTS mesas (id_mesa INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR NOT NULL, c_sillas INTEGER NOT NULL, id_ubi_fk INTEGER, FOREIGN KEY (id_ubi_fk) REFERENCES Ubicacion (id_ubicacion));";
+
+  registroMesa: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (1, 'Mesa 1', 4, 1)";
+  registroMesa2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (2, 'Mesa 2', 6, 2)";
+
+  // Tabla Reservas
+
+  tablaReservas: string = "CREATE TABLE IF NOT EXISTS reserva (id_reserva INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, f_reserva DATE NOT NULL, f_creacion DATE NOT NULL, id_usuario_fk INTEGER NOT NULL, id_mesa_fk INTEGER NOT NULL, id_bloque_fk INTEGER NOT NULL, FOREIGN KEY (id_usuario_fk) REFERENCES Usuario (id_usuario), FOREIGN KEY (id_mesa_fk) REFERENCES Mesas (id_mesa), FOREIGN KEY (id_bloque_fk) REFERENCES Bloque (id_bloque));";
+
+  // tabla Rol
+
+  tablaRol: string = "CREATE TABLE IF NOT EXISTS rol (id_rol INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre VARCHAR NOT NULL);";
+
+  registroRol: string = "INSERT or IGNORE INTO rol(id_rol, nombre) VALUES (1, 'Administrador')";
+  registroRol2: string = "INSERT or IGNORE INTO rol(id_rol, nombre) VALUES (2, 'Usuario')";
+
+  // Tabla Usuario
+
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS Usuario (id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, rut VARCHAR(10) NOT NULL, nombreusuario VARCHAR NOT NULL, nombrecompleto VARCHAR NOT NULL, contrasenia VARCHAR NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, id_rol_fk INTEGER NOT NULL, FOREIGN KEY (id_rol_fk) REFERENCES Rol (id_rol));";
+
+  registroUsuario: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk) VALUES (1,'213781146', 'admin', 'Aroneitor', 'admin', 930935460, 'admin@duocuc.cl', 1)";
+
+  registroUsuario2: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk) VALUES (2,'205902058', 'RayCL', 'Basthian Bascuñan', '123456', 959808217, 'bast.bascunan@duocuc.cl', 2)";
+
+  //variables para guardar los datos de las consultas en las tablas
+  
+  listadoContacto = new BehaviorSubject([]);
+  listadoBloque = new BehaviorSubject([]);
+  listadoUbicacion = new BehaviorSubject([]);
+  listadoMesas = new BehaviorSubject([]);
+  listadoReservas = new BehaviorSubject([]);
+  listadoRol = new BehaviorSubject([]);
+  listadoUsuario = new BehaviorSubject([]);
+  
+
+  //variable para el status de la Base de datos
+  private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+
+  constructor(private sqlite: SQLite, private platform: Platform, private alertController: AlertController) {
+    this.createBD();
+  }
+
+  async Alerta(titulo: string, msj:string) {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: msj,
+      buttons: ['OK'],
+      cssClass: 'estilo-alertas'
+    });
+
+    await alert.present();
+  }
+
+  //metodos para manipular los observables
+
+  fetchContacto(): Observable<Contacto[]>{
+    return this.listadoContacto.asObservable();
+  }
+  fetchBloque(): Observable<Bloque[]>{
+    return this.listadoBloque.asObservable();
+  }
+
+  fetchUbicacion(): Observable<Ubicacion[]>{
+    return this.listadoUbicacion.asObservable();
+  }
+
+  fetchMesas(): Observable<Mesas[]>{
+    return this.listadoMesas.asObservable();
+  }
+  fetchReservas(): Observable<Reserva[]>{
+    return this.listadoReservas.asObservable();
+  }
+
+  fetchRol(): Observable<Rol[]>{
+    return this.listadoRol.asObservable();
+  }
+
+  fetchUsuario(): Observable<Usuario[]>{
+    return this.listadoUsuario.asObservable();
+  }
+
+  dbState(){
+    return this.isDBReady.asObservable();
+  }
+
+  //función para crear la Base de Datos
+  createBD(){
+    //varificar si la plataforma esta disponible
+    this.platform.ready().then(()=>{
+      //crear la Base de Datos
+      this.sqlite.create({
+        name: 'sazonyarte.db',
+        location: 'default'
+      }).then((db: SQLiteObject)=>{
+
+        //capturar la conexion a la BD
+        this.database = db;
+        //llamamos a la función para crear las tablas
+        this.crearTablas();
+      }).catch(e=>{
+        this.Alerta('Base de Datos', 'Error en crear la BD: ' + JSON.stringify(e));
+      })
+    })
+  }
+
+  async crearTablas(){
+    try{
+      //ejecuto la creación de Tablas
+      await this.database.executeSql(this.tablaContacto, []);
+      await this.database.executeSql(this.tablaBloque, []);
+      await this.database.executeSql(this.tablaUbicacion, []);
+      await this.database.executeSql(this.tablaMesas, []);
+      await this.database.executeSql(this.tablaReservas, []);
+      await this.database.executeSql(this.tablaRol, []);
+      await this.database.executeSql(this.tablaUsuario, []);
+
+      //ejecuto los insert por defecto en el caso que existan
+      await this.database.executeSql(this.registroContacto, []);
+      await this.database.executeSql(this.registroBloque, []);
+      await this.database.executeSql(this.registroUbicacion, []);
+      await this.database.executeSql(this.registroUbicacion2, []);
+      await this.database.executeSql(this.registroMesa, []);
+      await this.database.executeSql(this.registroMesa2, []);
+      await this.database.executeSql(this.registroRol, []);
+      await this.database.executeSql(this.registroRol2, []);
+      await this.database.executeSql(this.registroUsuario, []);
+      await this.database.executeSql(this.registroUsuario2, []);
+      
+      //llamamos a la función para seleccionar los datos de las tablas
+
+
+      //this.seleccionarNoticias();
+      
+      //modifico el estado de la Base de Datos
+      this.isDBReady.next(true);
+
+    }catch(e){
+      this.Alerta('Creación de Tablas', 'Error en crear las tablas: ' + JSON.stringify(e));
+    }
+  }
+
+}
