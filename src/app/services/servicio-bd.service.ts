@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+ import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -89,7 +89,6 @@ export class ServicioBDService {
       header: titulo,
       message: msj,
       buttons: ['OK'],
-      cssClass: 'estilo-alertas'
     });
 
     await alert.present();
@@ -182,5 +181,4 @@ export class ServicioBDService {
       this.Alerta('Creación de Tablas', 'Error en crear las tablas: ' + JSON.stringify(e));
     }
   }
-
 }
