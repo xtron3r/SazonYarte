@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { ServicioBDService } from 'src/app/services/servicio-bd.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuarios',
@@ -10,18 +9,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UsuariosPage implements OnInit {
 
-  usuarios: any = [
+  usuario: any = [
     {
       id_usuario: '',
       rut: '',
       nombreUsuario: '',
-      nombreyApellido: '',
+      nombreCompleto: '',
       correo: '',
       telefono: ''
     },
   ];
 
-  constructor(private menu: MenuController, private bd: ServicioBDService,private router: Router, private activedrouter: ActivatedRoute) { }
+  buscarRut: string = "";
+  errorRut: boolean = false;
+
+  constructor(private menu: MenuController, private bd: ServicioBDService) { }
 
   ngOnInit() {
     this.menu.enable(false);
@@ -31,10 +33,29 @@ export class UsuariosPage implements OnInit {
       if (data) {
         // subscribir al observable de usuarios
         this.bd.fetchUsuario().subscribe(res => {
-          this.usuarios = res;
+          this.usuario = res;
         });
       }
     });
   }
-  
+
+  eliminarUsuario(usuario: any){
+    this.bd.eliminarUsuario(usuario.id_usuario);
+  }
+
+  buscarUsuario(buscarRut: any){
+    
+    if (buscarRut == ""){
+      this.bd.listarUsuario();
+      this.errorRut = false;
+    } else{
+       // Buscar el usuario por Rut
+       this.bd.buscarUsuario(buscarRut).then(() => {
+        // Si no hay resultados activa el ngif
+        if (this.usuario.length == 0) {
+          this.errorRut = true;
+        }
+      });
+    }
+  }
 }

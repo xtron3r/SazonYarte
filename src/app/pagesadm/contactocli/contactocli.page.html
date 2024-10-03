@@ -23,7 +23,7 @@
         <p>Mensaje: {{contacto.mensaje}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button class="botones-accion-del"> Eliminar<mat-icon mat-card-avatar class="icon-del">delete</mat-icon></button>
+        <button mat-button class="botones-accion-del" (click)="eliminarContacto(contacto)"> Eliminar<mat-icon mat-card-avatar class="icon-del">delete</mat-icon></button>
       </mat-card-actions>
     </mat-card>
   </div>

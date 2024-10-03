@@ -10,22 +10,23 @@
 </ion-header>
 
 <ion-content class="fondo">
-  <ion-searchbar animated="true" placeholder="Ingrese el Rut" class="ion-margin-top search-bar"></ion-searchbar>
+  <ion-searchbar animated="true" placeholder="Ingrese el Rut" class="ion-margin-top search-bar" type="tel" maxlength="9" [(ngModel)]="buscarRut" (click)="buscarUsuario(buscarRut)"></ion-searchbar>
   <div class="container-usuarios">
+    <ion-text *ngIf="errorRut" class="ion-text-center">SIN RESULTADO</ion-text>
     <!-- Listar usuarios utilizando *ngFor -->
-    <mat-card *ngFor="let usuario of usuarios" class="container-usuario">
+    <mat-card *ngFor="let usu of usuario" class="container-usuario">
       <mat-card-header>
         <mat-icon mat-card-avatar>person</mat-icon>
-        <mat-card-title>{{ usuario.nombreyApellido }}</mat-card-title>
+        <mat-card-title>{{ usu.nombreCompleto }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p>Rut: {{ usuario.rut }}</p>
-        <p>Usuario: {{ usuario.nombreUsuario }}</p>
-        <p>Correo: {{ usuario.correo }}</p>
-        <p>Teléfono: {{ usuario.telefono }}</p>
+        <p>Rut: {{ usu.rut }}</p>
+        <p>Usuario: {{ usu.nombreUsuario }}</p>
+        <p>Correo: {{ usu.correo }}</p>
+        <p>Teléfono: {{ usu.telefono }}</p>
       </mat-card-content>
       <mat-card-actions class="action-buttons">
-        <button mat-button class="botones-accion-del">
+        <button mat-button class="botones-accion-del" (click)="eliminarUsuario(usu)">
           Restablecer
           <mat-icon mat-card-avatar class="icon-del">delete</mat-icon>
         </button>

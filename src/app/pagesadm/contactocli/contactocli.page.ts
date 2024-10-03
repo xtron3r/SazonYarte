@@ -34,4 +34,8 @@ export class ContactocliPage implements OnInit {
     })
   }
 
+  eliminarContacto(contacto:any){
+    this.bd.eliminarContacto(contacto.id_contacto);
+  }
+
 }

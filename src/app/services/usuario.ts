@@ -3,7 +3,7 @@ export class Usuario {
     id_usuario!: number;
     rut!: string;
     nombreUsuario!: string;
-    nombreyApellido!: string;
+    nombreCompleto!: string;
     contrasenia!: string;
     telefono!: number;
     correo!: string;

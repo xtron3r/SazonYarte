@@ -25,6 +25,7 @@ export class ServicioBDService {
   tablaContacto: string = "CREATE TABLE IF NOT EXISTS contacto ( id_contacto INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombrecompleto VARCHAR NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, mensaje TEXT NOT NULL);";
 
   registroContacto: string = "INSERT or IGNORE INTO contacto(id_contacto, nombrecompleto, telefono, correo, mensaje) VALUES (1,'Esteban', '959808217', 'este.toledo@duocuc.cl', 'Este es un mensaje de prueba')";
+  registroContacto2: string = "INSERT or IGNORE INTO contacto(id_contacto, nombrecompleto, telefono, correo, mensaje) VALUES (2,'PEPE', '959808217', 'este.toledo@duocuc.cl', 'Este es un mensaje de prueba')";
 
   // Tabla Bloque
 
@@ -43,8 +44,15 @@ export class ServicioBDService {
 
   tablaMesas: string = "CREATE TABLE IF NOT EXISTS mesas (id_mesa INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR NOT NULL, c_sillas INTEGER NOT NULL, id_ubi_fk INTEGER, FOREIGN KEY (id_ubi_fk) REFERENCES Ubicacion (id_ubicacion));";
 
-  registroMesa: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (1, 'Mesa 1', 4, 1)";
-  registroMesa2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (2, 'Mesa 2', 6, 2)";
+  // Mesas Terrazas
+  registroMesaTerraza: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (1, 'MESA 1 TERRAZA', 4, 1)";
+  registroMesaTerraza2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (2, 'MESA 2 TERRAZA', 6, 1)";
+  registroMesaTerraza3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (3, 'MESA 3 TERRAZA', 3, 1)";
+
+  // Mesas Locales
+  registroMesaLocal: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (4, 'MESA 1 LOCAL', 4, 2)";
+  registroMesaLocal2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (5, 'MESA 2 LOCAL', 6, 2)";
+  registroMesaLocal3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (6, 'MESA 3 LOCAL', 3, 2)";
 
   // Tabla Reservas
 
@@ -159,11 +167,17 @@ export class ServicioBDService {
 
       //ejecuto los insert por defecto en el caso que existan
       await this.database.executeSql(this.registroContacto, []);
+      await this.database.executeSql(this.registroContacto2, []);
       await this.database.executeSql(this.registroBloque, []);
       await this.database.executeSql(this.registroUbicacion, []);
       await this.database.executeSql(this.registroUbicacion2, []);
-      await this.database.executeSql(this.registroMesa, []);
-      await this.database.executeSql(this.registroMesa2, []);
+      await this.database.executeSql(this.registroMesaTerraza, []);
+      await this.database.executeSql(this.registroMesaTerraza2, []);
+      await this.database.executeSql(this.registroMesaTerraza3, []);
+      await this.database.executeSql(this.registroMesaLocal, []);
+      await this.database.executeSql(this.registroMesaLocal2, []);
+      await this.database.executeSql(this.registroMesaLocal3, []);
+
       await this.database.executeSql(this.registroRol, []);
       await this.database.executeSql(this.registroRol2, []);
       await this.database.executeSql(this.registroUsuario, []);
@@ -207,36 +221,101 @@ export class ServicioBDService {
 
    })
   }
- eliminarContacto(){}
+ eliminarContacto(id_contacto:string){
+  return this.database.executeSql('DELETE FROM contacto WHERE id_contacto = ?',[id_contacto]).then(res=>{
+    this.Alerta("Eliminar","Contacto Eliminado");
+    this.listarContactos();
+  }).catch(e=>{
+    this.Alerta('Eliminar', 'Error: ' + JSON.stringify(e));
+  })
+ }
 
+
+ //funciones de usuario
 
  listarUsuario() {
-  return this.database.executeSql('SELECT id_usuario, rut, nombreUsuario, nombreyApellido, correo, telefono FROM Usuario', []).then(res => {
-    // Variable para almacenar el resultado de la consulta
-    let items: Usuario[] = [];
-    
-    // Valido si trae al menos un registro
-    if (res.rows.length > 0) {
-      // Recorro mi resultado
-      for (let i = 0; i < res.rows.length; i++) {
-        // Agrego solo los campos que deseo mostrar en la lista
-        items.push({
-          id_usuario: res.rows.item(i).id_usuario,
-          rut: res.rows.item(i).rut,
-          nombreUsuario: res.rows.item(i).nombreUsuario,
-          nombreyApellido: res.rows.item(i).nombreyApellido,
-          correo: res.rows.item(i).correo,
-          telefono: res.rows.item(i).telefono,
-         
-          contrasenia: '',
-          id_rol_fk: 1     
-        });
+  return this.database.executeSql('SELECT id_usuario, rut, nombreusuario, nombrecompleto, correo, telefono FROM Usuario', []).then(res => {
+    //variable para almacenar el resultado de la consulta
+    let items: Usuario[]= [];
+    //valido si trae al menos un registro
+    if(res.rows.length > 0){
+     //recorro mi resultado
+      for(var i=0; i < res.rows.length; i++){
+       //agrego los registros a mi lista
+       items.push({
+        id_usuario: res.rows.item(i).id_usuario,
+        rut: res.rows.item(i).rut,
+        nombreUsuario: res.rows.item(i).nombreusuario,
+        nombreCompleto: res.rows.item(i).nombrecompleto,
+        correo: res.rows.item(i).correo,
+        telefono: res.rows.item(i).telefono,
+
+        // dudas con el profesor
+        contrasenia: '',
+        id_rol_fk: 1
+       })
       }
     }
-    
-    // Actualizar el observable con el array de Usuarios
+    //actualizar el observable
     this.listadoUsuario.next(items as any);})
-}
+  }
 
+  eliminarUsuario(id_usuario:string){
+    return this.database.executeSql('DELETE FROM usuario WHERE id_usuario = ?',[id_usuario]).then(res=>{
+      this.Alerta("Eliminar","Usuario Eliminado");
+      this.listarUsuario();
+    }).catch(e=>{
+      this.Alerta('Eliminar', 'Error: ' + JSON.stringify(e));
+    })
+   }
+
+  buscarUsuario(rut:string){
+    return this.database.executeSql('SELECT id_usuario, rut, nombreusuario, nombrecompleto, correo, telefono FROM Usuario WHERE rut = ?', [rut]).then(res => {
+      //variable para almacenar el resultado de la consulta
+      let items: Usuario[]= [];
+      //valido si trae al menos un registro
+      if(res.rows.length > 0){
+       //recorro mi resultado
+        for(var i=0; i < res.rows.length; i++){
+         //agrego los registros a mi lista
+         items.push({
+          id_usuario: res.rows.item(i).id_usuario,
+          rut: res.rows.item(i).rut,
+          nombreUsuario: res.rows.item(i).nombreusuario,
+          nombreCompleto: res.rows.item(i).nombrecompleto,
+          correo: res.rows.item(i).correo,
+          telefono: res.rows.item(i).telefono,
   
+          // dudas con el profesor
+          contrasenia: '',
+          id_rol_fk: 1
+         })
+        }
+      }
+      //actualizar el observable
+      this.listadoUsuario.next(items as any);})
+  }
+
+  // Funciones de mesa
+
+  buscarMesa(id_ubi_fk: string) {
+    return this.database.executeSql('SELECT * FROM mesa WHERE id_ubi_fk = ? ', [id_ubi_fk]).then(res => {
+      //variable para almacenar el resultado de la consulta
+      let items: Mesas[]= [];
+      //valido si trae al menos un registro
+      if(res.rows.length > 0){
+      //recorro mi resultado
+        for(var i=0; i < res.rows.length; i++){
+        //agrego los registros a mi lista
+          items.push({
+            id_mesa: res.rows.item(i).id_mesa,
+            nombre: res.rows.item(i).nombre,
+            c_sillas: res.rows.item(i).c_sillas,
+            id_ubi_fk: res.rows.item(i).id_ubi_fk
+          })
+        }
+      }
+      //actualizar el observable
+      this.listadoMesas.next(items as any);})
+  }
 }
