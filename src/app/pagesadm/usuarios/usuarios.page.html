@@ -12,6 +12,7 @@
 <ion-content class="fondo">
   <ion-searchbar animated="true" placeholder="Ingrese el Rut" class="ion-margin-top search-bar"></ion-searchbar>
   <div class="container-usuarios">
+    <!-- Listar usuarios utilizando *ngFor -->
     <mat-card *ngFor="let usuario of usuarios" class="container-usuario">
       <mat-card-header>
         <mat-icon mat-card-avatar>person</mat-icon>
@@ -23,9 +24,13 @@
         <p>Correo: {{ usuario.correo }}</p>
         <p>Teléfono: {{ usuario.telefono }}</p>
       </mat-card-content>
-      <mat-card-actions class="">
-        <button mat-button class="botones-accion-del"> Restablecer<mat-icon mat-card-avatar class="icon-del">delete</mat-icon></button>
+      <mat-card-actions class="action-buttons">
+        <button mat-button class="botones-accion-del">
+          Restablecer
+          <mat-icon mat-card-avatar class="icon-del">delete</mat-icon>
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
 </ion-content>
+

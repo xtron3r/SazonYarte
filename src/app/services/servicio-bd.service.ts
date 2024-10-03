@@ -172,6 +172,7 @@ export class ServicioBDService {
       //llamamos a la función para seleccionar los datos de las tablas
 
       this.listarContactos();
+      this.listarUsuario();
       
       //modifico el estado de la Base de Datos
       this.isDBReady.next(true);
@@ -206,6 +207,36 @@ export class ServicioBDService {
 
    })
   }
+ eliminarContacto(){}
 
-  eliminarContacto(){}
+
+ listarUsuario() {
+  return this.database.executeSql('SELECT id_usuario, rut, nombreUsuario, nombreyApellido, correo, telefono FROM Usuario', []).then(res => {
+    // Variable para almacenar el resultado de la consulta
+    let items: Usuario[] = [];
+    
+    // Valido si trae al menos un registro
+    if (res.rows.length > 0) {
+      // Recorro mi resultado
+      for (let i = 0; i < res.rows.length; i++) {
+        // Agrego solo los campos que deseo mostrar en la lista
+        items.push({
+          id_usuario: res.rows.item(i).id_usuario,
+          rut: res.rows.item(i).rut,
+          nombreUsuario: res.rows.item(i).nombreUsuario,
+          nombreyApellido: res.rows.item(i).nombreyApellido,
+          correo: res.rows.item(i).correo,
+          telefono: res.rows.item(i).telefono,
+         
+          contrasenia: '',
+          id_rol_fk: 1     
+        });
+      }
+    }
+    
+    // Actualizar el observable con el array de Usuarios
+    this.listadoUsuario.next(items as any);})
+}
+
+  
 }
