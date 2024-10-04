@@ -331,4 +331,18 @@ export class ServicioBDService {
       this.Alerta('Agregar', 'Error: ' + JSON.stringify(e));
     });
   }
+  
+  insertarContacto(nombrecompleto: String, telefono: string, correo: String, mensaje: String) {
+    return this.database.executeSql(
+      'INSERT INTO contacto (nombrecompleto, telefono, correo, mensaje) VALUES (?, ?, ?, ?)', 
+      [nombrecompleto, telefono, correo, mensaje]
+    ).then(res => {
+      this.Alerta("Agregar", "mensaje agregado exitosamente.");
+      this.listarContactos();
+    }).catch(e => {
+      this.Alerta('Contacto', 'Error: ' + JSON.stringify(e));
+    });
+  }
+
+  
 }

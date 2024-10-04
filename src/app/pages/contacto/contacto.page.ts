@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, MenuController, ToastController } from '@ionic/angular';
+import { ServicioBDService } from 'src/app/services/servicio-bd.service';
 
 @Component({
   selector: 'app-contacto',
@@ -13,12 +14,14 @@ export class ContactoPage implements OnInit {
   correo: string="";
   mensaje: string="";
 
-  constructor(private menu:MenuController, private alertController: AlertController, private toastController: ToastController) { }
-
+  constructor(private menu:MenuController, private alertController: AlertController, private toastController: ToastController, private bd:ServicioBDService) { }
+ 
   ngOnInit() {
     this.menu.enable(false);
   }
-
+  insertarC(){
+    this.bd.insertarContacto(this.nombreyApellido, this.telefono,this.correo, this.mensaje);
+  }
   async enviarFormulario(){
     if(this.nombreyApellido == "" || this.telefono == "" || this.mensaje == "" || this.correo == ""){
       const alert = await this.alertController.create({
@@ -45,6 +48,7 @@ export class ContactoPage implements OnInit {
       cssClass: 'estilo-alertas'
     });
     await toast.present();
+    this.insertarC();
   }
 
 
