@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AlertController, MenuController } from '@ionic/angular';
+import { ServicioBDService } from 'src/app/services/servicio-bd.service';
 
 @Component({
   selector: 'app-register',
@@ -8,21 +9,24 @@ import { AlertController, MenuController } from '@ionic/angular';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  nombreyApellido: string ='';
+  rut : string ='';
+  usuario: string ='';
+  contrasenia: string ='';
+  nuevaContrasenia: string ='';
+  telefono: string ='';
+  correo: string ='';
+  id_rol: string='1';
 
-  nombreyApellido: string ="";
-  rut : string ="";
-  usuario: string ="";
-  contrasenia: string ="";
-  nuevaContrasenia: string ="";
-  telefono: string ="";
-  correo: string ="";
-
-  constructor(private menu:MenuController, private alertController: AlertController, private router: Router) { }
+  constructor(private menu:MenuController, private alertController: AlertController, private router: Router, private bd: ServicioBDService) { }
 
   ngOnInit() {
     this.menu.enable(false);
   }
-  
+  insertar(){
+    this.bd.insertarUsuario(this.rut, this.usuario, this.nombreyApellido, this.contrasenia, this.telefono, this.correo, Number(this.id_rol));
+  }
+
   async IrLogin(){
 
     const validaMayuscula = /[A-Z]/;
@@ -71,10 +75,13 @@ export class RegisterPage implements OnInit {
         cssClass: 'estilo-alertas'
       });
       await alert.present();
-
+      this.insertar();
       this.router.navigate(['/login'], navigationextras);
+      
     }
     
   }
+  
+
 
 }

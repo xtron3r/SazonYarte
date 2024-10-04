@@ -318,4 +318,17 @@ export class ServicioBDService {
       //actualizar el observable
       this.listadoMesas.next(items as any);})
   }
+
+  // Funcion de insertar datos en la tabla usuario
+  insertarUsuario(rut: String, nombreusuario: String, nombrecompleto: String, contrasenia: String, telefono: string, correo: String, id_rol_fk: number) {
+    return this.database.executeSql(
+      'INSERT INTO Usuario (rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+      [rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk]
+    ).then(res => {
+      this.Alerta("Agregar", "Usuario agregado exitosamente.");
+      this.listarUsuario();
+    }).catch(e => {
+      this.Alerta('Agregar', 'Error: ' + JSON.stringify(e));
+    });
+  }
 }
