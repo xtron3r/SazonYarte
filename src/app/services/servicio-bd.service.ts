@@ -343,6 +343,18 @@ export class ServicioBDService {
       this.Alerta('Contacto', 'Error: ' + JSON.stringify(e));
     });
   }
+  
+  ModificarUsuario(rut: String, nombreusuario: String, nombrecompleto: String,  telefono: string, correo: String){
+    return this.database.executeSql(
+      'UPDATE Usuario SET nombreusuario =?, nombrecompleto =?, telefono =?, correo =? WHERE rut =?',
+      [nombreusuario, nombrecompleto, telefono, correo, rut]
+    ).then(res => {
+      this.Alerta("Modificar", "Usuario modificado exitosamente.");
+      this.listarUsuario();
+    }).catch(e => {
+      this.Alerta('Modificar', 'Error: ' + JSON.stringify(e));
+    });
+  }
 
   
 }
