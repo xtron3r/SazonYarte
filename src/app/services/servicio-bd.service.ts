@@ -67,7 +67,7 @@ export class ServicioBDService {
 
   // Tabla Usuario
 
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS Usuario (id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, rut VARCHAR(10) NOT NULL, nombreusuario VARCHAR NOT NULL, nombrecompleto VARCHAR NOT NULL, contrasenia VARCHAR NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, id_rol_fk INTEGER NOT NULL, FOREIGN KEY (id_rol_fk) REFERENCES Rol (id_rol));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS Usuario (id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, rut VARCHAR(10) NOT NULL, nombreusuario VARCHAR NOT NULL UNIQUE, nombrecompleto VARCHAR NOT NULL, contrasenia VARCHAR NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, id_rol_fk INTEGER NOT NULL, FOREIGN KEY (id_rol_fk) REFERENCES Rol (id_rol));";
 
   registroUsuario: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk) VALUES (1,'213781146', 'admin', 'Aroneitor', 'admin', 930935460, 'admin@duocuc.cl', 1)";
 
@@ -97,6 +97,7 @@ export class ServicioBDService {
       header: titulo,
       message: msj,
       buttons: ['OK'],
+      cssClass:'estilo-alertas'
     });
 
     await alert.present();
@@ -221,14 +222,25 @@ export class ServicioBDService {
 
    })
   }
- eliminarContacto(id_contacto:string){
-  return this.database.executeSql('DELETE FROM contacto WHERE id_contacto = ?',[id_contacto]).then(res=>{
-    this.Alerta("Eliminar","Contacto Eliminado");
-    this.listarContactos();
-  }).catch(e=>{
-    this.Alerta('Eliminar', 'Error: ' + JSON.stringify(e));
-  })
- }
+  eliminarContacto(id_contacto:string){
+    return this.database.executeSql('DELETE FROM contacto WHERE id_contacto = ?',[id_contacto]).then(res=>{
+      this.Alerta("Eliminar","Contacto Eliminado");
+      this.listarContactos();
+    }).catch(e=>{
+      this.Alerta('Eliminar', 'Error: ' + JSON.stringify(e));
+    })
+  }
+
+  insertarContacto(nombrecompleto: string, telefono: string, correo: string, mensaje: string) {
+    return this.database.executeSql(
+      'INSERT INTO contacto (nombrecompleto, telefono, correo, mensaje) VALUES (?, ?, ?, ?)', 
+      [nombrecompleto, telefono, correo, mensaje]
+    ).then(res => {
+      this.listarContactos();
+    }).catch(e => {
+      this.Alerta('Contacto', 'Error: ' + JSON.stringify(e));
+    });
+  }
 
 
  //funciones de usuario
@@ -296,6 +308,63 @@ export class ServicioBDService {
       this.listadoUsuario.next(items as any);})
   }
 
+  ModificarUsuario(nombreusuario: String, nombrecompleto: String,  telefono: string, correo: String, id_usuario: number){
+    return this.database.executeSql(
+      'UPDATE Usuario SET nombreusuario = ?, nombrecompleto = ?, telefono = ?, correo = ? WHERE id_usuario = ?',
+      [nombreusuario, nombrecompleto, telefono, correo, id_usuario]
+    ).then(res => {
+      this.Alerta("Modificar", "Usuario modificado exitosamente.");
+      this.listarUsuario();
+    }).catch(e => {
+      this.Alerta('Modificar', 'Error: ' + JSON.stringify(e));
+    });
+  }
+
+  insertarUsuario(rut: String, nombreusuario: String, nombrecompleto: String, contrasenia: String, telefono: string, correo: String, id_rol_fk: number) {
+    return this.database.executeSql(
+      'INSERT INTO Usuario (rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+      [rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk]
+    ).then(res => {
+      this.listarUsuario();
+    }).catch(e => {
+      this.Alerta('Agregar', 'Error: ' + JSON.stringify(e));
+    });
+  }
+
+  IniciarSesion(usuario: string, contrasenia: string) {
+    return this.database.executeSql(
+      'SELECT * FROM Usuario WHERE nombreusuario = ? AND contrasenia = ?', [usuario, contrasenia]
+    ).then(res => {
+      if (res.rows.length > 0) {
+        // Si las credenciales son correctas, retorna el usuario encontrado
+        return res.rows.item(0);
+      } else {
+        // Si no hay coincidencias, retorna null
+        return null;
+      }
+    }).catch(e => {
+      this.Alerta('Usuario', 'Error: ' + JSON.stringify(e));
+      return null;
+    });
+  }
+
+  miPerfil(id_usuario: number){
+    return this.database.executeSql(
+      'SELECT * FROM Usuario WHERE id_usuario = ?', [id_usuario]
+    ).then(res => {
+      if (res.rows.length > 0) {
+        // Si las credenciales son correctas, retorna el usuario encontrado
+        return res.rows.item(0);
+      } else {
+        // Si no hay coincidencias, retorna null
+        return null;
+      }
+    }).catch(e => {
+      this.Alerta('Usuario', 'Error: ' + JSON.stringify(e));
+      return null;
+    });
+  }
+
   // Funciones de mesa
 
   buscarMesa(id_ubi_fk: string) {
@@ -320,41 +389,6 @@ export class ServicioBDService {
   }
 
   // Funcion de insertar datos en la tabla usuario
-  insertarUsuario(rut: String, nombreusuario: String, nombrecompleto: String, contrasenia: String, telefono: string, correo: String, id_rol_fk: number) {
-    return this.database.executeSql(
-      'INSERT INTO Usuario (rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-      [rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk]
-    ).then(res => {
-      this.Alerta("Agregar", "Usuario agregado exitosamente.");
-      this.listarUsuario();
-    }).catch(e => {
-      this.Alerta('Agregar', 'Error: ' + JSON.stringify(e));
-    });
-  }
-  
-  insertarContacto(nombrecompleto: String, telefono: string, correo: String, mensaje: String) {
-    return this.database.executeSql(
-      'INSERT INTO contacto (nombrecompleto, telefono, correo, mensaje) VALUES (?, ?, ?, ?)', 
-      [nombrecompleto, telefono, correo, mensaje]
-    ).then(res => {
-      this.Alerta("Agregar", "mensaje agregado exitosamente.");
-      this.listarContactos();
-    }).catch(e => {
-      this.Alerta('Contacto', 'Error: ' + JSON.stringify(e));
-    });
-  }
-  
-  ModificarUsuario(rut: String, nombreusuario: String, nombrecompleto: String,  telefono: string, correo: String){
-    return this.database.executeSql(
-      'UPDATE Usuario SET nombreusuario =?, nombrecompleto =?, telefono =?, correo =? WHERE rut =?',
-      [nombreusuario, nombrecompleto, telefono, correo, rut]
-    ).then(res => {
-      this.Alerta("Modificar", "Usuario modificado exitosamente.");
-      this.listarUsuario();
-    }).catch(e => {
-      this.Alerta('Modificar', 'Error: ' + JSON.stringify(e));
-    });
-  }
-
+ 
   
 }

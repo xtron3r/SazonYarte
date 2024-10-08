@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { MenuController } from '@ionic/angular';
+import { ServicioBDService } from '../services/servicio-bd.service';
 
 @Component({
   selector: 'app-home',
@@ -8,18 +10,12 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  usuario: string = "";
-  contrasenia: string = "";
 
-  constructor(private router: Router, private activedrouter: ActivatedRoute, private menu:MenuController) { 
-    // Subscribirnos a la lectura de los parametros
-    this.activedrouter.queryParams.subscribe(param =>{
-      //valido si viene o no informacion en la ruta
-      if(this.router.getCurrentNavigation()?.extras.state){
-        this.usuario = this.router.getCurrentNavigation()?.extras?.state?.['usu'];
-        this.contrasenia = this.router.getCurrentNavigation()?.extras?.state?.['con'];
-      }
-    }) 
+  id_usuario! : number;
+  usuario : string = "";
+
+  constructor(private menu:MenuController, private storage: NativeStorage, private bd: ServicioBDService) { 
+
   }
 
   ngOnInit() {
@@ -29,5 +25,17 @@ export class HomePage implements OnInit {
   /*Antes de cargar la pagina, activa el menu*/
   ionViewWillEnter() {
     this.menu.enable(true);
+
+    this.storage.getItem('usuario').then(data=>{
+      this.id_usuario = data;
+
+      // llama a la consulta solo cuando se haya obtenido el id
+      return this.bd.miPerfil(this.id_usuario);
+
+    }).then(data => {
+      if (data) {
+        this.usuario = data.nombreusuario;
+      }
+    });
   }
 }

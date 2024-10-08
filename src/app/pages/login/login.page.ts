@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { AlertController, MenuController } from '@ionic/angular';
+import { ServicioBDService } from 'src/app/services/servicio-bd.service';
 
 @Component({
   selector: 'app-login',
@@ -9,29 +11,14 @@ import { AlertController, MenuController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-
-  contraRegistro: string = "";
-  usuarioRegistro: string = "";
-
   contrasenia: string = "";
   usuario: string = "";
 
-  constructor(private router:Router, private menu:MenuController,private alertController: AlertController,private activedrouter: ActivatedRoute ) { 
-
-    // Subscribirnos a la lectura de los parametros
-    this.activedrouter.queryParams.subscribe(param =>{
-      //valido si viene o no informacion en la ruta
-      if(this.router.getCurrentNavigation()?.extras.state){
-        this.usuarioRegistro = this.router.getCurrentNavigation()?.extras?.state?.['usu'];
-        this.contraRegistro = this.router.getCurrentNavigation()?.extras?.state?.['con'];
-      }
-    }) 
-  }
+  constructor(private router:Router, private menu:MenuController,private alertController: AlertController,private storage: NativeStorage, private bd: ServicioBDService ) {}
 
   ngOnInit() {
     this.menu.enable(false);
   }
-
 
   async irPagina() {
 
@@ -43,22 +30,18 @@ export class LoginPage implements OnInit {
         cssClass: 'estilo-alertas'
       });
       await alert.present();
-    } else if (this.usuario == "admin" && this.contrasenia == "admin"){
+    } else{
+      
+      let ValidarUsuario = await this.bd.IniciarSesion(this.usuario, this.contrasenia);
 
-      this.router.navigate(['/homeadmin']);
-
-    } else if (this.usuario == this.usuarioRegistro && this.contrasenia == this.contraRegistro){
-
-      let navigationExtras: NavigationExtras = {
-        state: {
-          'usu': this.usuarioRegistro,
-          'con': this.contraRegistro
-        }
-      };
-      this.router.navigate(['/home'], navigationExtras);
-
-    } else {
-
+      if (ValidarUsuario) {
+        // Guardar los datos del usuario en el NativeStorage
+        this.storage.setItem('usuario',ValidarUsuario.id_usuario);
+        
+        this.router.navigate(['/home']);
+        
+      }
+      else {
       const alert = await this.alertController.create({
         header: 'Error al iniciar Sesion',
         message: 'Usuario o Contraseña incorrecta',
@@ -66,6 +49,12 @@ export class LoginPage implements OnInit {
         cssClass: 'estilo-alertas'
       });
       await alert.present();
+      }
+    
+    }
+  
+    if (this.usuario == "admin" || this.contrasenia == "admin"){
+      this.router.navigate(['/homeadmin']);
     }
   }
 }

@@ -33,11 +33,13 @@ export class ContactoPage implements OnInit {
       await alert.present(); 
     }
     else{
+      this.insertarC();
       this.mensajeContacto('bottom');
       this.nombreyApellido = "";
       this.telefono = "";
       this.correo = "";
       this.mensaje = "";
+      
     }  
   }
   async mensajeContacto(position: 'top' | 'middle' | 'bottom') {
@@ -48,7 +50,6 @@ export class ContactoPage implements OnInit {
       cssClass: 'estilo-alertas'
     });
     await toast.present();
-    this.insertarC();
   }
 
 

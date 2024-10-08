@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertController, MenuController } from '@ionic/angular';
 import { ServicioBDService } from 'src/app/services/servicio-bd.service';
 
@@ -60,14 +60,6 @@ export class RegisterPage implements OnInit {
       });
       await alert.present();
     } else{
-      
-        // Creamos variable de contexto
-      let navigationextras: NavigationExtras = {
-        state: {
-          usu: this.usuario,
-          con: this.contrasenia
-        }
-      };
       const alert = await this.alertController.create({
         header: 'Registrado',
         message: 'Registrado Correctamente',
@@ -76,8 +68,7 @@ export class RegisterPage implements OnInit {
       });
       await alert.present();
       this.insertar();
-      this.router.navigate(['/login'], navigationextras);
-      
+      this.router.navigate(['/login']);
     }
     
   }
