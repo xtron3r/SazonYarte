@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, MenuController, ToastController } from '@ionic/angular';
+import { ServicioBDService } from 'src/app/services/servicio-bd.service';
 
 @Component({
   selector: 'app-cambiarcontra',
@@ -9,13 +10,20 @@ import { AlertController, MenuController, ToastController } from '@ionic/angular
 })
 export class CambiarcontraPage implements OnInit {
 
-  contraAntigua: string = "Hola123";
+  contraAntigua: string = "";
   validarContraAntigua: string = "";
   nuevaContra: string = "";
   confirmContra: string = "";
 
-  constructor(private menu:MenuController,private router: Router,private alertController: AlertController, private toastController: ToastController) {
+  id_usuario!: number;
 
+  constructor(private menu:MenuController,private router: Router,private alertController: AlertController, private toastController: ToastController, private activedrouter: ActivatedRoute, private bd: ServicioBDService) {
+    this.activedrouter.queryParams.subscribe(res=>{
+      if(this.router.getCurrentNavigation()?.extras.state){
+        this.id_usuario = this.router.getCurrentNavigation()?.extras?.state?.['id'];
+        this.contraAntigua = this.router.getCurrentNavigation()?.extras?.state?.['con'];
+      }
+    })
   }
 
   ngOnInit() {
@@ -70,7 +78,11 @@ export class CambiarcontraPage implements OnInit {
     
     } else{ 
       this.MensajeRegistro('bottom');
-      this.router.navigate(['/miperfil']);
+      
+      // funcion modiciar contra
+      this.bd.modificarContra(this.nuevaContra, this.id_usuario).then(res =>{
+        this.router.navigate(['/miperfil']);
+      });
     }
    
   }

@@ -88,9 +88,14 @@ const routes: Routes = [
     loadChildren: () => import('./pagesadm/agregarmesa/agregarmesa.module').then( m => m.AgregarmesaPageModule)
   },
   {
+    path: 'editarmesa',
+    loadChildren: () => import('./pagesadm/editarmesa/editarmesa.module').then( m => m.EditarmesaPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
   }
+
 
 
  

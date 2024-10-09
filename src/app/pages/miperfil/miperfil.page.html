@@ -10,8 +10,12 @@
 <ion-content [fullscreen]="true" class="fondo">
   
   <div class="ion-no-margin">
-    <div class="img-logo">
-      <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
+    <div class="img-logo" style="position: relative;">
+      <img class="avatar-icon" *ngIf="imagen" [src]="imagen" alt="Imagen" (click)="tomarFoto()">
+      <img class="avatar-icon" *ngIf="!imagen" src="../../../assets/icon/avatar.jpg" alt="Avatar" (click)="tomarFoto()">
+      <ion-button fill="clear" class="editar-icon" (click)="tomarFoto()">
+        <ion-icon name="create-outline" size="large"></ion-icon>
+      </ion-button>
     </div>
     <ion-text class="ion-text-center">
       <h5 class="usuario">{{usuario}}</h5>
@@ -44,7 +48,7 @@
           Mis Reservas
           <ion-icon slot="end" name="wine-outline"></ion-icon>
         </ion-button>
-        <ion-button  expand="block" class="ion-margin boton-inicio txt-marcado" [routerLink]="['/cambiarcontra']">
+        <ion-button  expand="block" class="ion-margin boton-inicio txt-marcado" (click)="cambiarContrasenia()">
           Editar Contraseña
           <ion-icon slot="end" name="key-outline"></ion-icon>
         </ion-button>

@@ -45,14 +45,14 @@ export class ServicioBDService {
   tablaMesas: string = "CREATE TABLE IF NOT EXISTS mesas (id_mesa INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR NOT NULL, c_sillas INTEGER NOT NULL, id_ubi_fk INTEGER, FOREIGN KEY (id_ubi_fk) REFERENCES Ubicacion (id_ubicacion));";
 
   // Mesas Terrazas
-  registroMesaTerraza: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (1, 'MESA 1 TERRAZA', 4, 1)";
-  registroMesaTerraza2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (2, 'MESA 2 TERRAZA', 6, 1)";
-  registroMesaTerraza3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (3, 'MESA 3 TERRAZA', 3, 1)";
+  registroMesaTerraza: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (1, 'Mesa 1', 4, 1)";
+  registroMesaTerraza2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (2, 'Mesa 2', 2, 1)";
+  registroMesaTerraza3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (3, 'Mesa 3', 3, 1)";
 
   // Mesas Locales
-  registroMesaLocal: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (4, 'MESA 1 LOCAL', 4, 2)";
-  registroMesaLocal2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (5, 'MESA 2 LOCAL', 6, 2)";
-  registroMesaLocal3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (6, 'MESA 3 LOCAL', 3, 2)";
+  registroMesaLocal: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (4, 'Mesa 1', 4, 2)";
+  registroMesaLocal2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (5, 'Mesa 2', 5, 2)";
+  registroMesaLocal3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (6, 'Mesa 3', 3, 2)";
 
   // Tabla Reservas
 
@@ -246,7 +246,7 @@ export class ServicioBDService {
  //funciones de usuario
 
  listarUsuario() {
-  return this.database.executeSql('SELECT id_usuario, rut, nombreusuario, nombrecompleto, correo, telefono FROM Usuario', []).then(res => {
+  return this.database.executeSql('SELECT u.id_usuario, u.rut, u.nombreusuario, u.nombrecompleto, u.correo, u.telefono, r.nombre AS id_rol_fk FROM Usuario u INNER JOIN rol r ON u.id_rol_fk = r.id_rol', []).then(res => {
     //variable para almacenar el resultado de la consulta
     let items: Usuario[]= [];
     //valido si trae al menos un registro
@@ -261,15 +261,24 @@ export class ServicioBDService {
         nombreCompleto: res.rows.item(i).nombrecompleto,
         correo: res.rows.item(i).correo,
         telefono: res.rows.item(i).telefono,
+        id_rol_fk: res.rows.item(i).id_rol_fk,
 
         // dudas con el profesor
         contrasenia: '',
-        id_rol_fk: 1
        })
       }
     }
     //actualizar el observable
     this.listadoUsuario.next(items as any);})
+  }
+
+  cambiarRolUsu(id_usuario: string, id_rol_fk: string){
+    return this.database.executeSql('UPDATE Usuario SET id_rol_fk = ? WHERE id_usuario = ?',[id_rol_fk,id_usuario]).then(res=>{
+      this.Alerta("Rol","Rol cambiado");
+      this.listarUsuario();
+    }).catch(e=>{
+      this.Alerta('Cambiar Rol', 'Error: ' + JSON.stringify(e));
+    })
   }
 
   eliminarUsuario(id_usuario:string){
@@ -279,7 +288,7 @@ export class ServicioBDService {
     }).catch(e=>{
       this.Alerta('Eliminar', 'Error: ' + JSON.stringify(e));
     })
-   }
+  }
 
   buscarUsuario(rut:string){
     return this.database.executeSql('SELECT id_usuario, rut, nombreusuario, nombrecompleto, correo, telefono FROM Usuario WHERE rut = ?', [rut]).then(res => {
@@ -314,6 +323,16 @@ export class ServicioBDService {
       [nombreusuario, nombrecompleto, telefono, correo, id_usuario]
     ).then(res => {
       this.Alerta("Modificar", "Usuario modificado exitosamente.");
+      this.listarUsuario();
+    }).catch(e => {
+      this.Alerta('Modificar', 'Error: ' + JSON.stringify(e));
+    });
+  }
+  modificarContra(contrasenia: string, id_usuario: number){
+    return this.database.executeSql(
+      'UPDATE Usuario SET contrasenia = ? WHERE id_usuario = ?',
+      [contrasenia, id_usuario]
+    ).then(res => {
       this.listarUsuario();
     }).catch(e => {
       this.Alerta('Modificar', 'Error: ' + JSON.stringify(e));
@@ -366,9 +385,8 @@ export class ServicioBDService {
   }
 
   // Funciones de mesa
-
   buscarMesa(id_ubi_fk: string) {
-    return this.database.executeSql('SELECT * FROM mesa WHERE id_ubi_fk = ? ', [id_ubi_fk]).then(res => {
+    return this.database.executeSql('SELECT m.id_mesa, m.nombre, m.c_sillas, u.nombre AS id_ubi_fk FROM mesas m INNER JOIN ubicacion u ON m.id_ubi_fk = u.id_ubicacion WHERE id_ubi_fk = ?  ', [id_ubi_fk]).then(res => {
       //variable para almacenar el resultado de la consulta
       let items: Mesas[]= [];
       //valido si trae al menos un registro
@@ -388,7 +406,35 @@ export class ServicioBDService {
       this.listadoMesas.next(items as any);})
   }
 
-  // Funcion de insertar datos en la tabla usuario
+  insertarMesa(nombre: string, c_sillas: string, id_ubi_fk: string) {
+    return this.database.executeSql(
+      'INSERT INTO mesas (nombre, c_sillas, id_ubi_fk) VALUES (?, ?, ?)', 
+      [nombre, c_sillas, id_ubi_fk]
+    ).then(res => {
+      this.Alerta("Agregar", "Mesa agregada exitosamente.");
+      this.buscarMesa(id_ubi_fk);
+    }).catch(e => {
+      this.Alerta('Agregar', 'Error: ' + JSON.stringify(e));
+    });
+  }
+
+  eliminarMesa(id_mesa:string){
+    return this.database.executeSql('DELETE FROM mesas WHERE id_mesa = ?',[id_mesa]).then(res=>{
+      this.Alerta("Eliminar","Mesa Eliminada");
+      this.buscarMesa(id_mesa);
+    }).catch(e=>{
+      this.Alerta('Eliminar', 'Error: ' + JSON.stringify(e));
+    })
+  }
+  modificarMesa(id_mesa:string, nombre:string, c_sillas: string, id_ubi_fk:string){
+    return this.database.executeSql('UPDATE mesas SET nombre = ?, c_sillas = ?, id_ubi_fk = ? WHERE id_mesa = ?',[nombre,c_sillas, id_ubi_fk,id_mesa]).then(res=>{
+      this.Alerta("Modificar","Mesa Modificada");
+      this.buscarMesa(id_mesa);
+    }).catch(e=>{
+      this.Alerta('Modificar', 'Error: ' + JSON.stringify(e));
+    })
+
+  }
  
   
 }

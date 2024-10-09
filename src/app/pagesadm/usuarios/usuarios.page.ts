@@ -16,7 +16,8 @@ export class UsuariosPage implements OnInit {
       nombreUsuario: '',
       nombreCompleto: '',
       correo: '',
-      telefono: ''
+      telefono: '',
+      id_rol_fk: ''
     },
   ];
 
@@ -57,5 +58,15 @@ export class UsuariosPage implements OnInit {
         }
       });
     }
+  }
+
+  cambiarRol(usuario: any){
+
+    if (usuario.id_rol_fk == "Usuario"){
+      this.bd.cambiarRolUsu(usuario.id_usuario, "1");
+    } else{
+      this.bd.cambiarRolUsu(usuario.id_usuario, "2");
+    }
+    
   }
 }
