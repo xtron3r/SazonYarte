@@ -67,11 +67,11 @@ export class ServicioBDService {
 
   // Tabla Usuario
 
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS Usuario (id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, rut VARCHAR(10) NOT NULL, nombreusuario VARCHAR NOT NULL UNIQUE, nombrecompleto VARCHAR NOT NULL, contrasenia VARCHAR NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, id_rol_fk INTEGER NOT NULL, FOREIGN KEY (id_rol_fk) REFERENCES Rol (id_rol));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS Usuario (id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, rut VARCHAR(10) NOT NULL, nombreusuario VARCHAR NOT NULL UNIQUE, nombrecompleto VARCHAR NOT NULL, contrasenia VARCHAR NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, fotousuario TEXT, id_rol_fk INTEGER NOT NULL, FOREIGN KEY (id_rol_fk) REFERENCES Rol (id_rol));";
 
-  registroUsuario: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk) VALUES (1,'213781146', 'admin', 'Aroneitor', 'admin', 930935460, 'admin@duocuc.cl', 1)";
+  registroUsuario: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (1,'213781146', 'admin', 'Aroneitor', 'admin', 930935460, 'admin@duocuc.cl','', 1)";
 
-  registroUsuario2: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk) VALUES (2,'205902058', 'RayCL', 'Basthian Bascuñan', '123456', 959808217, 'bast.bascunan@duocuc.cl', 2)";
+  registroUsuario2: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (2,'205902058', 'RayCL', 'Basthian Bascuñan', '123456', 959808217, 'bast.bascunan@duocuc.cl','', 2)";
 
   //variables para guardar los datos de las consultas en las tablas
   
@@ -265,6 +265,7 @@ export class ServicioBDService {
 
         // dudas con el profesor
         contrasenia: '',
+        fotousuario:''
        })
       }
     }
@@ -291,7 +292,7 @@ export class ServicioBDService {
   }
 
   buscarUsuario(rut:string){
-    return this.database.executeSql('SELECT id_usuario, rut, nombreusuario, nombrecompleto, correo, telefono FROM Usuario WHERE rut = ?', [rut]).then(res => {
+    return this.database.executeSql('SELECT id_usuario, rut, nombreusuario, nombrecompleto, correo, telefono, id_rol_fk FROM Usuario WHERE rut = ?', [rut]).then(res => {
       //variable para almacenar el resultado de la consulta
       let items: Usuario[]= [];
       //valido si trae al menos un registro
@@ -306,10 +307,11 @@ export class ServicioBDService {
           nombreCompleto: res.rows.item(i).nombrecompleto,
           correo: res.rows.item(i).correo,
           telefono: res.rows.item(i).telefono,
-  
+          id_rol_fk:res.rows.item(i).id_rol_fk,
+
           // dudas con el profesor
           contrasenia: '',
-          id_rol_fk: 1
+          fotousuario: '',
          })
         }
       }
@@ -317,10 +319,10 @@ export class ServicioBDService {
       this.listadoUsuario.next(items as any);})
   }
 
-  ModificarUsuario(nombreusuario: String, nombrecompleto: String,  telefono: string, correo: String, id_usuario: number){
+  ModificarUsuario(nombreusuario: String, nombrecompleto: String,  telefono: string, correo: String, fotousuario: any,id_usuario: number){
     return this.database.executeSql(
-      'UPDATE Usuario SET nombreusuario = ?, nombrecompleto = ?, telefono = ?, correo = ? WHERE id_usuario = ?',
-      [nombreusuario, nombrecompleto, telefono, correo, id_usuario]
+      'UPDATE Usuario SET nombreusuario = ?, nombrecompleto = ?, telefono = ?, correo = ?, fotousuario = ? WHERE id_usuario = ?',
+      [nombreusuario, nombrecompleto, telefono, correo, fotousuario, id_usuario]
     ).then(res => {
       this.Alerta("Modificar", "Usuario modificado exitosamente.");
       this.listarUsuario();
@@ -339,10 +341,10 @@ export class ServicioBDService {
     });
   }
 
-  insertarUsuario(rut: String, nombreusuario: String, nombrecompleto: String, contrasenia: String, telefono: string, correo: String, id_rol_fk: number) {
+  insertarUsuario(rut: String, nombreusuario: String, nombrecompleto: String, contrasenia: String, telefono: string, correo: String,fotousuario: string, id_rol_fk: number) {
     return this.database.executeSql(
-      'INSERT INTO Usuario (rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-      [rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, id_rol_fk]
+      'INSERT INTO Usuario (rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo,fotousuario, id_rol_fk) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+      [rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo,fotousuario, id_rol_fk]
     ).then(res => {
       this.listarUsuario();
     }).catch(e => {

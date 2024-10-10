@@ -24,7 +24,7 @@ export class RegisterPage implements OnInit {
     this.menu.enable(false);
   }
   insertar(){
-    this.bd.insertarUsuario(this.rut, this.usuario, this.nombreyApellido, this.contrasenia, this.telefono, this.correo, Number(this.id_rol));
+    this.bd.insertarUsuario(this.rut, this.usuario, this.nombreyApellido, this.contrasenia, this.telefono, this.correo,'', Number(this.id_rol));
   }
 
   async IrLogin(){

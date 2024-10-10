@@ -25,6 +25,7 @@ export class EditarperfilPage implements OnInit {
 
   // Dato para rescatar el id
   id_usuario!: number;
+  imagen!: any;
 
   constructor(private menu:MenuController,private router: Router, private alertController: AlertController, private bd: ServicioBDService,private activedrouter: ActivatedRoute) {
     this.activedrouter.queryParams.subscribe(res=>{
@@ -34,6 +35,8 @@ export class EditarperfilPage implements OnInit {
         this.telefonoNuevo = this.router.getCurrentNavigation()?.extras?.state?.['te'];
         this.correoNuevo = this.router.getCurrentNavigation()?.extras?.state?.['cor'];
         this.id_usuario = this.router.getCurrentNavigation()?.extras?.state?.['id'];
+        this.imagen = this.router.getCurrentNavigation()?.extras?.state?.['img'];
+
 
         this.nombreAntiguo = this.nombreNuevo
         this.usuarioAntiguo =  this.usuarioNuevo
@@ -68,7 +71,7 @@ export class EditarperfilPage implements OnInit {
     }
     else{
 
-      this.bd.ModificarUsuario(this.usuarioNuevo,this.nombreNuevo, this.telefonoNuevo, this.correoNuevo,this.id_usuario)       
+      this.bd.ModificarUsuario(this.usuarioNuevo,this.nombreNuevo, this.telefonoNuevo, this.correoNuevo,this.imagen,this.id_usuario)       
       this.router.navigate(['/miperfil']);
     } 
   }

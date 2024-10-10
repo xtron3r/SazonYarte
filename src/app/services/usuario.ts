@@ -8,4 +8,5 @@ export class Usuario {
     telefono!: number;
     correo!: string;
     id_rol_fk!: number;
+    fotousuario!: string;
 }
