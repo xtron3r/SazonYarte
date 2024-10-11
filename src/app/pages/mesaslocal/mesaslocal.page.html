@@ -17,9 +17,8 @@
       <ion-grid>
         <ion-row>
           <ion-col *ngFor="let mesa of mesas">
-            <p style="color: black;">M{{mesa.id_mesa}} - {{mesa.nombre}} - Sillas: {{mesa.c_sillas}}</p>
-            <ion-button expand="block" class="boton-inicio" (click)="reservarMesa(mesa)">
-              
+            <ion-button expand="block" class="boton-inicio">
+              M {{mesa.id_mesa}}
               <ion-icon name="restaurant-outline" slot="end"></ion-icon>
             </ion-button>
           </ion-col>
