@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, MenuController, ToastController } from '@ionic/angular';
 import { ServicioBDService } from 'src/app/services/servicio-bd.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-cambiarcontra',
@@ -17,7 +18,7 @@ export class CambiarcontraPage implements OnInit {
 
   id_usuario!: number;
 
-  constructor(private menu:MenuController,private router: Router,private alertController: AlertController, private toastController: ToastController, private activedrouter: ActivatedRoute, private bd: ServicioBDService) {
+  constructor(private menu:MenuController,private router: Router,private alertController: AlertController, private toastController: ToastController, private activedrouter: ActivatedRoute, private bd: ServicioBDService,  private afAuth: AngularFireAuth) {
     this.activedrouter.queryParams.subscribe(res=>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.id_usuario = this.router.getCurrentNavigation()?.extras?.state?.['id'];
@@ -77,12 +78,21 @@ export class CambiarcontraPage implements OnInit {
       await alert.present(); 
     
     } else{ 
-      this.MensajeRegistro('bottom');
+  
+      let user = await this.afAuth.currentUser;
       
-      // funcion modiciar contra
-      this.bd.modificarContra(this.nuevaContra, this.id_usuario).then(res =>{
-        this.router.navigate(['/miperfil']);
-      });
+      if (user) {
+
+        this.MensajeRegistro('bottom');
+
+        // funcion modiciar contra
+        await user.updatePassword(this.nuevaContra); 
+        this.bd.modificarContra(this.nuevaContra, this.id_usuario).then(res =>{
+          this.router.navigate(['/miperfil']);
+        });
+
+      }
+      
     }
    
   }

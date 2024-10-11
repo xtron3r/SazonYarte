@@ -49,3 +49,31 @@
         }
     }
 }
+
+// ubicacion
+
+.ubicacion{
+
+    margin-top: 35px;
+
+    h5{
+        margin-left: 20px;
+        margin-top: 20px;
+        font-size: 25px;
+        color: white;
+    }
+
+    .texto{
+        color: #4e3725;
+        font-weight: bold;
+    }
+    
+    ion-card{
+        background: radial-gradient(circle, #ffffff, #d3c6b1);
+        display: flex;
+        flex-direction: column;
+        .btn-center{
+            text-align: center;
+        }
+    }
+}

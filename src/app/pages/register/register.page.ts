@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, MenuController } from '@ionic/angular';
 import { ServicioBDService } from 'src/app/services/servicio-bd.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthfireBaseService } from 'src/app/services/authfire-base.service';
+
 
 @Component({
   selector: 'app-register',
@@ -16,14 +19,17 @@ export class RegisterPage implements OnInit {
   nuevaContrasenia: string ='';
   telefono: string ='';
   correo: string ='';
-  id_rol: string='1';
+  id_rol: string='2';
 
-  constructor(private menu:MenuController, private alertController: AlertController, private router: Router, private bd: ServicioBDService) { }
+  constructor(private menu:MenuController, private alertController: AlertController, private router: Router, private bd: ServicioBDService, private afAuth: AngularFireAuth, private authService: AuthfireBaseService) { }
 
   ngOnInit() {
     this.menu.enable(false);
   }
   insertar(){
+
+    this.authService.registro(this.correo,this.contrasenia);
+
     this.bd.insertarUsuario(this.rut, this.usuario, this.nombreyApellido, this.contrasenia, this.telefono, this.correo,'', Number(this.id_rol));
   }
 

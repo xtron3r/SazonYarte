@@ -31,17 +31,12 @@
       </ion-item>
       
       <ion-item class="ion-margin-horizontal ion-color">
-        <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
-        <ion-input type="email" placeholder="Ingresa Correo valido" label="Correo Electronico" label-placement="floating" class="quitar-linea" errorText="Email invalido" name="correoNuevo" [(ngModel)]="correoNuevo" #correo="ngModel" ngModel email></ion-input>
-      </ion-item>
-      
-      <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
         <ion-input type="tel" label="Telefono" label-placement="floating" placeholder="EJ : 123456789" color="dark" maxlength="9" name="telefonoNuevo" [(ngModel)]="telefonoNuevo"></ion-input>
       </ion-item>
     
       <div class="ion-text-center ion-margin">
-        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" [disabled]="correo.invalid" (click)="irPerfil()">
+        <ion-button expand="block" class="ion-margin boton-inicio txt-marcado" (click)="irPerfil()">
           Confirmar
           <ion-icon slot="end" name="checkmark-done-outline"></ion-icon>
         </ion-button>

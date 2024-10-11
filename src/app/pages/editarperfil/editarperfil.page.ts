@@ -15,7 +15,7 @@ export class EditarperfilPage implements OnInit {
   nombreNuevo: string = "";
   usuarioNuevo: string = "";
   telefonoNuevo: string = "";
-  correoNuevo: string = "";
+
 
   // Datos Antiguos
   usuarioAntiguo : string = "";
@@ -33,15 +33,15 @@ export class EditarperfilPage implements OnInit {
         this.nombreNuevo = this.router.getCurrentNavigation()?.extras?.state?.['nom'];
         this.usuarioNuevo = this.router.getCurrentNavigation()?.extras?.state?.['us'];
         this.telefonoNuevo = this.router.getCurrentNavigation()?.extras?.state?.['te'];
-        this.correoNuevo = this.router.getCurrentNavigation()?.extras?.state?.['cor'];
         this.id_usuario = this.router.getCurrentNavigation()?.extras?.state?.['id'];
+        this.correoAntiguo = this.router.getCurrentNavigation()?.extras?.state?.['cor'];
+        
         this.imagen = this.router.getCurrentNavigation()?.extras?.state?.['img'];
 
 
         this.nombreAntiguo = this.nombreNuevo
         this.usuarioAntiguo =  this.usuarioNuevo
         this.telefonoAntiguo = this.telefonoNuevo
-        this.correoAntiguo = this.correoNuevo
       }
     })
   }
@@ -51,7 +51,7 @@ export class EditarperfilPage implements OnInit {
   }
   async irPerfil() {
 
-    if (this.nombreNuevo =="" || this.usuarioNuevo =="" || this.telefonoNuevo =="" || this.correoNuevo ==""){
+    if (this.nombreNuevo =="" || this.usuarioNuevo =="" || this.telefonoNuevo ==""){
       const alert = await this.alertController.create({
         header: 'Campos vacios',
         message: 'Por Favor intentelo de nuevo',
@@ -60,7 +60,7 @@ export class EditarperfilPage implements OnInit {
       });
   
       await alert.present();
-    } else if (this.nombreNuevo == this.nombreAntiguo && this.usuarioNuevo == this.usuarioAntiguo && this.telefonoNuevo  ==  this.telefonoAntiguo && this.correoNuevo  ==  this.correoAntiguo){
+    } else if (this.nombreNuevo == this.nombreAntiguo && this.usuarioNuevo == this.usuarioAntiguo && this.telefonoNuevo  ==  this.telefonoAntiguo){
       const alert = await this.alertController.create({
         header: 'Los datos no pueden ser igual a los anteriores',
         message: 'Por favor intentelo de nuevo',
@@ -71,7 +71,7 @@ export class EditarperfilPage implements OnInit {
     }
     else{
 
-      this.bd.ModificarUsuario(this.usuarioNuevo,this.nombreNuevo, this.telefonoNuevo, this.correoNuevo,this.imagen,this.id_usuario)       
+      this.bd.ModificarUsuario(this.usuarioNuevo,this.nombreNuevo, this.telefonoNuevo, this.correoAntiguo,this.imagen,this.id_usuario)       
       this.router.navigate(['/miperfil']);
     } 
   }

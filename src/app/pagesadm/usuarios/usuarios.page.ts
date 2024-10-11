@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { ServicioBDService } from 'src/app/services/servicio-bd.service';
+import { AuthfireBaseService } from 'src/app/services/authfire-base.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -24,7 +25,7 @@ export class UsuariosPage implements OnInit {
   buscarRut: string = "";
   errorRut: boolean = false;
 
-  constructor(private menu: MenuController, private bd: ServicioBDService) { }
+  constructor(private menu: MenuController, private bd: ServicioBDService,  private authFireBase: AuthfireBaseService) { }
 
   ngOnInit() {
     this.menu.enable(false);
@@ -41,6 +42,7 @@ export class UsuariosPage implements OnInit {
   }
 
   eliminarUsuario(usuario: any){
+    this.authFireBase.eliminarUsuario(usuario.id_usuario)
     this.bd.eliminarUsuario(usuario.id_usuario);
   }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { AlertController, MenuController } from '@ionic/angular';
+import { ServicioBDService } from 'src/app/services/servicio-bd.service';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 @Component({
   selector: 'app-mesaslocal',
@@ -11,28 +13,21 @@ export class MesaslocalPage implements OnInit {
 
   mesaSeleccionada: any = null;
   fechaReserva: string = ""; 
-  mesas: any = [
-    {numero: 1, reservada: false },
-    {numero: 2, reservada: false },
-    {numero: 3, reservada: false },
-    {numero: 4, reservada: false },
-    {numero: 5, reservada: true },
-    {numero: 6, reservada: false },
-    {numero: 7, reservada: false },
-    {numero: 8, reservada: false },
-    {numero: 9, reservada: false },
-    {numero: 10, reservada: false },
-    {numero: 11, reservada: false },
-    {numero: 12, reservada: false },
-    {numero: 13, reservada: true },
-    {numero: 14, reservada: false },
-    {numero: 15, reservada: false },
-  ];
+  mesas: any = [{
+    id_mesa: '',
+    nombre: '',
+    c_sillas: '',
+    id_ubi_fk: ''
+  }];
 
-  constructor(private router: Router, private menu: MenuController, private alertController: AlertController) { }
+  constructor(private router: Router, private menu: MenuController, private alertController: AlertController, private bd : ServicioBDService, private storage: NativeStorage) {
+    this.bd.buscarMesa("2").then((data) => {
+      this.mesas = data;
+    })
+  }
 
   ngOnInit() {
-    this.menu.enable(false);
+    this.menu.enable(false); 
   }
 
   reservarMesa(mesa: any) {

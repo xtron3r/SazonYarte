@@ -188,6 +188,7 @@ export class ServicioBDService {
 
       this.listarContactos();
       this.listarUsuario();
+      this.listarReservas();
       
       //modifico el estado de la Base de Datos
       this.isDBReady.next(true);
@@ -369,6 +370,26 @@ export class ServicioBDService {
     });
   }
 
+  BuscarCorreoUsuario(usuario: string) {
+    return this.database.executeSql(
+      'SELECT id_usuario, correo FROM Usuario WHERE nombreusuario = ?', [usuario]
+    ).then(res => {
+      if (res.rows.length > 0) {
+        // Si las credenciales son correctas, retorna el usuario encontrado
+        return {
+          id_usuario: res.rows.item(0).id_usuario,
+          correo: res.rows.item(0).correo
+        };
+      } else {
+        // Si no hay coincidencias, retorna null
+        return null;
+      }
+    }).catch(e => {
+      this.Alerta('Usuario', 'Error: ' + JSON.stringify(e));
+      return null;
+    });
+  }
+
   miPerfil(id_usuario: number){
     return this.database.executeSql(
       'SELECT * FROM Usuario WHERE id_usuario = ?', [id_usuario]
@@ -388,7 +409,7 @@ export class ServicioBDService {
 
   // Funciones de mesa
   buscarMesa(id_ubi_fk: string) {
-    return this.database.executeSql('SELECT m.id_mesa, m.nombre, m.c_sillas, u.nombre AS id_ubi_fk FROM mesas m INNER JOIN ubicacion u ON m.id_ubi_fk = u.id_ubicacion WHERE id_ubi_fk = ?  ', [id_ubi_fk]).then(res => {
+    return this.database.executeSql('SELECT m.id_mesa, m.nombre, m.c_sillas, u.nombre AS id_ubi_fk FROM mesas m INNER JOIN ubicacion u ON m.id_ubi_fk = u.id_ubicacion WHERE m.id_ubi_fk = ?  ', [id_ubi_fk]).then(res => {
       //variable para almacenar el resultado de la consulta
       let items: Mesas[]= [];
       //valido si trae al menos un registro
@@ -436,6 +457,44 @@ export class ServicioBDService {
       this.Alerta('Modificar', 'Error: ' + JSON.stringify(e));
     })
 
+  }
+
+
+  // RESERVAS
+
+  listarReservas(){
+      return this.database.executeSql('SELECT * FROM reserva', []).then(res => {
+        //variable para almacenar el resultado de la consulta
+        let items: Reserva[]= [];
+        //valido si trae al menos un registro
+        if(res.rows.length > 0){
+         //recorro mi resultado
+          for(var i=0; i < res.rows.length; i++){
+           //agrego los registros a mi lista
+           items.push({
+            id_reserva: res.rows.item(i).id_reserva,
+            f_reserva: res.rows.item(i).f_reserva,
+            f_creacion: res.rows.item(i).f_creacion,
+            id_usuario_fk: res.rows.item(i).id_usuario_fk,
+            id_mesa_fk: res.rows.item(i).id_mesa_fk,
+            id_bloque_fk: res.rows.item(i).id_bloque_fk,
+           })
+          }
+        }
+        //actualizar el observable
+        this.listadoReservas.next(items as any);})
+  }
+
+  insertarReserva(f_reserva:string, f_creacion: string, id_usuario_fk : number, id_mesa_fk: number, id_bloque_fk: string) {
+    return this.database.executeSql(
+      'INSERT INTO reserva (f_reserva, f_creacion, id_usuario_fk, id_mesa_fk, id_bloque_fk) VALUES (?, ?, ?, ?, ?)', 
+      [f_reserva, f_creacion, id_usuario_fk, id_mesa_fk, id_bloque_fk]
+    ).then(res => {
+      this.Alerta("Agregar", "Mesa agregada exitosamente.");
+      this.listarReservas();
+    }).catch(e => {
+      this.Alerta('Agregar', 'Error: ' + JSON.stringify(e));
+    });
   }
  
   

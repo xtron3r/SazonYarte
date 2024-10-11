@@ -20,15 +20,15 @@
 
   <div class="seccion-form">
     <div class="miperfil">
-      <img *ngIf="tipomesa == 'dentro'" src="../../../assets/fondos/local1.jpg" alt="Cocina Dentro" class="segmento">
-      <img *ngIf="tipomesa == 'fuera'" src="../../../assets/fondos/Terraza.jpg" alt="Terraza" class="segmento">
+      <img *ngIf="tipomesa == '2'" src="../../../assets/fondos/local1.jpg" alt="Cocina Dentro" class="segmento">
+      <img *ngIf="tipomesa == '1'" src="../../../assets/fondos/Terraza.jpg" alt="Terraza" class="segmento">
   
       <ion-segment [(ngModel)]="tipomesa">
-        <ion-segment-button class="color" value="dentro">
+        <ion-segment-button class="color" value="2" name="dentro">
           <ion-label>Dentro</ion-label>
           <ion-icon name="restaurant-outline"></ion-icon>
         </ion-segment-button>
-        <ion-segment-button class="color" value="fuera">
+        <ion-segment-button class="color" value="1" name="terraza">
           <ion-label>Terraza</ion-label>
           <ion-icon name="sunny-outline"></ion-icon>
           </ion-segment-button>
