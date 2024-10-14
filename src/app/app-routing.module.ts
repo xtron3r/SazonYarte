@@ -92,9 +92,15 @@ const routes: Routes = [
     loadChildren: () => import('./pagesadm/editarmesa/editarmesa.module').then( m => m.EditarmesaPageModule)
   },
   {
+    path: 'fechareserva',
+    loadChildren: () => import('./pages/fechareserva/fechareserva.module').then( m => m.FechareservaPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
-  }
+  },
+
+
 
 
 

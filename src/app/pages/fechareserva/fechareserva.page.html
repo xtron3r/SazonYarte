@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>fechareserva</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <mat-card>
+    <mat-card>
+      <mat-calendar [(selected)]="selectedDate" [minDate]="minDate" [maxDate]="maxDate"></mat-calendar>
+    </mat-card>
+    
+    <p>Fecha seleccionada: {{ selectedDate | date }}</p>
+  </mat-card>
+</ion-content>
