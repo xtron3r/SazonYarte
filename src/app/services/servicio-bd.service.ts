@@ -511,6 +511,14 @@ export class ServicioBDService {
       this.Alerta('Agregar', 'Error: ' + JSON.stringify(e));
     });
   }
+  eliminarReserva(id_reserva:string){
+    return this.database.executeSql('DELETE FROM reserva WHERE id_reserva = ?',[id_reserva]).then(res=>{
+      this.Alerta("Eliminar","Reserva Eliminada");
+      this.listarReservas();
+    }).catch(e=>{
+      this.Alerta('Eliminar', 'Error: ' + JSON.stringify(e));
+    })
+  }
 
   // BLOQUES
 

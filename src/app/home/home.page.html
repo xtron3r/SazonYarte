@@ -161,7 +161,7 @@
       </ion-card-header>
   
       <ion-card-content>
-        <ion-item>
+        <ion-item class="ion-color">
           <ion-label>Moneda Base</ion-label>
           <ion-select [(ngModel)]="MonedaBase">
             <ion-select-option *ngFor="let x of Monedas" [value]="x">
@@ -170,7 +170,7 @@
           </ion-select>
         </ion-item>
   
-        <ion-item>
+        <ion-item class="ion-color">
           <ion-label>Moneda Destino</ion-label>
           <ion-select [(ngModel)]="MonedaDefecto">
             <ion-select-option *ngFor="let x of Monedas" [value]="x">
@@ -179,20 +179,22 @@
           </ion-select>
         </ion-item>
   
-        <ion-item>
+        <ion-item class="ion-color">
           <ion-label>Cantidad</ion-label>
-          <ion-input [(ngModel)]="CantidadConv" type="number" placeholder="1"></ion-input>
+          <ion-input [(ngModel)]="CantidadConv" type="number" placeholder="1" class="ion-text-center"></ion-input>
         </ion-item>
   
-        <button mat-fab class="boton-reserva">
-          CONVERTIR
-          <mat-icon class="color-inicio espacio" fontIcon="table_bar"></mat-icon>
-        </button>
-  
-        <ion-item *ngIf="Resultado">
-          <ion-label>Resultado: {{ Resultado }} {{ MonedaDefecto }}</ion-label>
+        <ion-item class="ion-color">
+          <ion-label>Resultado</ion-label>
+          <ion-label>{{Resultado | number:"1.0-2" }} {{ MonedaDefecto }}</ion-label>
         </ion-item>
       </ion-card-content>
+      <ion-card-footer class="btn-center">
+        <button mat-fab class="boton-reserva" (click)="convertirMoneda()">
+          CONVERTIR
+          <mat-icon class="color-inicio espacio" fontIcon="paid"></mat-icon>
+        </button>
+      </ion-card-footer>
     </ion-card>
   </div>
 

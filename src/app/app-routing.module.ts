@@ -20,10 +20,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'reservar',
-    loadChildren: () => import('./pages/reservar/reservar.module').then( m => m.ReservarPageModule)
-  },
-  {
     path: 'nosotros',
     loadChildren: () => import('./pages/nosotros/nosotros.module').then( m => m.NosotrosPageModule)
   },
@@ -50,14 +46,6 @@ const routes: Routes = [
   {
     path: 'misreservas',
     loadChildren: () => import('./pages/misreservas/misreservas.module').then( m => m.MisreservasPageModule)
-  },
-  {
-    path: 'mesasterraza',
-    loadChildren: () => import('./pages/mesasterraza/mesasterraza.module').then( m => m.MesasterrazaPageModule)
-  },
-  {
-    path: 'mesaslocal',
-    loadChildren: () => import('./pages/mesaslocal/mesaslocal.module').then( m => m.MesaslocalPageModule)
   },
   {
     path: 'usuarios',

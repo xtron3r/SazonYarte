@@ -24,8 +24,8 @@
         <p>Ubicacion: {{r.id_mesa_fk}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button class="botones-accion-ed" [routerLink]="['/editareserva']"> Editar<mat-icon mat-card-avatar class="icon-edit">edit</mat-icon></button>
-        <button mat-button class="botones-accion-del"> Eliminar<mat-icon mat-card-avatar class="icon-del">delete</mat-icon></button>
+        <!-- <button mat-button class="botones-accion-ed" [routerLink]="['/editareserva']"> Editar<mat-icon mat-card-avatar class="icon-edit">edit</mat-icon></button> -->
+        <button mat-button class="botones-accion-del" (click)="eliminarReserva(r.id_reserva)"> Eliminar<mat-icon mat-card-avatar class="icon-del">delete</mat-icon></button>
       </mat-card-actions>
     </mat-card>
   </div>

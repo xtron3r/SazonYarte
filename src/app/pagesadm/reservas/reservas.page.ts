@@ -35,4 +35,8 @@ export class ReservasPage implements OnInit {
     this.menu.enable(false);
   }
 
+  eliminarReserva(id_reserva:string){
+    this.bd.eliminarReserva(id_reserva);
+  }
+
 }
