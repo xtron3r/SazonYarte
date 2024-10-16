@@ -23,13 +23,16 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 registerLocaleData(localeEs);
 
+//API CONVERSOR
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule,
-    AngularFireAuthModule, AngularFireModule.initializeApp(environment.firebaseConfig)],
+    AngularFireAuthModule, AngularFireModule.initializeApp(environment.firebaseConfig),HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync(), NativeStorage, SQLite,{provide: LOCALE_ID, useValue:"es-CL" }],
   bootstrap: [AppComponent],
 })

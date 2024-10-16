@@ -28,12 +28,13 @@
         <ion-card class="ion-margin">
           <img alt="Promocion" src="../../assets/fondos/comida1.jpg"/>
           <ion-card-header>
-            <ion-card-title class="texto">Pastel De Choclo</ion-card-title>
-            <ion-card-subtitle class="texto">Tipico Chileno</ion-card-subtitle>
+            <ion-card-title class="texto">Pastel De Choclo </ion-card-title>
+            <ion-card-subtitle class="texto">Tipico Chileno | Total: $9.000 CLP</ion-card-subtitle>
           </ion-card-header>
         
           <ion-card-content>
             <p class="texto">Ingredientes: Choclo, Cebolla, Carne de res molida, Carne de pollo, Huevos duros, Pasas, Aceitunas negras, Azúcar.</p>
+            
           </ion-card-content>
 
           <ion-card-footer>
@@ -49,7 +50,7 @@
           <img alt="Promocion" src="../../assets/fondos/comida2.jpg"/>
           <ion-card-header>
             <ion-card-title class="texto">Cazuela de vacuno</ion-card-title>
-            <ion-card-subtitle class="texto">Tipico Chileno</ion-card-subtitle>
+            <ion-card-subtitle class="texto">Tipico Chileno | Total: $8.000 CLP</ion-card-subtitle>
           </ion-card-header>
         
           <ion-card-content>
@@ -69,7 +70,7 @@
           <img alt="Promocion" src="../../assets/fondos/arepaven.jpg"/>
           <ion-card-header>
             <ion-card-title class="texto">Arepas Tipicas</ion-card-title>
-            <ion-card-subtitle class="texto">Delicias Venezolanas</ion-card-subtitle>
+            <ion-card-subtitle class="texto">Delicias Venezolanas | Total: $6.000 CLP</ion-card-subtitle>
           </ion-card-header>
         
           <ion-card-content>
@@ -89,7 +90,7 @@
           <img alt="Promocion" src="../../assets/fondos/costillarconpapas.png"/>
           <ion-card-header>
             <ion-card-title class="texto">Costillar Con Papas</ion-card-title>
-            <ion-card-subtitle class="texto">Tipico Bajon</ion-card-subtitle>
+            <ion-card-subtitle class="texto">Tipico Bajon | Total: $12.000 CLP</ion-card-subtitle>
           </ion-card-header>
         
           <ion-card-content>
@@ -109,7 +110,7 @@
           <img alt="Promocion" src="../../assets/fondos/pizza.png"/>
           <ion-card-header>
             <ion-card-title class="texto">Pizza Italiana</ion-card-title>
-            <ion-card-subtitle class="texto">Tipico Bajon</ion-card-subtitle>
+            <ion-card-subtitle class="texto">Tipico Bajon | Total: $15.000 CLP</ion-card-subtitle>
           </ion-card-header>
         
           <ion-card-content>
@@ -135,7 +136,7 @@
       <ion-card-header>
         <ion-card-title class="texto">Promocion Especial de la Semana</ion-card-title>
         <ion-card-subtitle class="texto">Entrada, Plato de fondo y Postre</ion-card-subtitle>
-        <ion-card-subtitle class="texto">Pide lo que quieras!</ion-card-subtitle>
+        <ion-card-subtitle class="texto">Pide lo que quieras! | Total: $16.000 CLP</ion-card-subtitle>
       </ion-card-header>
     
       <ion-card-content>
@@ -148,6 +149,50 @@
           <mat-icon class="color-inicio espacio" fontIcon="table_bar"></mat-icon>
         </button>
       </ion-card-footer>
+    </ion-card>
+  </div>
+
+  <div class="convertidor-monedas">
+    <h5 class="ion-margin-horizontal">Convertidor</h5>
+  
+    <ion-card class="ion-margin">
+      <ion-card-header>
+        <ion-card-title class="texto ion-text-center">Selecciona la moneda</ion-card-title>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Moneda Base</ion-label>
+          <ion-select [(ngModel)]="MonedaBase">
+            <ion-select-option *ngFor="let x of Monedas" [value]="x">
+              {{ x }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Moneda Destino</ion-label>
+          <ion-select [(ngModel)]="MonedaDefecto">
+            <ion-select-option *ngFor="let x of Monedas" [value]="x">
+              {{ x }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Cantidad</ion-label>
+          <ion-input [(ngModel)]="CantidadConv" type="number" placeholder="1"></ion-input>
+        </ion-item>
+  
+        <button mat-fab class="boton-reserva">
+          CONVERTIR
+          <mat-icon class="color-inicio espacio" fontIcon="table_bar"></mat-icon>
+        </button>
+  
+        <ion-item *ngIf="Resultado">
+          <ion-label>Resultado: {{ Resultado }} {{ MonedaDefecto }}</ion-label>
+        </ion-item>
+      </ion-card-content>
     </ion-card>
   </div>
 

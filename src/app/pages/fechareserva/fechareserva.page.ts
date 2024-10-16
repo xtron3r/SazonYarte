@@ -44,7 +44,7 @@ export class FechareservaPage implements OnInit {
     // fecha minima 
     this.minDate = this.today;
  
-    // Fecha máxima: 31 de diciembre de 2024
+    // Fecha maxima: 31 de diciembre de 2024
     this.maxDate = new Date(2024, 11, 31);
      
     this.fechaSelec = new Date();

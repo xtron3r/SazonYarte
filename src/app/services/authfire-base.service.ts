@@ -1,14 +1,26 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ServicioBDService } from 'src/app/services/servicio-bd.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthfireBaseService {
+  
+  httpOptions = {
+    headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin':'*'
+    })
+  }
+  private apiUrl = 'https://openexchangerates.org/api/latest.json?app_id=4ac0b15502bf4e969e92ab022061d130'
 
-  constructor(private AFauth: AngularFireAuth, private bd : ServicioBDService) { }
+
+
+  constructor(private AFauth: AngularFireAuth, private bd : ServicioBDService, private http: HttpClient) { }
 
 
   inicioSesion(nombreUsuario: string, contrasenia: string) {
@@ -44,6 +56,13 @@ export class AuthfireBaseService {
   resetContra(email: string){
     
     return this.AFauth.sendPasswordResetEmail(email);
+  }
+
+  // ------------------------------ API CONVERSORA DE MONEDAS ------------------------------------------------------
+
+  obtenerValorMoneda(MonedaBase: string): Observable<any> {
+    const url = `https://api.exchangerate-api.com/v4/latest/${MonedaBase}`; 
+    return this.http.get(url)
   }
 
 }
