@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="fondo">
-    <ion-title>Mis Reservas</ion-title>
+    <ion-title>Listado de Reservas</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,30 +12,23 @@
   </div>
 
   <div class="ion-padding mis-reservas">
-    <ion-card *ngIf="reservaConfirmada == true">
+    <ion-card *ngFor="let r of reserva">
       <ion-card-header>
-        <ion-card-title>Detalles de la Reserva</ion-card-title>
+        <ion-card-title>Reserva ID: {{ r.id_reserva }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p><strong>Mesa Reservada:</strong> Nro {{ mesaReservada.numero }}</p>
-        <p><strong>Fecha de la Reserva:</strong> {{ diaReserva | date:'dd-MM-yyyy' }}</p>
-        <p><strong>Ubicacion:</strong> {{ ubicacionReserva }}</p>
+        <p><strong>Cliente:</strong> {{ r.id_usuario_fk }}</p>
+        <p><strong>Fecha:</strong> {{ r.f_reserva | date:"dd MMMM yyyy" }}</p>
+        <p><strong>Hora:</strong> {{ r.id_bloque_fk }}</p>
+        <p><strong>Fecha Creación:</strong> {{ r.f_creacion | date:"dd MMMM yyyy" }}</p>
+        <p><strong>Ubicación:</strong> {{ r.id_mesa_fk }}</p>
       </ion-card-content>
       <div>
-        <button mat-fab class="cancelar-button" (click)="cancelarReserva()">
+        <button mat-fab class="cancelar-button" (click)="eliminarReserva(r.id_reserva)">
           <mat-icon class="color-button espacio" fontIcon="delete"></mat-icon>
-          Cancelar Reserva
+          Cancelar reserva
         </button>
       </div>
-    </ion-card>
-
-    <ion-card *ngIf="reservaConfirmada == false">
-      <ion-card-header>
-        <ion-card-title>No hay reservas</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>No tienes ninguna reserva activa.</p>
-      </ion-card-content>
     </ion-card>
   </div>
 
@@ -45,5 +38,4 @@
       <mat-icon class="color-inicio espacio" fontIcon="home"></mat-icon>
     </button>
   </div>
-
 </ion-content>

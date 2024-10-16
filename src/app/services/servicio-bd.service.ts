@@ -520,6 +520,26 @@ export class ServicioBDService {
     })
   }
 
+  listarReservasPorUsuario(id_usuario_fk: number) {
+    return this.database.executeSql('SELECT * FROM reserva WHERE id_usuario_fk = ?', [id_usuario_fk]).then(res => {
+      let items: Reserva[] = [];
+      if (res.rows.length > 0) {
+        for (let i = 0; i < res.rows.length; i++) {
+          items.push({
+            id_reserva: res.rows.item(i).id_reserva,
+            f_reserva: res.rows.item(i).f_reserva,
+            f_creacion: res.rows.item(i).f_creacion,
+            id_usuario_fk: res.rows.item(i).id_usuario_fk,
+            id_mesa_fk: res.rows.item(i).id_mesa_fk,
+            id_bloque_fk: res.rows.item(i).id_bloque_fk
+          });
+        }
+      }
+      this.listadoReservas.next(items as any);
+    });
+  }
+  
+
   // BLOQUES
 
   listarBloques(){
