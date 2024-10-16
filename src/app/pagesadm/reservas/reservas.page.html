@@ -11,15 +11,17 @@
 
 <ion-content [fullscreen]="true" class="fondo">
   <div class="container-reservas">
-    <mat-card *ngFor="let reserva of reservas" class="container-reserva">
+    <mat-card *ngFor="let r of reserva" class="container-reserva">
       <mat-card-header>
         <mat-icon mat-card-avatar>event</mat-icon>
-        <mat-card-title>{{ reserva.nroMesa }}</mat-card-title>
+        <mat-card-title>Reserva ID: {{ r.id_reserva }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p>Cliente: {{reserva.nombreCliente}}</p>
-        <p>Fecha: {{reserva.fechaReserva}}</p>
-        <p>Ubicacion: {{reserva.tipoMesa}}</p>
+        <p>Cliente: {{r.id_usuario_fk}}</p>
+        <p>Fecha: {{r.f_reserva | date:"dd MMMM yyyy"}}</p>
+        <p>Hora: {{r.id_bloque_fk}}</p>
+        <p>Fecha Creacion: {{r.f_creacion | date:"dd MMMM yyyy"}}</p>
+        <p>Ubicacion: {{r.id_mesa_fk}}</p>
       </mat-card-content>
       <mat-card-actions>
         <button mat-button class="botones-accion-ed" [routerLink]="['/editareserva']"> Editar<mat-icon mat-card-avatar class="icon-edit">edit</mat-icon></button>

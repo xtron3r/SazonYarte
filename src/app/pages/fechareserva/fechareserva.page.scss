@@ -1,6 +1,118 @@
-mat-card {
-    max-width: 300px;       
+.fondo {
+    --background: linear-gradient(to right, #4e3725, #2d1b14);
 }
-mat-calendar {
-    width: 80%;  
-}  
+
+.calendario {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    mat-calendar {
+        border-radius: 30px;
+        width: 350px;
+        height: 450px;
+        background-color: white;
+        color: black;
+    }
+}
+.parrafo{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+}
+
+.bloque-hora {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;     
+    ion-item{
+        width: 80%;
+        background-color: white !important;
+        border-radius: 30px;
+    }
+}
+
+.ion-color{
+    color: #4e3725;
+}
+
+.container-mesas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 400px;
+    
+}
+
+.color-blanco{
+    color: white;
+}
+
+.container-mesa{
+    background-color: white;
+    color: #2d1b14;
+    margin-bottom: 30px;
+    width: 90%;
+}
+
+.botones-accion-des{
+    width: 150px;
+    margin: 5px;
+    background-color: #4e3725;
+    color: white !important;
+
+    .icon-des{
+        color: white;
+        margin: 0px;
+        margin-right: 5px;
+    }
+
+
+}
+
+
+// calendario Angular
+::ng-deep .mat-calendar-body-cell-content {
+    color: black !important;
+}
+
+::ng-deep .mat-calendar-table-header th {
+    color: black !important;
+}
+
+::ng-deep .mat-calendar-header,
+::ng-deep .mat-calendar-header .mat-button {
+    color: black !important;
+}
+
+::ng-deep .calendario .mat-calendar-body-selected {
+    background-color: #4e3725;
+    color: white !important;
+}
+
+::ng-deep .mat-calendar-prev-button,
+::ng-deep .mat-calendar-next-button {
+    color: black !important;
+}
+
+::ng-deep .mat-calendar-body-today {
+    border: 2px solid #000000 !important;
+}
+
+::ng-deep .mat-calendar-period-button {
+    color: black !important;
+}
+
+::ng-deep .mat-calendar-arrow {
+    color: black !important;
+}
+
+::ng-deep .mat-calendar-body-disabled {
+    color: white !important; /* Cambia el color de los días inhabilitados */
+    background-color: white !important; /* Color de fondo de los días inhabilitados */
+    opacity: 0;
+}

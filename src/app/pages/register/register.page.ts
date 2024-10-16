@@ -65,7 +65,16 @@ export class RegisterPage implements OnInit {
         cssClass: 'estilo-alertas'
       });
       await alert.present();
-    } else{
+    }else if (this.nuevaContrasenia.length < 6 || this.contrasenia.length < 6){
+      const alert = await this.alertController.create({
+        header: 'Error en contraseña',
+        message: 'La contraseña debe tener al menos 6 caracteres',
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas'
+      });
+      await alert.present();
+    }
+    else{
       const alert = await this.alertController.create({
         header: 'Registrado',
         message: 'Registrado Correctamente',

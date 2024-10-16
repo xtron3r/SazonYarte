@@ -29,10 +29,17 @@ export class ServicioBDService {
 
   // Tabla Bloque
 
-  tablaBloque: string = "CREATE TABLE IF NOT EXISTS bloque (id_bloque INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, h_inicio DATETIME NOT NULL, h_fin DATETIME NOT NULL, dia DATE NOT NULL,mes DATE NOT NULL);";
+  tablaBloque: string = "CREATE TABLE IF NOT EXISTS bloque (id_bloque INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, h_inicio DATETIME NOT NULL, h_fin DATETIME NOT NULL);";
 
-  registroBloque: string = "INSERT or IGNORE INTO bloque(id_bloque, h_inicio, h_fin, dia, mes) VALUES (1, '10:45', '11:45', '02', '10')";
-
+  registroBloque1: string = "INSERT or IGNORE INTO bloque(id_bloque, h_inicio, h_fin) VALUES (1, '12:30', '13:30')";
+  registroBloque2: string = "INSERT or IGNORE INTO bloque(id_bloque, h_inicio, h_fin) VALUES (2, '14:00', '15:00')";
+  registroBloque3: string = "INSERT or IGNORE INTO bloque(id_bloque, h_inicio, h_fin) VALUES (3, '15:30', '16:30')";
+  registroBloque4: string = "INSERT or IGNORE INTO bloque(id_bloque, h_inicio, h_fin) VALUES (4, '17:00', '18:00')";
+  registroBloque5: string = "INSERT or IGNORE INTO bloque(id_bloque, h_inicio, h_fin) VALUES (5, '18:30', '19:30')";
+  registroBloque6: string = "INSERT or IGNORE INTO bloque(id_bloque, h_inicio, h_fin) VALUES (6, '20:00', '21:00')";
+  registroBloque7: string = "INSERT or IGNORE INTO bloque(id_bloque, h_inicio, h_fin) VALUES (7, '21:30', '22:30')";
+  registroBloque8: string = "INSERT or IGNORE INTO bloque(id_bloque, h_inicio, h_fin) VALUES (8, '23:00', '00:00')";
+  
   // Tabla Ubicacion
 
   tablaUbicacion: string = "CREATE TABLE IF NOT EXISTS ubicacion (id_ubicacion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre VARCHAR NOT NULL);";
@@ -169,7 +176,14 @@ export class ServicioBDService {
       //ejecuto los insert por defecto en el caso que existan
       await this.database.executeSql(this.registroContacto, []);
       await this.database.executeSql(this.registroContacto2, []);
-      await this.database.executeSql(this.registroBloque, []);
+      await this.database.executeSql(this.registroBloque1, []);
+      await this.database.executeSql(this.registroBloque2, []);
+      await this.database.executeSql(this.registroBloque3, []);
+      await this.database.executeSql(this.registroBloque4, []);
+      await this.database.executeSql(this.registroBloque5, []);
+      await this.database.executeSql(this.registroBloque6, []);
+      await this.database.executeSql(this.registroBloque7, []);
+      await this.database.executeSql(this.registroBloque8, []);
       await this.database.executeSql(this.registroUbicacion, []);
       await this.database.executeSql(this.registroUbicacion2, []);
       await this.database.executeSql(this.registroMesaTerraza, []);
@@ -189,6 +203,7 @@ export class ServicioBDService {
       this.listarContactos();
       this.listarUsuario();
       this.listarReservas();
+      this.listarBloques();
       
       //modifico el estado de la Base de Datos
       this.isDBReady.next(true);
@@ -463,7 +478,7 @@ export class ServicioBDService {
   // RESERVAS
 
   listarReservas(){
-      return this.database.executeSql('SELECT * FROM reserva', []).then(res => {
+      return this.database.executeSql("SELECT r.id_reserva, r.f_reserva, r.f_creacion, u.nombrecompleto AS id_usuario_fk, m.nombre ||' '|| ub.nombre AS id_mesa_fk, b.h_inicio ||' - '|| b.h_fin AS id_bloque_fk  FROM reserva r INNER JOIN Usuario u ON r.id_usuario_fk = u.id_usuario INNER JOIN mesas m ON r.id_mesa_fk = m.id_mesa INNER JOIN bloque b ON r.id_bloque_fk = b.id_bloque INNER JOIN ubicacion ub ON m.id_ubi_fk = ub.id_ubicacion", []).then(res => {
         //variable para almacenar el resultado de la consulta
         let items: Reserva[]= [];
         //valido si trae al menos un registro
@@ -485,17 +500,41 @@ export class ServicioBDService {
         this.listadoReservas.next(items as any);})
   }
 
-  insertarReserva(f_reserva:string, f_creacion: string, id_usuario_fk : number, id_mesa_fk: number, id_bloque_fk: string) {
+  insertarReserva(f_reserva:Date, f_creacion: Date, id_usuario_fk : number, id_mesa_fk: number, id_bloque_fk: number) {
     return this.database.executeSql(
       'INSERT INTO reserva (f_reserva, f_creacion, id_usuario_fk, id_mesa_fk, id_bloque_fk) VALUES (?, ?, ?, ?, ?)', 
       [f_reserva, f_creacion, id_usuario_fk, id_mesa_fk, id_bloque_fk]
     ).then(res => {
-      this.Alerta("Agregar", "Mesa agregada exitosamente.");
+      this.Alerta("Agregar", "Reserva agregada exitosamente.");
       this.listarReservas();
     }).catch(e => {
       this.Alerta('Agregar', 'Error: ' + JSON.stringify(e));
     });
   }
+
+  // BLOQUES
+
+  listarBloques(){
+    return this.database.executeSql('SELECT * FROM bloque', []).then(res => {
+      //variable para almacenar el resultado de la consulta
+      let items: Bloque[]= [];
+      //valido si trae al menos un registro
+      if(res.rows.length > 0){
+       //recorro mi resultado
+        for(var i=0; i < res.rows.length; i++){
+         //agrego los registros a mi lista
+         items.push({
+          id_bloque: res.rows.item(i).id_bloque,
+          h_inicio: res.rows.item(i).h_inicio,
+          h_fin: res.rows.item(i).h_fin
+         })
+        }
+      }
+      //actualizar el observable
+      this.listadoBloque.next(items as any);})
+}
+
+
  
   
 }

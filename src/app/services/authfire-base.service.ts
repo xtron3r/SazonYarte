@@ -37,8 +37,7 @@ export class AuthfireBaseService {
     });
   }
   
-  registro(correo: string, contrasenia: string){
-    
+  registro(correo: string, contrasenia: string){ 
     return this.AFauth.createUserWithEmailAndPassword(correo, contrasenia);
   }
 
