@@ -404,6 +404,15 @@ export class ServicioBDService {
       return null;
     });
   }
+  //Metodo para ver si ya existe un nombre de usuario en la base de datos
+  async verificarUsuario(usuario: string): Promise<boolean> {
+    const query = 'SELECT * FROM Usuario WHERE nombreusuario = ?';
+    const result = await this.database.executeSql(query, [usuario]);
+  
+    return result.rows.length > 0;
+  }
+  
+  
 
   miPerfil(id_usuario: number){
     return this.database.executeSql(
