@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ServicioBDService } from 'src/app/services/servicio-bd.service';
 import { AlertController } from '@ionic/angular';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-fechareserva',
   templateUrl: './fechareserva.page.html',
   styleUrls: ['./fechareserva.page.scss'],
+  providers: [DatePipe] 
 })
 export class FechareservaPage implements OnInit {
 
@@ -35,7 +37,11 @@ export class FechareservaPage implements OnInit {
   buscarMesa: string = "";
   id_usuario!: number;
 
-  constructor(private bd: ServicioBDService, private alertController: AlertController,private storage: NativeStorage) {
+
+  // Variables para controlar la activacion de secciones
+  MesaTomada: boolean = false; // Controla si se puede buscar mesas
+
+  constructor(private bd: ServicioBDService, private alertController: AlertController,private storage: NativeStorage,private datePipe: DatePipe) {
 
     this.storage.getItem('usuario').then(data=>{
       this.id_usuario = data;
@@ -50,21 +56,11 @@ export class FechareservaPage implements OnInit {
     this.fechaSelec = new Date();
 
     this.bd.dbState().subscribe(data => {
-      // validar si la base de datos está lista
+      // validar si la base de datos esta lista
       if (data) {
         // subscribir al observable de usuarios
         this.bd.fetchBloque().subscribe(res => {
           this.bloque = res;
-        });
-      }
-    });
-
-    this.bd.dbState().subscribe(data => {
-      // validar si la base de datos esta lista
-      if (data) {
-        // subscribir al observable de usuarios
-        this.bd.fetchMesas().subscribe(res => {
-          this.mesas = res;
         });
       }
     });
@@ -73,16 +69,39 @@ export class FechareservaPage implements OnInit {
   ngOnInit() {
   }
 
+  CambioFecha() {
+    this.listarMesas(this.buscarMesa);
+  }
+  CambioBloque() {
+      this.listarMesas(this.buscarMesa);
+  }
 
   listarMesas(id_ubi_fk:string) {
-    this.bd.buscarMesa(id_ubi_fk);
+
+    // Formatear la fecha al formato día/mes/año
+     let FechaFormato = this.datePipe.transform(this.fechaSelec, 'dd/MM/yyyy'); 
+    
+    if (FechaFormato && this.bloqueSele) {
+      this.bd.ListarMesasDisponibles(id_ubi_fk,FechaFormato,this.bloqueSele).then(data => {
+        this.mesas = data;
+
+        if (this.mesas.length == 0) {
+          this.Alerta('Sin Mesas', 'No hay mesas disponibles para la fecha y hora seleccionadas.');
+        }
+      });
+    }
   }
 
   Reservar(id_mesa:number) {
-    if (this.fechaSelec == null || this.bloqueSele == null || id_mesa == null){
-      this.Alerta('Error en Reservar','No pueden haber campos sin seleccion')
-    } else{
-      this.bd.insertarReserva(this.fechaSelec,this.today,this.id_usuario,id_mesa,this.bloqueSele);
+
+     // Formatear la fecha al formato día/mes/año
+     let FechaFormato = this.datePipe.transform(this.fechaSelec, 'dd/MM/yyyy');
+     let FechaFormatoHoy = this.datePipe.transform(this.today, 'dd/MM/yyyy');
+
+    if (FechaFormato == null || this.bloqueSele == null || id_mesa == null || FechaFormatoHoy == null) {
+      this.Alerta('Error en Reservar', 'No pueden haber campos sin seleccion');
+    } else {
+      this.bd.insertarReserva(FechaFormato, FechaFormatoHoy, this.id_usuario, id_mesa, this.bloqueSele);
     }
   }
 

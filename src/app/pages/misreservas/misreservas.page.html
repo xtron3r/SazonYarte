@@ -17,11 +17,11 @@
       </ion-card-header>
       <ion-card-content>
         <p><strong>Cliente:</strong> {{ r.id_usuario_fk }}</p>
-        <p><strong>Fecha:</strong> {{ r.f_reserva | date:"dd MMMM yyyy" }}</p>
+        <p><strong>Fecha:</strong> {{ r.f_reserva  }}</p>
         <p><strong>Hora:</strong> {{ r.id_bloque_fk }}</p>
         <p><strong>Ubicación:</strong> {{ r.id_mesa_fk | slice:0:-1 }}</p>
         <p><strong>Sillas:</strong> {{ r.id_mesa_fk | slice:-1 }}</p>
-        <p><strong>Fecha Creación:</strong> {{ r.f_creacion | date:"dd MMMM yyyy" }}</p>
+        <p><strong>Fecha Creación:</strong> {{ r.f_creacion }}</p>
         
       </ion-card-content>
       <div>

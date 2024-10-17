@@ -9,13 +9,13 @@
 
 <ion-content [fullscreen]="true" class="fondo">
   <div class=" calendario">
-      <mat-calendar [(selected)]="fechaSelec" [minDate]="minDate" [maxDate]="maxDate"></mat-calendar>
+      <mat-calendar [(selected)]="fechaSelec" [minDate]="minDate" [maxDate]="maxDate"  (selectedChange)="CambioFecha()">></mat-calendar>
   </div>
 
   <p class="parrafo ion-text-center">SELECCIONE UNA HORA</p>
   <div class="bloque-hora">
     <ion-item class="ion-color">
-      <ion-select class="ion-text-center" [(ngModel)]="bloqueSele">
+      <ion-select class="ion-text-center" [(ngModel)]="bloqueSele" (ngModelChange)="CambioBloque()">
         <ion-select-option disabled>Desliza para ver más</ion-select-option>
         <ion-select-option *ngFor="let hora of bloque" [value]="hora.id_bloque">        
         Inicio: {{hora.h_inicio}} - Termino: {{hora.h_fin}}
@@ -38,8 +38,11 @@
   </ion-toolbar>
 
   <div class="container-mesas" *ngIf="buscarMesa == '2'">
-    <ion-grid>
-      <ion-row>
+    <p *ngIf="!fechaSelec || !bloqueSele" class="ion-text-center ion-margin-top aviso">
+      seleccione una <strong>fecha</strong> y una <strong>hora</strong> para ver las mesas disponibles
+    </p>
+    <ion-grid >
+      <ion-row *ngIf="fechaSelec && bloqueSele ">
         <ion-col size="6" *ngFor="let mesa of mesas">
           <mat-card class="container-mesa">
             <mat-card-header>
@@ -59,9 +62,14 @@
     </ion-grid>
   </div>
 
+  
+
   <div class="container-mesas" *ngIf="buscarMesa == '1'">
+    <p *ngIf="!fechaSelec || !bloqueSele" class="ion-text-center aviso">
+      seleccione una <strong>fecha</strong> y una <strong>hora</strong> para ver las mesas disponibles
+    </p>
     <ion-grid>
-      <ion-row>
+      <ion-row *ngIf="fechaSelec && bloqueSele ">
         <ion-col size="6" *ngFor="let mesa of mesas">
           <mat-card class="container-mesa">
             <mat-card-header>

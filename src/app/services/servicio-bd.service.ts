@@ -518,12 +518,13 @@ export class ServicioBDService {
           });
          }
        }
+       //actualizar el observable
       this.listadoReservas.next(items as any);
     });
   }
   
 
-  insertarReserva(f_reserva:Date, f_creacion: Date, id_usuario_fk : number, id_mesa_fk: number, id_bloque_fk: number) {
+  insertarReserva(f_reserva:string, f_creacion: string, id_usuario_fk : number, id_mesa_fk: number, id_bloque_fk: number) {
     return this.database.executeSql(
       'INSERT INTO reserva (f_reserva, f_creacion, id_usuario_fk, id_mesa_fk, id_bloque_fk) VALUES (?, ?, ?, ?, ?)', 
       [f_reserva, f_creacion, id_usuario_fk, id_mesa_fk, id_bloque_fk]
@@ -541,6 +542,28 @@ export class ServicioBDService {
     }).catch(e=>{
       this.Alerta('Eliminar', 'Error: ' + JSON.stringify(e));
     })
+  }
+
+  ListarMesasDisponibles(id_ubi_fk: string, f_reserva: string, id_bloque: number){
+    return this.database.executeSql("SELECT m.id_mesa, m.nombre, m.c_sillas, u.nombre AS id_ubi_fk FROM mesas m INNER JOIN ubicacion u ON m.id_ubi_fk = u.id_ubicacion WHERE m.id_ubi_fk = ? AND m.id_mesa NOT IN ( SELECT r.id_mesa_fk FROM reserva r WHERE CAST(r.f_reserva AS DATE) = CAST(? AS DATE) AND r.id_bloque_fk = ? );", [id_ubi_fk,f_reserva,id_bloque,]).then(res => {
+      //variable para almacenar el resultado de la consulta
+      let items: Mesas[]= [];
+      //valido si trae al menos un registro
+      if(res.rows.length > 0){
+       //recorro mi resultado
+        for(var i=0; i < res.rows.length; i++){
+         //agrego los registros a mi lista
+         items.push({
+          id_mesa: res.rows.item(i).id_mesa,
+          nombre: res.rows.item(i).nombre,
+          c_sillas: res.rows.item(i).c_sillas,
+          id_ubi_fk: res.rows.item(i).id_ubi_fk
+         });
+        }
+      }
+      //actualizar el observable
+      return items;
+   });
   }
 
 
