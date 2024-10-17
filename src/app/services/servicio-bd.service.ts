@@ -478,7 +478,7 @@ export class ServicioBDService {
   // RESERVAS
 
   listarReservas(){
-      return this.database.executeSql("SELECT r.id_reserva, r.f_reserva, r.f_creacion, u.nombrecompleto AS id_usuario_fk, m.nombre ||' '|| ub.nombre AS id_mesa_fk, b.h_inicio ||' - '|| b.h_fin AS id_bloque_fk  FROM reserva r INNER JOIN Usuario u ON r.id_usuario_fk = u.id_usuario INNER JOIN mesas m ON r.id_mesa_fk = m.id_mesa INNER JOIN bloque b ON r.id_bloque_fk = b.id_bloque INNER JOIN ubicacion ub ON m.id_ubi_fk = ub.id_ubicacion", []).then(res => {
+      return this.database.executeSql("SELECT r.id_reserva, r.f_reserva, r.f_creacion, u.nombrecompleto AS id_usuario_fk, m.nombre ||' '|| ub.nombre ||' '|| m.c_sillas AS id_mesa_fk, b.h_inicio ||' - '|| b.h_fin AS id_bloque_fk  FROM reserva r INNER JOIN Usuario u ON r.id_usuario_fk = u.id_usuario INNER JOIN mesas m ON r.id_mesa_fk = m.id_mesa INNER JOIN bloque b ON r.id_bloque_fk = b.id_bloque INNER JOIN ubicacion ub ON m.id_ubi_fk = ub.id_ubicacion", []).then(res => {
         //variable para almacenar el resultado de la consulta
         let items: Reserva[]= [];
         //valido si trae al menos un registro
@@ -499,6 +499,29 @@ export class ServicioBDService {
         //actualizar el observable
         this.listadoReservas.next(items as any);})
   }
+  listarReservasPorUsuario(id_usuario_fk: number) {
+    return this.database.executeSql("SELECT r.id_reserva, r.f_reserva, r.f_creacion, u.nombrecompleto AS id_usuario_fk, m.nombre ||' '|| ub.nombre ||' '|| m.c_sillas AS id_mesa_fk, b.h_inicio ||' - '|| b.h_fin AS id_bloque_fk  FROM reserva r INNER JOIN Usuario u ON r.id_usuario_fk = u.id_usuario INNER JOIN mesas m ON r.id_mesa_fk = m.id_mesa INNER JOIN bloque b ON r.id_bloque_fk = b.id_bloque INNER JOIN ubicacion ub ON m.id_ubi_fk = ub.id_ubicacion WHERE id_usuario_fk = ?", [id_usuario_fk]).then(res => {
+       //variable para almacenar el resultado de la consulta
+       let items: Reserva[]= [];
+       //valido si trae al menos un registro
+       if(res.rows.length > 0){
+        //recorro mi resultado
+         for(var i=0; i < res.rows.length; i++){
+          //agrego los registros a mi lista
+          items.push({
+           id_reserva: res.rows.item(i).id_reserva,
+           f_reserva: res.rows.item(i).f_reserva,
+           f_creacion: res.rows.item(i).f_creacion,
+           id_usuario_fk: res.rows.item(i).id_usuario_fk,
+           id_mesa_fk: res.rows.item(i).id_mesa_fk,
+           id_bloque_fk: res.rows.item(i).id_bloque_fk,
+          });
+         }
+       }
+      this.listadoReservas.next(items as any);
+    });
+  }
+  
 
   insertarReserva(f_reserva:Date, f_creacion: Date, id_usuario_fk : number, id_mesa_fk: number, id_bloque_fk: number) {
     return this.database.executeSql(
@@ -520,25 +543,7 @@ export class ServicioBDService {
     })
   }
 
-  listarReservasPorUsuario(id_usuario_fk: number) {
-    return this.database.executeSql('SELECT * FROM reserva WHERE id_usuario_fk = ?', [id_usuario_fk]).then(res => {
-      let items: Reserva[] = [];
-      if (res.rows.length > 0) {
-        for (let i = 0; i < res.rows.length; i++) {
-          items.push({
-            id_reserva: res.rows.item(i).id_reserva,
-            f_reserva: res.rows.item(i).f_reserva,
-            f_creacion: res.rows.item(i).f_creacion,
-            id_usuario_fk: res.rows.item(i).id_usuario_fk,
-            id_mesa_fk: res.rows.item(i).id_mesa_fk,
-            id_bloque_fk: res.rows.item(i).id_bloque_fk
-          });
-        }
-      }
-      this.listadoReservas.next(items as any);
-    });
-  }
-  
+
 
   // BLOQUES
 

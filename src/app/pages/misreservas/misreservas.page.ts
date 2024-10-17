@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { MenuController, AlertController } from '@ionic/angular';
 import { ServicioBDService } from 'src/app/services/servicio-bd.service';
 
@@ -18,24 +19,35 @@ export class MisreservasPage implements OnInit {
     id_bloque_fk:''
   }];
 
-  constructor(private menu: MenuController,private bd: ServicioBDService, private alertController: AlertController) { 
-    this.bd.dbState().subscribe(data => {
-      // validar si la base de datos está lista
-      if (data) {
-        // subscribir al observable de usuarios
-        this.bd.fetchReservas().subscribe(res => {
-          this.reserva = res;
-        });
-      }
-    });
+  id_usuario!: number;
+
+  constructor(private menu: MenuController,private bd: ServicioBDService, private alertController: AlertController, private storage: NativeStorage) { 
+
   }
 
   ngOnInit() {
     this.menu.enable(false);
+    this.storage.getItem('usuario').then(data=>{
+      this.id_usuario = data;
+
+      // llama a la consulta solo cuando se haya obtenido el id
+      return this.listarReservasDelUsuario(this.id_usuario);
+
+    }).then(data => {
+      this.reserva = data;
+    });
   }
 
   eliminarReserva(id_reserva:string){
     this.bd.eliminarReserva(id_reserva);
+  }
+
+  listarReservasDelUsuario(id_usuario_fk: number) {
+    this.bd.listarReservasPorUsuario(id_usuario_fk).then(() => {
+      this.bd.fetchReservas().subscribe((reservas) => {
+        this.reserva = reservas;
+      });
+    });
   }
 
 }

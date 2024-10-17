@@ -1,17 +1,13 @@
 .fondo{
     --background: linear-gradient(to right, #4e3725, #2d1b14);
-    min-height: 100%;
 }
-
-
 .img-logo{
     text-align: center;
     img{
-        width: 210px;
+        width: 200px;
         margin-right: 12px;
         margin-top: 10px;
 }}
-
 .mis-reservas ion-card {
     background: radial-gradient(circle, #ffffff, #d3c6b1); 
     border-radius: 10px; 
@@ -23,6 +19,10 @@
     ion-card-title{
         color: #4e3725;
     }
+}
+
+.espacio-arriba{
+    margin-top: 20px;
 }
 
 div{
