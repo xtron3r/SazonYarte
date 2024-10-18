@@ -405,28 +405,40 @@ export class ServicioBDService {
     });
   }
   //Metodo para ver si ya existe un nombre de usuario en la base de datos
-  verificarUsuario(usuario: string): Promise<boolean> {
-    const query = 'SELECT * FROM Usuario WHERE nombreusuario = ?';
-    return this.database.executeSql(query, [usuario])
-      .then(result => {
-        return result.rows.length > 0; // Devuelve true si se encontró el usuario, false si no
-      })
-      .catch(e => {
-        this.Alerta('Usuario', 'Error: ' + JSON.stringify(e));
-        return false; // Maneja el error devolviendo false en caso de fallo
-      });
-  }
-  
-  verificarCorreo(correo: string): Promise<boolean> {
-    const query = 'SELECT * FROM Usuario WHERE correo = ?';
-
-    return this.database.executeSql(query, [correo]).then((result) => {
-      return result.rows.length > 0; // Retorna true si el correo existe, false en caso contrario
-    }).catch((error) => {
-      console.error('Error al verificar correo:', error);
+  verificarUsuario(usuario: string) {
+    return this.database.executeSql(
+      'SELECT * FROM Usuario WHERE nombreusuario = ?', [usuario]
+    ).then(res => {
+      if (res.rows.length > 0) {
+        // Si el usuario ya existe, retorna true
+        return true;
+      } else {
+        // Si no hay coincidencias, retorna false
+        return false;
+      }
+    }).catch(e => {
+      this.Alerta('Usuario', 'Error: ' + JSON.stringify(e));
       return false; // En caso de error, retorna false
     });
   }
+  
+  verificarCorreo(correo: string) {
+    return this.database.executeSql(
+      'SELECT * FROM Usuario WHERE correo = ?', [correo]
+    ).then(res => {
+      if (res.rows.length > 0) {
+        // Si el correo ya está registrado, retorna true
+        return true;
+      } else {
+        // Si no hay coincidencias, retorna false
+        return false;
+      }
+    }).catch(e => {
+      this.Alerta('Correo', 'Error: ' + JSON.stringify(e));
+      return false; // En caso de error, retorna false
+    });
+  }
+  
 
   miPerfil(id_usuario: number){
     return this.database.executeSql(
