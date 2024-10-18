@@ -405,14 +405,28 @@ export class ServicioBDService {
     });
   }
   //Metodo para ver si ya existe un nombre de usuario en la base de datos
-  async verificarUsuario(usuario: string): Promise<boolean> {
+  verificarUsuario(usuario: string): Promise<boolean> {
     const query = 'SELECT * FROM Usuario WHERE nombreusuario = ?';
-    const result = await this.database.executeSql(query, [usuario]);
-  
-    return result.rows.length > 0;
+    return this.database.executeSql(query, [usuario])
+      .then(result => {
+        return result.rows.length > 0; // Devuelve true si se encontró el usuario, false si no
+      })
+      .catch(e => {
+        this.Alerta('Usuario', 'Error: ' + JSON.stringify(e));
+        return false; // Maneja el error devolviendo false en caso de fallo
+      });
   }
   
-  
+  verificarCorreo(correo: string): Promise<boolean> {
+    const query = 'SELECT * FROM Usuario WHERE correo = ?';
+
+    return this.database.executeSql(query, [correo]).then((result) => {
+      return result.rows.length > 0; // Retorna true si el correo existe, false en caso contrario
+    }).catch((error) => {
+      console.error('Error al verificar correo:', error);
+      return false; // En caso de error, retorna false
+    });
+  }
 
   miPerfil(id_usuario: number){
     return this.database.executeSql(

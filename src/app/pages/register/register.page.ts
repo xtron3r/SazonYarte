@@ -33,7 +33,8 @@ export class RegisterPage implements OnInit {
     this.menu.enable(false);
   }
 
-  async insertar() {
+  insertar() {
+    this.authService.registro(this.correo, this.contrasenia);
     this.bd.insertarUsuario(
       this.rut,
       this.usuario,
@@ -48,7 +49,7 @@ export class RegisterPage implements OnInit {
 
   async IrLogin() {
     const validaMayuscula = /[A-Z]/;
-  
+
     if (
       this.nombreyApellido == '' ||
       this.rut == '' ||
@@ -61,7 +62,7 @@ export class RegisterPage implements OnInit {
         header: 'Campos Vacíos',
         message: 'Por favor complete todos los campos',
         buttons: ['OK'],
-        cssClass: 'estilo-alertas'
+        cssClass: 'estilo-alertas',
       });
       await alert.present();
     } else if (validaMayuscula.test(this.contrasenia) == false) {
@@ -69,7 +70,7 @@ export class RegisterPage implements OnInit {
         header: 'Error en contraseña',
         message: 'La contraseña debe tener al menos una mayúscula',
         buttons: ['OK'],
-        cssClass: 'estilo-alertas'
+        cssClass: 'estilo-alertas',
       });
       await alert.present();
     } else if (this.contrasenia != this.nuevaContrasenia) {
@@ -77,7 +78,7 @@ export class RegisterPage implements OnInit {
         header: 'Error en contraseña',
         message: 'Las contraseñas no coinciden',
         buttons: ['OK'],
-        cssClass: 'estilo-alertas'
+        cssClass: 'estilo-alertas',
       });
       await alert.present();
     } else if (this.nuevaContrasenia.length < 6 || this.contrasenia.length < 6) {
@@ -85,59 +86,39 @@ export class RegisterPage implements OnInit {
         header: 'Error en contraseña',
         message: 'La contraseña debe tener al menos 6 caracteres',
         buttons: ['OK'],
-        cssClass: 'estilo-alertas'
+        cssClass: 'estilo-alertas',
+      });
+      await alert.present();
+    } else if (await this.bd.verificarUsuario(this.usuario)) {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'El nombre de usuario ya existe',
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas',
+      });
+      await alert.present();
+    } else if (await this.bd.verificarCorreo(this.correo)) { // Validación de correo existente
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'El correo ya está registrado',
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas',
       });
       await alert.present();
     } else {
-      try {
-        // Utilizamos 
-        const usuarioExiste = await this.bd.verificarUsuario(this.usuario);
-  
-        if (usuarioExiste) {
-          const alert = await this.alertController.create({
-            header: 'Error',
-            message: 'El nombre de usuario ya existe',
-            buttons: ['OK'],
-            cssClass: 'estilo-alertas'
-          });
-          await alert.present();
-        } else {
-          // Si no existe, registramos al usuario en Firebase
-          await this.authService.registro(this.correo, this.contrasenia);
-  
-          // Luego insertamos al usuario en SQLite
-          await this.insertar();
-  
-          const alert = await this.alertController.create({
-            header: 'Registrado',
-            message: 'Registrado correctamente',
-            buttons: ['OK'],
-            cssClass: 'estilo-alertas'
-          });
-          await alert.present();
-  
-          this.router.navigate(['/login']);
-        }
-      } catch (error: any) {
-        // Manejar el error de Firebase si el correo ya está registrado
-        if (error.code === 'auth/email-already-in-use') {
-          const alert = await this.alertController.create({
-            header: 'Error',
-            message: 'El correo ya está registrado',
-            buttons: ['OK'],
-            cssClass: 'estilo-alertas'
-          });
-          await alert.present();
-        } else {
-          const alert = await this.alertController.create({
-            header: 'Error',
-            message: 'Error al registrar. Inténtelo de nuevo',
-            buttons: ['OK'],
-            cssClass: 'estilo-alertas'
-          });
-          await alert.present();
-        }
-      }
+      // Si todas las validaciones pasan, registrar en Firebase
+      this.insertar();
+
+      const alert = await this.alertController.create({
+        header: 'Registrado',
+        message: 'Registrado correctamente',
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas',
+      });
+      await alert.present();
+
+      // Redirigir al login
+      this.router.navigate(['/login']);
     }
   }
-} 
+}
