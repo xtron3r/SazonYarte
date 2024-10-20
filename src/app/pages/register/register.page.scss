@@ -18,22 +18,25 @@
 
 //seccion formulario
 
-.seccion-form{
+.seccion-form {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 72vh;
+    overflow-y: auto; 
 }
-.registro{
+.registro {
     background: rgb(211, 210, 210);
     color: #4e3725;
-    border-radius: 50px 50px 0px 0px;
-    padding: 10px; 
+    border-radius: 50px 50px 0 0;
+    padding: 10px;
     text-align: center;
-    height: 100%;
-
-    .quitar-linea{
+    height: auto;
+    min-height: 100vh; 
+    overflow-y: auto; 
+    
+    .quitar-linea {
         --border-width: 0;
     }
 }
