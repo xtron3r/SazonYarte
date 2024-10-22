@@ -76,9 +76,9 @@ export class ServicioBDService {
 
   tablaUsuario: string = "CREATE TABLE IF NOT EXISTS Usuario (id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, rut VARCHAR(10) NOT NULL, nombreusuario VARCHAR NOT NULL UNIQUE, nombrecompleto VARCHAR NOT NULL, contrasenia VARCHAR NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, fotousuario TEXT, id_rol_fk INTEGER NOT NULL, FOREIGN KEY (id_rol_fk) REFERENCES Rol (id_rol));";
 
-  registroUsuario: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (1,'213781146', 'admin', 'Aroneitor', 'admin', 930935460, 'admin@duocuc.cl','', 1)";
+  registroUsuario: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (1,'213781146', 'Manolo', 'Aroneitor', 'Hola123', 930935460, 'aaronleal2003@gmail.com','', 2)";
 
-  registroUsuario2: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (2,'205902058', 'RayCL', 'Basthian Bascuñan', '123456', 959808217, 'bast.bascunan@duocuc.cl','', 2)";
+  registroUsuario2: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (2,'205902058', 'RayCL', 'Basthian Bascuñan', 'Hola123', 959808217, 'bast.bascunan@duocuc.cl','', 2)";
 
   //variables para guardar los datos de las consultas en las tablas
   
@@ -387,10 +387,10 @@ export class ServicioBDService {
 
   BuscarCorreoUsuario(usuario: string) {
     return this.database.executeSql(
-      'SELECT id_usuario, correo FROM Usuario WHERE nombreusuario = ?', [usuario]
+      'SELECT id_usuario, correo, id_rol_fk FROM Usuario WHERE nombreusuario = ?', [usuario]
     ).then(res => {
       if (res.rows.length > 0) {
-        // Si las credenciales son correctas, retorna el usuario encontrado
+         // Si las credenciales son correctas, retorna el usuario encontrado
         return {
           id_usuario: res.rows.item(0).id_usuario,
           correo: res.rows.item(0).correo
@@ -421,18 +421,23 @@ export class ServicioBDService {
       return false; // En caso de error, retorna false
     });
   }
+
+  verificarUsu(id_usuario: string){
+    return this.database.executeSql(
+      'SELECT * FROM Usuario WHERE id_usuario = ?', [id_usuario]
+    ).then(res => {
+      return res.rows.length > 0; // Retorna true si el usuario existe
+    }).catch(e => {
+      this.Alerta('Usuario', 'Error: ' + JSON.stringify(e));
+      return false; // En caso de error, retorna false
+    });
+  }
   
   verificarCorreo(correo: string) {
     return this.database.executeSql(
       'SELECT * FROM Usuario WHERE correo = ?', [correo]
     ).then(res => {
-      if (res.rows.length > 0) {
-        // Si el correo ya está registrado, retorna true
-        return true;
-      } else {
-        // Si no hay coincidencias, retorna false
-        return false;
-      }
+      return res.rows.length > 0;
     }).catch(e => {
       this.Alerta('Correo', 'Error: ' + JSON.stringify(e));
       return false; // En caso de error, retorna false
@@ -488,6 +493,23 @@ export class ServicioBDService {
       this.buscarMesa(id_ubi_fk);
     }).catch(e => {
       this.Alerta('Agregar', 'Error: ' + JSON.stringify(e));
+    });
+  }
+
+  existeMesa(nombre: string, id_ubi_fk: string) {
+    return this.database.executeSql(
+      'SELECT * FROM mesas WHERE nombre = ? AND id_ubi_fk = ?', [nombre,id_ubi_fk]
+    ).then(res => {
+      if (res.rows.length > 0) {
+        // Si la mesa ya existe, retorna true
+        return true;
+      } else {
+        // Si no hay coincidencias, retorna false
+        return false;
+      }
+    }).catch(e => {
+      this.Alerta('Mesa', 'Error: ' + JSON.stringify(e));
+      return false; // En caso de error, retorna false
     });
   }
 

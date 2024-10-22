@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, MenuController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthfireBaseService } from 'src/app/services/authfire-base.service';
+import { ServicioBDService } from 'src/app/services/servicio-bd.service';
 
 @Component({
   selector: 'app-rcontrasenia',
@@ -11,14 +12,14 @@ import { AuthfireBaseService } from 'src/app/services/authfire-base.service';
 export class RcontraseniaPage implements OnInit {
   correo: string = "";
 
-  constructor(private menu: MenuController,private alertController: AlertController,private afAuth: AngularFireAuth, private authService: AuthfireBaseService) {}
+  constructor(private menu: MenuController,private alertController: AlertController,private afAuth: AngularFireAuth, private authService: AuthfireBaseService, private bd: ServicioBDService) {}
 
   ngOnInit() {
     this.menu.enable(false);
   }
 
   async enviarCorreo() {
-    if (this.correo === "") {
+    if (this.correo == "") {
       const alert = await this.alertController.create({
         header: 'Error',
         message: 'Debe ingresar un correo',
@@ -27,12 +28,19 @@ export class RcontraseniaPage implements OnInit {
       });
       await alert.present();
     } else {
-      this.authService.resetContra(this.correo).then(() => {
-        this.Alerta('Resetear Contraseña', 'Se ha enviado un correo para restablecer su contraseña');
-        
-      }).catch(() => {
-        this.Alerta('Error', 'No se pudo enviar el correo');
-      });
+
+      const ValidarCorreo = await this.bd.verificarCorreo(this.correo);
+
+      if(ValidarCorreo){
+        this.authService.resetContra(this.correo).then(() => {
+          this.Alerta('Resetear Contraseña', 'Se ha enviado un correo para restablecer su contraseña');
+          
+        }).catch(() => {
+          this.Alerta('Error', 'No se pudo enviar el correo');
+        });
+      } else{
+        this.Alerta('Error', 'El correo no esta registrado');
+      }
     }
   }
 

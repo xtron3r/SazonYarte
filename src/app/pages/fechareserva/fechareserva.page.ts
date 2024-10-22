@@ -81,7 +81,7 @@ export class FechareservaPage implements OnInit {
     // Formatear la fecha al formato día/mes/año
      let FechaFormato = this.datePipe.transform(this.fechaSelec, 'dd/MM/yyyy'); 
     
-    if (FechaFormato && this.bloqueSele) {
+    if (FechaFormato && this.bloqueSele && this.buscarMesa) {
       this.bd.ListarMesasDisponibles(id_ubi_fk,FechaFormato,this.bloqueSele).then(data => {
         this.mesas = data;
 

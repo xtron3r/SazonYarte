@@ -35,9 +35,24 @@ export class AgregarmesaPage implements OnInit {
       await alert.present();
     } 
     else{
-      this.bd.insertarMesa('Mesa ' + this.nroMesa, this.c_sillas, this.id_ubi_fk);
-      this.router.navigate(['/mesas']);
-    }
 
+      const mesaExiste = await this.bd.existeMesa('Mesa ' + this.nroMesa,this.id_ubi_fk);
+      if (mesaExiste) {
+        this.Alerta('Mesa', 'La mesa ya existe');
+      } else{
+        this.bd.insertarMesa('Mesa ' + this.nroMesa, this.c_sillas, this.id_ubi_fk);
+        this.router.navigate(['/mesas']);
+      }
+    }
+  }
+
+  async Alerta(titulo: string, mensaje: string){
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: mensaje,
+      buttons: ['OK'],
+      cssClass:'estilo-alertas'
+    });
+    await alert.present();
   }
 }
