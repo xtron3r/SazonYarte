@@ -3,6 +3,7 @@ import { ServicioBDService } from 'src/app/services/servicio-bd.service';
 import { AlertController } from '@ionic/angular';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fechareserva',
@@ -41,7 +42,7 @@ export class FechareservaPage implements OnInit {
   // Variables para controlar la activacion de secciones
   MesaTomada: boolean = false; // Controla si se puede buscar mesas
 
-  constructor(private bd: ServicioBDService, private alertController: AlertController,private storage: NativeStorage,private datePipe: DatePipe) {
+  constructor(private bd: ServicioBDService, private alertController: AlertController,private storage: NativeStorage,private datePipe: DatePipe,private router: Router) {
 
     this.storage.getItem('usuario').then(data=>{
       this.id_usuario = data;
@@ -102,6 +103,7 @@ export class FechareservaPage implements OnInit {
       this.Alerta('Error en Reservar', 'No pueden haber campos sin seleccion');
     } else {
       this.bd.insertarReserva(FechaFormato, FechaFormatoHoy, this.id_usuario, id_mesa, this.bloqueSele);
+      this.router.navigate(['/misreservas']);
     }
   }
 

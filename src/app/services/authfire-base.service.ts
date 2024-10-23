@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { ServicioBDService } from 'src/app/services/servicio-bd.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 
 
 @Injectable({
@@ -20,7 +22,7 @@ export class AuthfireBaseService {
 
 
 
-  constructor(private AFauth: AngularFireAuth, private bd : ServicioBDService, private http: HttpClient) { }
+  constructor(private AFauth: AngularFireAuth, private bd : ServicioBDService, private http: HttpClient,private functions: AngularFireFunctions) { }
 
 
   inicioSesion(nombreUsuario: string, contrasenia: string) {

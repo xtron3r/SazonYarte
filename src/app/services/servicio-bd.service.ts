@@ -65,6 +65,8 @@ export class ServicioBDService {
 
   tablaReservas: string = "CREATE TABLE IF NOT EXISTS reserva (id_reserva INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, f_reserva DATE NOT NULL, f_creacion DATE NOT NULL, id_usuario_fk INTEGER NOT NULL, id_mesa_fk INTEGER NOT NULL, id_bloque_fk INTEGER NOT NULL, FOREIGN KEY (id_usuario_fk) REFERENCES Usuario (id_usuario), FOREIGN KEY (id_mesa_fk) REFERENCES Mesas (id_mesa), FOREIGN KEY (id_bloque_fk) REFERENCES Bloque (id_bloque));";
 
+  registroReserva: string = "INSERT or IGNORE INTO reserva(id_reserva, f_reserva, f_creacion, id_usuario_fk, id_mesa_fk, id_bloque_fk) VALUES (1,'30/10/2024','19/10/2024',2,2,1);";
+
   // tabla Rol
 
   tablaRol: string = "CREATE TABLE IF NOT EXISTS rol (id_rol INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre VARCHAR NOT NULL);";
@@ -76,9 +78,11 @@ export class ServicioBDService {
 
   tablaUsuario: string = "CREATE TABLE IF NOT EXISTS Usuario (id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, rut VARCHAR(10) NOT NULL, nombreusuario VARCHAR NOT NULL UNIQUE, nombrecompleto VARCHAR NOT NULL, contrasenia VARCHAR NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, fotousuario TEXT, id_rol_fk INTEGER NOT NULL, FOREIGN KEY (id_rol_fk) REFERENCES Rol (id_rol));";
 
-  registroUsuario: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (1,'213781146', 'Manolo', 'Aroneitor', 'Hola123', 930935460, 'aaronleal2003@gmail.com','', 2)";
+  registroAdmin: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (1,'202211013', 'Admin', 'Admin', 'Admin123', 930935460,'admin@duocuc.cl','',1)";
 
-  registroUsuario2: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (2,'205902058', 'RayCL', 'Basthian Bascuñan', 'Hola123', 959808217, 'bast.bascunan@duocuc.cl','', 2)";
+  registroUsuario2: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (2,'213781146', 'Manolo', 'Aroneitor', 'Hola123', 930935460, 'aaronleal2003@gmail.com','', 2)";
+
+  registroUsuario3: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (3,'205902058', 'RayCL', 'Basthian Bascuñan', 'Hola123', 959808217, 'bast.bascunan@duocuc.cl','', 2)";
 
   //variables para guardar los datos de las consultas en las tablas
   
@@ -195,8 +199,10 @@ export class ServicioBDService {
 
       await this.database.executeSql(this.registroRol, []);
       await this.database.executeSql(this.registroRol2, []);
-      await this.database.executeSql(this.registroUsuario, []);
+      await this.database.executeSql(this.registroAdmin, []);
       await this.database.executeSql(this.registroUsuario2, []);
+      await this.database.executeSql(this.registroUsuario3, []);
+      await this.database.executeSql(this.registroReserva, []);
       
       //llamamos a la función para seleccionar los datos de las tablas
 
@@ -387,13 +393,15 @@ export class ServicioBDService {
 
   BuscarCorreoUsuario(usuario: string) {
     return this.database.executeSql(
-      'SELECT id_usuario, correo, id_rol_fk FROM Usuario WHERE nombreusuario = ?', [usuario]
+      'SELECT id_usuario, correo, id_rol_fk, contrasenia FROM Usuario WHERE nombreusuario = ?', [usuario]
     ).then(res => {
       if (res.rows.length > 0) {
          // Si las credenciales son correctas, retorna el usuario encontrado
         return {
           id_usuario: res.rows.item(0).id_usuario,
-          correo: res.rows.item(0).correo
+          correo: res.rows.item(0).correo,
+          id_rol_fk: res.rows.item(0).id_rol_fk,
+          contrasenia: res.rows.item(0).contrasenia
         };
       } else {
         // Si no hay coincidencias, retorna null

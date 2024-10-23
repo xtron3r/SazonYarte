@@ -28,11 +28,11 @@
         <p>Rol: {{usu.id_rol_fk}}</p>
       </mat-card-content>
       <mat-card-actions class="action-buttons">
-        <button mat-button class="botones-accion-del" (click)="eliminarUsuario(usu)">
+        <button mat-button class="botones-accion-del" (click)="eliminarUsuario(usu)"  *ngIf="usu.id_usuario != '1'">
           Restablecer
           <mat-icon mat-card-avatar class="icon-del">delete</mat-icon>
         </button>
-        <button mat-button class="botones-accion-del" (click)="cambiarRol(usu)">
+        <button mat-button class="botones-accion-del" (click)="cambiarRol(usu)" *ngIf="usu.id_usuario != '1'">
           Cambiar Rol
           <mat-icon mat-card-avatar class="icon-del">delete</mat-icon>
         </button>

@@ -17,17 +17,17 @@
       <h5 class="ion-margin-top">Tienes un mensaje? Envialo!</h5>
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="person-outline" slot="start"></ion-icon>
-        <ion-input placeholder="Maximo 25 caracteres" label="Nombre y Apellido" label-placement="floating" maxlength="25" color="dark" name="nombreyApellido" [(ngModel)]="nombreyApellido"></ion-input>
+        <ion-input placeholder="Maximo 25 caracteres" label="Nombre y Apellido" label-placement="floating" color="dark" name="nombre" value="{{nombre}}" readonly></ion-input>
       </ion-item>
 
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
-        <ion-input type="tel" label="Telefono" label-placement="floating" placeholder="EJ : 123456789" color="dark" maxlength="9" name="telefono" [(ngModel)]="telefono"></ion-input>
+        <ion-input type="tel" label="Telefono" label-placement="floating" placeholder="EJ : 123456789" color="dark" maxlength="9" name="telefono" value="{{telefono}}" readonly></ion-input>
       </ion-item>
 
       <ion-item class="ion-margin-horizontal ion-color">
         <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
-        <ion-input type="email" placeholder="Ingresa Correo valido" label="Correo Electronico" label-placement="floating" class="quitar-linea" errorText="Email invalido" name="correo" [(ngModel)]="correo" ngModel email></ion-input>
+        <ion-input type="email" placeholder="Ingresa Correo valido" label="Correo Electronico" label-placement="floating" class="quitar-linea" name="correo" value="{{correo}}" readonly></ion-input>
       </ion-item>
 
       <ion-item class="ion-margin-horizontal ion-color">

@@ -32,10 +32,7 @@ export class LoginPage implements OnInit {
       });
       await alert.present();
 
-    } else if (this.usuario == "admin" && this.contrasenia == "admin") {
-
-      this.router.navigate(['/homeadmin']);
-    } else {
+    }else {
 
       try {
         let CredencialFireBase = await this.authFirebase.inicioSesion(this.usuario, this.contrasenia);
@@ -51,8 +48,14 @@ export class LoginPage implements OnInit {
             // Guardar los datos del usuario en el NativeStorage
             await this.storage.setItem('usuario', ValidarUsuario.id_usuario);
   
-            // Redirigir al home
-            this.router.navigate(['/home']);
+
+            if (ValidarUsuario.id_rol_fk == "1") {
+              this.router.navigate(['/homeadmin']);
+            }else{
+              // Redirigir al home
+              this.router.navigate(['/home']);
+            }
+            
           } else { 
             const alert = await this.alertController.create({
               header: 'Error al iniciar sesión',
