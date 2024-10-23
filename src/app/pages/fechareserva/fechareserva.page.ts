@@ -103,7 +103,7 @@ export class FechareservaPage implements OnInit {
       this.Alerta('Error en Reservar', 'No pueden haber campos sin seleccion');
     } else {
       this.bd.insertarReserva(FechaFormato, FechaFormatoHoy, this.id_usuario, id_mesa, this.bloqueSele);
-      this.router.navigate(['/misreservas']);
+      this.router.navigate(['/home']);
     }
   }
 
