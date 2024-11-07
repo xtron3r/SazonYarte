@@ -41,8 +41,8 @@ export class MisreservasPage implements OnInit {
   }
 
   eliminarReserva(id_reserva:string){
-    this.bd.eliminarReserva(id_reserva);
-  }
+    /* this.bd.eliminarReserva(id_reserva); */
+  } 
   listarReservasDelUsuario(id_usuario_fk: number) {
     this.bd.listarReservasPorUsuario(id_usuario_fk).then(() => {
       this.bd.fetchReservas().subscribe((reservas) => {

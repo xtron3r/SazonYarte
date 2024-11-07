@@ -16,8 +16,12 @@ export class ReservasPage implements OnInit {
     f_creacion:'',
     id_usuario_fk:'',
     id_mesa_fk:'',
-    id_bloque_fk:''
+    id_bloque_fk:'',
+    motivo:'',
+    id_estado_fk:'',
   }];
+
+  motivo!:string
 
   constructor(private menu: MenuController,private bd: ServicioBDService, private alertController: AlertController) { 
   }
@@ -33,8 +37,53 @@ export class ReservasPage implements OnInit {
     });
   }
 
-  eliminarReserva(id_reserva:string){
-    this.bd.eliminarReserva(id_reserva);
+  async eliminarReserva(reserva:any) {
+    const alert = await this.alertController.create({
+      header: 'Reserva',
+      message: 'Ingrese el motivo para cambiar el estado de la reserva:',
+      inputs: [
+        {
+          name: 'motivo',
+          type: 'text',
+          placeholder: 'Motivo',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Aceptar',
+          handler: (data) => {
+            if (data.motivo) {
+
+              if(reserva.id_estado_fk == "Activado"){
+                this.bd.ModificarReserva(data.motivo,'1',reserva.id_reserva)
+              }else{
+                this.bd.ModificarReserva(data.motivo,'2',reserva.id_reserva)
+              }
+
+            } else {
+              this.mostrarAlerta('Error', 'Debe ingresar un motivo para cambiar el estado.');
+            }
+          },
+        },
+      ],
+      cssClass: 'estilo-alertas'
+    });
+  
+    await alert.present();
+  }
+  async mostrarAlerta(titulo: string, mensaje: string) {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: mensaje,
+      buttons: ['OK'],
+      cssClass:'estilo-alertas'
+    });
+    await alert.present();
   }
 
 }

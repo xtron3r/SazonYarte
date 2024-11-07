@@ -19,6 +19,7 @@ export class RegisterPage implements OnInit {
   telefono: string = '';
   correo: string = '';
   id_rol: string = '2';
+  id_estado_fk: string = '2';
 
   constructor(
     private menu: MenuController,
@@ -43,7 +44,8 @@ export class RegisterPage implements OnInit {
       this.telefono,
       this.correo,
       '',
-      Number(this.id_rol)
+      Number(this.id_rol),
+      this.id_estado_fk
     );
   }
 

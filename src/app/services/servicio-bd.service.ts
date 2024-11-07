@@ -63,9 +63,9 @@ export class ServicioBDService {
 
   // Tabla Reservas
 
-  tablaReservas: string = "CREATE TABLE IF NOT EXISTS reserva (id_reserva INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, f_reserva DATE NOT NULL, f_creacion DATE NOT NULL, id_usuario_fk INTEGER NOT NULL, id_mesa_fk INTEGER NOT NULL, id_bloque_fk INTEGER NOT NULL, FOREIGN KEY (id_usuario_fk) REFERENCES Usuario (id_usuario), FOREIGN KEY (id_mesa_fk) REFERENCES Mesas (id_mesa), FOREIGN KEY (id_bloque_fk) REFERENCES Bloque (id_bloque));";
+  tablaReservas: string = "CREATE TABLE IF NOT EXISTS reserva (id_reserva INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, f_reserva DATE NOT NULL, f_creacion DATE NOT NULL, motivo VARCHAR, id_usuario_fk INTEGER NOT NULL, id_mesa_fk INTEGER NOT NULL, id_bloque_fk INTEGER NOT NULL, id_estado_fk VARCHAR, FOREIGN KEY (id_usuario_fk) REFERENCES Usuario (id_usuario), FOREIGN KEY (id_mesa_fk) REFERENCES Mesas (id_mesa), FOREIGN KEY (id_bloque_fk) REFERENCES Bloque (id_bloque),FOREIGN KEY (id_estado_fk) REFERENCES estado (id_estado));";
 
-  registroReserva: string = "INSERT or IGNORE INTO reserva(id_reserva, f_reserva, f_creacion, id_usuario_fk, id_mesa_fk, id_bloque_fk) VALUES (1,'30/10/2024','19/10/2024',2,2,1);";
+  registroReserva: string = "INSERT or IGNORE INTO reserva(id_reserva, f_reserva, f_creacion, motivo, id_usuario_fk, id_mesa_fk, id_bloque_fk,id_estado_fk) VALUES (1,'30/10/2024','19/10/2024','',2,2,1,'2');";
 
   // tabla Rol
 
@@ -282,7 +282,7 @@ export class ServicioBDService {
  //funciones de usuario
 
  listarUsuario() {
-  return this.database.executeSql('SELECT u.id_usuario, u.rut, u.nombreusuario, u.nombrecompleto, u.correo, u.telefono, r.nombre AS id_rol_fk, e.nombre as id_estado_fk FROM Usuario u INNER JOIN rol r ON u.id_rol_fk = r.id_rol INNER JOIN estado e ON u.id_estado_fk = e.id_estado', []).then(res => {
+  return this.database.executeSql('SELECT u.id_usuario, u.rut, u.nombreusuario, u.nombrecompleto, u.correo, u.telefono, r.nombre AS id_rol_fk, e.nombre AS id_estado_fk FROM Usuario u INNER JOIN rol r ON u.id_rol_fk = r.id_rol INNER JOIN estado e ON u.id_estado_fk = e.id_estado', []).then(res => {
     //variable para almacenar el resultado de la consulta
     let items: Usuario[]= [];
     //valido si trae al menos un registro
@@ -321,7 +321,7 @@ export class ServicioBDService {
 
   deshabilitarUsuario(id_estado_fk:string,id_usuario:string){
     return this.database.executeSql('UPDATE Usuario SET id_estado_fk = ? WHERE id_usuario = ?',[id_estado_fk,id_usuario]).then(res=>{
-      this.Alerta("Usuario","Usuario Desactivado");
+      this.Alerta("Usuario","Usuario Modificado");
       this.listarUsuario();
     }).catch(e=>{
       this.Alerta('Desactivar', 'Error: ' + JSON.stringify(e));
@@ -379,10 +379,10 @@ export class ServicioBDService {
     });
   }
 
-  insertarUsuario(rut: String, nombreusuario: String, nombrecompleto: String, contrasenia: String, telefono: string, correo: String,fotousuario: string, id_rol_fk: number) {
+  insertarUsuario(rut: String, nombreusuario: String, nombrecompleto: String, contrasenia: String, telefono: string, correo: String,fotousuario: string, id_rol_fk: number, id_estado_fk:string) {
     return this.database.executeSql(
-      'INSERT INTO Usuario (rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo,fotousuario, id_rol_fk) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
-      [rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo,fotousuario, id_rol_fk]
+      'INSERT INTO Usuario (rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo,fotousuario, id_rol_fk,id_estado_fk) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)', 
+      [rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo,fotousuario, id_rol_fk,id_estado_fk]
     ).then(res => {
       this.listarUsuario();
     }).catch(e => {
@@ -560,7 +560,7 @@ export class ServicioBDService {
   // RESERVAS
 
   listarReservas(){
-      return this.database.executeSql("SELECT r.id_reserva, r.f_reserva, r.f_creacion, u.nombrecompleto AS id_usuario_fk, m.nombre ||' '|| ub.nombre ||' '|| m.c_sillas AS id_mesa_fk, b.h_inicio ||' - '|| b.h_fin AS id_bloque_fk  FROM reserva r INNER JOIN Usuario u ON r.id_usuario_fk = u.id_usuario INNER JOIN mesas m ON r.id_mesa_fk = m.id_mesa INNER JOIN bloque b ON r.id_bloque_fk = b.id_bloque INNER JOIN ubicacion ub ON m.id_ubi_fk = ub.id_ubicacion", []).then(res => {
+      return this.database.executeSql("SELECT r.id_reserva, r.f_reserva, r.f_creacion, u.nombrecompleto AS id_usuario_fk, m.nombre ||' '|| ub.nombre ||' '|| m.c_sillas AS id_mesa_fk, b.h_inicio ||' - '|| b.h_fin AS id_bloque_fk, r.motivo, e.nombre AS id_estado_fk FROM reserva r INNER JOIN Usuario u ON r.id_usuario_fk = u.id_usuario INNER JOIN mesas m ON r.id_mesa_fk = m.id_mesa INNER JOIN bloque b ON r.id_bloque_fk = b.id_bloque INNER JOIN ubicacion ub ON m.id_ubi_fk = ub.id_ubicacion INNER JOIN estado e ON r.id_estado_fk = e.id_estado", []).then(res => {
         //variable para almacenar el resultado de la consulta
         let items: Reserva[]= [];
         //valido si trae al menos un registro
@@ -575,6 +575,8 @@ export class ServicioBDService {
             id_usuario_fk: res.rows.item(i).id_usuario_fk,
             id_mesa_fk: res.rows.item(i).id_mesa_fk,
             id_bloque_fk: res.rows.item(i).id_bloque_fk,
+            motivo: res.rows.item(i).motivo,
+            id_estado_fk: res.rows.item(i).id_estado_fk,
            })
           }
         }
@@ -582,7 +584,7 @@ export class ServicioBDService {
         this.listadoReservas.next(items as any);})
   }
   listarReservasPorUsuario(id_usuario_fk: number) {
-    return this.database.executeSql("SELECT r.id_reserva, r.f_reserva, r.f_creacion, u.nombrecompleto AS id_usuario_fk, m.nombre ||' '|| ub.nombre ||' '|| m.c_sillas AS id_mesa_fk, b.h_inicio ||' - '|| b.h_fin AS id_bloque_fk  FROM reserva r INNER JOIN Usuario u ON r.id_usuario_fk = u.id_usuario INNER JOIN mesas m ON r.id_mesa_fk = m.id_mesa INNER JOIN bloque b ON r.id_bloque_fk = b.id_bloque INNER JOIN ubicacion ub ON m.id_ubi_fk = ub.id_ubicacion WHERE id_usuario_fk = ?", [id_usuario_fk]).then(res => {
+    return this.database.executeSql("SELECT r.id_reserva, r.f_reserva, r.f_creacion, u.nombrecompleto AS id_usuario_fk, m.nombre ||' '|| ub.nombre ||' '|| m.c_sillas AS id_mesa_fk, b.h_inicio ||' - '|| b.h_fin AS id_bloque_fk, r.motivo, e.nombre AS id_estado_fk  FROM reserva r INNER JOIN Usuario u ON r.id_usuario_fk = u.id_usuario INNER JOIN mesas m ON r.id_mesa_fk = m.id_mesa INNER JOIN bloque b ON r.id_bloque_fk = b.id_bloque INNER JOIN ubicacion ub ON m.id_ubi_fk = ub.id_ubicacion INNER JOIN estado e ON r.id_estado_fk = e.id_estado WHERE id_usuario_fk = ?", [id_usuario_fk]).then(res => {
        //variable para almacenar el resultado de la consulta
        let items: Reserva[]= [];
        //valido si trae al menos un registro
@@ -597,6 +599,8 @@ export class ServicioBDService {
            id_usuario_fk: res.rows.item(i).id_usuario_fk,
            id_mesa_fk: res.rows.item(i).id_mesa_fk,
            id_bloque_fk: res.rows.item(i).id_bloque_fk,
+           motivo: res.rows.item(i).motivo,
+           id_estado_fk: res.rows.item(i).id_estado_fk,
           });
          }
        }
@@ -606,10 +610,10 @@ export class ServicioBDService {
   }
   
 
-  insertarReserva(f_reserva:string, f_creacion: string, id_usuario_fk : number, id_mesa_fk: number, id_bloque_fk: number) {
+  insertarReserva(f_reserva:string, f_creacion: string, motivo:string, id_usuario_fk : number, id_mesa_fk: number, id_bloque_fk: number, id_estado_fk: string) {
     return this.database.executeSql(
-      'INSERT INTO reserva (f_reserva, f_creacion, id_usuario_fk, id_mesa_fk, id_bloque_fk) VALUES (?, ?, ?, ?, ?)', 
-      [f_reserva, f_creacion, id_usuario_fk, id_mesa_fk, id_bloque_fk]
+      'INSERT INTO reserva (f_reserva, f_creacion, motivo, id_usuario_fk, id_mesa_fk, id_bloque_fk,id_estado_fk) VALUES ( ?, ?, ?, ?, ?, ?, ?)', 
+      [f_reserva, f_creacion,motivo, id_usuario_fk, id_mesa_fk, id_bloque_fk,id_estado_fk]
     ).then(res => {
       this.Alerta("Agregar", "Reserva agregada exitosamente.");
       this.listarReservas();
@@ -617,12 +621,13 @@ export class ServicioBDService {
       this.Alerta('Agregar', 'Error: ' + JSON.stringify(e));
     });
   }
-  eliminarReserva(id_reserva:string){
-    return this.database.executeSql('DELETE FROM reserva WHERE id_reserva = ?',[id_reserva]).then(res=>{
-      this.Alerta("Eliminar","Reserva Eliminada");
+
+  ModificarReserva(motivo:string, id_estado_fk:string, id_reserva:string){
+    return this.database.executeSql('UPDATE reserva SET motivo = ?, id_estado_fk = ? WHERE id_reserva = ?',[motivo,id_estado_fk,id_reserva]).then(res=>{
+      this.Alerta("Reserva","Reserva modificada exitosamente.");
       this.listarReservas();
     }).catch(e=>{
-      this.Alerta('Eliminar', 'Error: ' + JSON.stringify(e));
+      this.Alerta('Reserva', 'Error: ' + JSON.stringify(e));
     })
   }
 

@@ -6,5 +6,7 @@ export class Reserva {
     id_usuario_fk!: number;
     id_mesa_fk!: number;
     id_bloque_fk!:number;
+    motivo!: string;
+    id_estado_fk!: number;
 
 }

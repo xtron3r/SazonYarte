@@ -102,7 +102,7 @@ export class FechareservaPage implements OnInit {
     if (FechaFormato == null || this.bloqueSele == null || id_mesa == null || FechaFormatoHoy == null) {
       this.Alerta('Error en Reservar', 'No pueden haber campos sin seleccion');
     } else {
-      this.bd.insertarReserva(FechaFormato, FechaFormatoHoy, this.id_usuario, id_mesa, this.bloqueSele);
+      this.bd.insertarReserva(FechaFormato, FechaFormatoHoy,'', this.id_usuario, id_mesa, this.bloqueSele,'2');
       this.router.navigate(['/home']);
     }
   }
