@@ -43,6 +43,18 @@ export class LoginPage implements OnInit {
           let ValidarUsuario = await this.bd.BuscarCorreoUsuario(this.usuario);
   
           if (ValidarUsuario) {
+
+            if (ValidarUsuario.id_estado_fk == '1') {
+              const alert = await this.alertController.create({
+                  header: 'Usuario Desactivado',
+                  message: 'Su cuenta está desactivada. Comuníquese con soporte para más información.',
+                  buttons: ['OK'],
+                  cssClass: 'estilo-alertas'
+              });
+              await alert.present();
+              return;
+            }
+
             await this.bd.modificarContra(this.contrasenia, ValidarUsuario.id_usuario);
 
             // Guardar los datos del usuario en el NativeStorage

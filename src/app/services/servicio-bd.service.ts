@@ -74,15 +74,20 @@ export class ServicioBDService {
   registroRol: string = "INSERT or IGNORE INTO rol(id_rol, nombre) VALUES (1, 'Administrador')";
   registroRol2: string = "INSERT or IGNORE INTO rol(id_rol, nombre) VALUES (2, 'Usuario')";
 
+  tablaEstado: string = "CREATE TABLE IF NOT EXISTS estado (id_estado INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR NOT NULL);"
+
+  registroEstado1: string = "INSERT or IGNORE INTO estado(id_estado, nombre) VALUES (1, 'Deshabilitado')";
+  registroEstado2: string = "INSERT or IGNORE INTO estado(id_estado, nombre) VALUES (2, 'Activado')";
+
   // Tabla Usuario
 
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS Usuario (id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, rut VARCHAR(10) NOT NULL, nombreusuario VARCHAR NOT NULL UNIQUE, nombrecompleto VARCHAR NOT NULL, contrasenia VARCHAR NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, fotousuario TEXT, id_rol_fk INTEGER NOT NULL, FOREIGN KEY (id_rol_fk) REFERENCES Rol (id_rol));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS Usuario (id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, rut VARCHAR(10) NOT NULL, nombreusuario VARCHAR NOT NULL UNIQUE, nombrecompleto VARCHAR NOT NULL, contrasenia VARCHAR NOT NULL, telefono INTEGER NOT NULL, correo VARCHAR NOT NULL, fotousuario TEXT, id_rol_fk INTEGER NOT NULL, id_estado_fk VARCHAR, FOREIGN KEY (id_rol_fk) REFERENCES Rol (id_rol), FOREIGN KEY (id_estado_fk) REFERENCES estado (id_estado));";
 
-  registroAdmin: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (1,'202211013', 'Admin', 'Admin', 'Admin123', 930935460,'admin@duocuc.cl','',1)";
+  registroAdmin: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk, id_estado_fk) VALUES (1,'202211013', 'Admin', 'Admin', 'Admin123', 930935460,'admin@duocuc.cl','',1,'2')";
 
-  registroUsuario2: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (2,'213781146', 'Manolo', 'Aroneitor', 'Hola123', 930935460, 'aaronleal2003@gmail.com','', 2)";
+  registroUsuario2: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk, id_estado_fk) VALUES (2,'213781146', 'Manolo', 'Aroneitor', 'Hola123', 930935460, 'aaronleal2003@gmail.com','', 2,'2')";
 
-  registroUsuario3: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk) VALUES (3,'205902058', 'RayCL', 'Basthian Bascuñan', 'Hola123', 959808217, 'bast.bascunan@duocuc.cl','', 2)";
+  registroUsuario3: string = "INSERT or IGNORE INTO Usuario(id_usuario, rut, nombreusuario, nombrecompleto, contrasenia, telefono, correo, fotousuario, id_rol_fk, id_estado_fk) VALUES (3,'205902058', 'RayCL', 'Basthian Bascuñan', 'Hola123', 959808217, 'bast.bascunan@duocuc.cl','', 2,'2')";
 
   //variables para guardar los datos de las consultas en las tablas
   
@@ -93,6 +98,7 @@ export class ServicioBDService {
   listadoReservas = new BehaviorSubject([]);
   listadoRol = new BehaviorSubject([]);
   listadoUsuario = new BehaviorSubject([]);
+  listadoEstados = new BehaviorSubject([]);
   
 
   //variable para el status de la Base de datos
@@ -142,6 +148,11 @@ export class ServicioBDService {
     return this.listadoUsuario.asObservable();
   }
 
+  fetchEstado(): Observable<Usuario[]>{
+    return this.listadoEstados.asObservable();
+  }
+
+
   dbState(){
     return this.isDBReady.asObservable();
   }
@@ -176,6 +187,7 @@ export class ServicioBDService {
       await this.database.executeSql(this.tablaReservas, []);
       await this.database.executeSql(this.tablaRol, []);
       await this.database.executeSql(this.tablaUsuario, []);
+      await this.database.executeSql(this.tablaEstado, []);
 
       //ejecuto los insert por defecto en el caso que existan
       await this.database.executeSql(this.registroContacto, []);
@@ -196,6 +208,8 @@ export class ServicioBDService {
       await this.database.executeSql(this.registroMesaLocal, []);
       await this.database.executeSql(this.registroMesaLocal2, []);
       await this.database.executeSql(this.registroMesaLocal3, []);
+      await this.database.executeSql(this.registroEstado1, []);
+      await this.database.executeSql(this.registroEstado2, []);
 
       await this.database.executeSql(this.registroRol, []);
       await this.database.executeSql(this.registroRol2, []);
@@ -268,7 +282,7 @@ export class ServicioBDService {
  //funciones de usuario
 
  listarUsuario() {
-  return this.database.executeSql('SELECT u.id_usuario, u.rut, u.nombreusuario, u.nombrecompleto, u.correo, u.telefono, r.nombre AS id_rol_fk FROM Usuario u INNER JOIN rol r ON u.id_rol_fk = r.id_rol', []).then(res => {
+  return this.database.executeSql('SELECT u.id_usuario, u.rut, u.nombreusuario, u.nombrecompleto, u.correo, u.telefono, r.nombre AS id_rol_fk, e.nombre as id_estado_fk FROM Usuario u INNER JOIN rol r ON u.id_rol_fk = r.id_rol INNER JOIN estado e ON u.id_estado_fk = e.id_estado', []).then(res => {
     //variable para almacenar el resultado de la consulta
     let items: Usuario[]= [];
     //valido si trae al menos un registro
@@ -284,6 +298,7 @@ export class ServicioBDService {
         correo: res.rows.item(i).correo,
         telefono: res.rows.item(i).telefono,
         id_rol_fk: res.rows.item(i).id_rol_fk,
+        id_estado_fk: res.rows.item(i).id_estado_fk,
 
         // dudas con el profesor
         contrasenia: '',
@@ -304,17 +319,17 @@ export class ServicioBDService {
     })
   }
 
-  eliminarUsuario(id_usuario:string){
-    return this.database.executeSql('DELETE FROM usuario WHERE id_usuario = ?',[id_usuario]).then(res=>{
-      this.Alerta("Eliminar","Usuario Eliminado");
+  deshabilitarUsuario(id_estado_fk:string,id_usuario:string){
+    return this.database.executeSql('UPDATE Usuario SET id_estado_fk = ? WHERE id_usuario = ?',[id_estado_fk,id_usuario]).then(res=>{
+      this.Alerta("Usuario","Usuario Desactivado");
       this.listarUsuario();
     }).catch(e=>{
-      this.Alerta('Eliminar', 'Error: ' + JSON.stringify(e));
+      this.Alerta('Desactivar', 'Error: ' + JSON.stringify(e));
     })
   }
 
   buscarUsuario(rut:string){
-    return this.database.executeSql('SELECT id_usuario, rut, nombreusuario, nombrecompleto, correo, telefono, id_rol_fk FROM Usuario WHERE rut = ?', [rut]).then(res => {
+    return this.database.executeSql('SELECT id_usuario, rut, nombreusuario, nombrecompleto, correo, telefono, id_rol_fk, id_estado_fk FROM Usuario WHERE rut = ?', [rut]).then(res => {
       //variable para almacenar el resultado de la consulta
       let items: Usuario[]= [];
       //valido si trae al menos un registro
@@ -330,6 +345,7 @@ export class ServicioBDService {
           correo: res.rows.item(i).correo,
           telefono: res.rows.item(i).telefono,
           id_rol_fk:res.rows.item(i).id_rol_fk,
+          id_estado_fk: res.rows.item(i).id_estado_fk,
 
           // dudas con el profesor
           contrasenia: '',
@@ -393,7 +409,7 @@ export class ServicioBDService {
 
   BuscarCorreoUsuario(usuario: string) {
     return this.database.executeSql(
-      'SELECT id_usuario, correo, id_rol_fk, contrasenia FROM Usuario WHERE nombreusuario = ?', [usuario]
+      'SELECT id_usuario, correo, id_rol_fk, contrasenia, id_estado_fk FROM Usuario WHERE nombreusuario = ?', [usuario]
     ).then(res => {
       if (res.rows.length > 0) {
          // Si las credenciales son correctas, retorna el usuario encontrado
@@ -401,7 +417,8 @@ export class ServicioBDService {
           id_usuario: res.rows.item(0).id_usuario,
           correo: res.rows.item(0).correo,
           id_rol_fk: res.rows.item(0).id_rol_fk,
-          contrasenia: res.rows.item(0).contrasenia
+          contrasenia: res.rows.item(0).contrasenia,
+          id_estado_fk: res.rows.item(0).id_estado_fk,
         };
       } else {
         // Si no hay coincidencias, retorna null

@@ -20,19 +20,17 @@ export class ReservasPage implements OnInit {
   }];
 
   constructor(private menu: MenuController,private bd: ServicioBDService, private alertController: AlertController) { 
-    this.bd.dbState().subscribe(data => {
-      // validar si la base de datos está lista
-      if (data) {
-        // subscribir al observable de usuarios
-        this.bd.fetchReservas().subscribe(res => {
-          this.reserva = res;
-        });
-      }
-    });
   }
 
   ngOnInit() {
     this.menu.enable(false);
+  }
+
+  ionViewWillEnter(){
+    this.bd.listarReservas();
+    this.bd.listadoReservas.subscribe(data => {
+      this.reserva = data;
+    });
   }
 
   eliminarReserva(id_reserva:string){
