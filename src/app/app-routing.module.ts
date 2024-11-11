@@ -84,9 +84,15 @@ const routes: Routes = [
     loadChildren: () => import('./pages/fechareserva/fechareserva.module').then( m => m.FechareservaPageModule)
   },
   {
+    path: 'contacto-login',
+    loadChildren: () => import('./pages/contacto-login/contacto-login.module').then( m => m.ContactoLoginPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
   },
+
+
 
 
 
