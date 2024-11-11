@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="fondo">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Listado de Reservas</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -30,12 +33,6 @@
           <p><strong>Estado:</strong> {{r.id_estado_fk}}</p>
           <p *ngIf="r.motivo"><strong>Motivo:</strong> {{r.motivo}}</p>
         </ion-card-content>
-        <div>
-          <button mat-fab class="cancelar-button" (click)="eliminarReserva(r.id_reserva)">
-            <mat-icon class="color-button espacio" fontIcon="delete"></mat-icon>
-            Cancelar reserva
-          </button>
-        </div>
       </ion-card>
   </div>
 
@@ -55,7 +52,7 @@
         <p *ngIf="r.motivo"><strong>Motivo:</strong> {{r.motivo}}</p>
       </ion-card-content>
       <div>
-        <button mat-fab class="cancelar-button" (click)="eliminarReserva(r.id_reserva)">
+        <button mat-fab class="cancelar-button" (click)="eliminarReserva(r)">
           <mat-icon class="color-button espacio" fontIcon="delete"></mat-icon>
           Cancelar reserva
         </button>

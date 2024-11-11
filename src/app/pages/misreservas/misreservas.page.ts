@@ -43,9 +43,6 @@ export class MisreservasPage implements OnInit {
 
   }
 
-  eliminarReserva(id_reserva:string){
-    /* this.bd.eliminarReserva(id_reserva); */
-  } 
   listarReservasDelUsuario(id_usuario_fk: number) {
     this.bd.listarReservasPorUsuario(id_usuario_fk).then(() => {
       this.bd.fetchReservas().subscribe((reservas) => {
@@ -69,6 +66,52 @@ export class MisreservasPage implements OnInit {
       });
     }
   }
+
+  async eliminarReserva(reserva:any) {
+    const alert = await this.alertController.create({
+      header: 'Reserva',
+      message: 'Ingrese el motivo por el que desea cancelar la reserva',
+      inputs: [
+        {
+          name: 'motivo',
+          type: 'text',
+          placeholder: 'Motivo',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Aceptar',
+          handler: (data) => {
+            if (data.motivo) {
+              this.bd.ModificarReserva(data.motivo,'1',reserva.id_reserva)
+              this.BuscarReserva = '1'
+            } else {
+              this.mostrarAlerta('Error', 'Debe ingresar un motivo para cambiar el estado.');
+            }
+          },
+        },
+      ],
+      cssClass: 'estilo-alertas'
+    });
+  
+    await alert.present();
+  }
+
+  async mostrarAlerta(titulo: string, mensaje: string) {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: mensaje,
+      buttons: ['OK'],
+      cssClass:'estilo-alertas'
+    });
+    await alert.present();
+  }
+
 
 
 }
