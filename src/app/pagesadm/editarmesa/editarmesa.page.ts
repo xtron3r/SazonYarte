@@ -10,7 +10,14 @@ import { ServicioBDService } from 'src/app/services/servicio-bd.service';
 })
 export class EditarmesaPage implements OnInit {
 
-  mesas: any;
+  mesas: any = [
+    {
+      id_mesa:'',
+      nombre:'',
+      c_sillas:'',
+      id_ubi_fk:''
+    }
+  ]
 
   constructor(private menu: MenuController, private bd: ServicioBDService, private activedrouter: ActivatedRoute, private router: Router) { 
 

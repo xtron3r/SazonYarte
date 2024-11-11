@@ -20,6 +20,7 @@ export class RegisterPage implements OnInit {
   correo: string = '';
   id_rol: string = '2';
   id_estado_fk: string = '2';
+  MensajeError!: string;
 
   constructor(
     private menu: MenuController,
