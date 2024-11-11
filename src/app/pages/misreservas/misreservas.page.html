@@ -5,15 +5,44 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="fondo">
-  <div class="ion-no-margin">
-    <div class="img-logo">
-      <img src="../../../assets/icon/ChefPerfil.png" alt="Imagen Chef">
-    </div>
+  <ion-toolbar class="fondo">
+    <ion-segment [(ngModel)]="BuscarReserva" (click)="BuscarReservas()">
+      <ion-segment-button value="2" class="color-blanco">
+        <ion-label>ACTIVAS</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1" class="color-blanco">
+        <ion-label>CANCELADAS</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <div class="ion-padding mis-reservas" *ngIf="BuscarReserva == '1'">
+      <ion-card *ngFor="let r of reserva" class="espacio-arriba">
+        <ion-card-header>
+          <ion-card-title>RESERVAS CANCELADAS</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Cliente:</strong> {{ r.id_usuario_fk }}</p>
+          <p><strong>Fecha:</strong> {{ r.f_reserva  }}</p>
+          <p><strong>Hora:</strong> {{ r.id_bloque_fk }}</p>
+          <p><strong>Ubicación:</strong> {{ r.id_mesa_fk | slice:0:-1 }}</p>
+          <p><strong>Sillas:</strong> {{ r.id_mesa_fk | slice:-1 }}</p>
+          <p><strong>Fecha Creación:</strong> {{ r.f_creacion }}</p>
+          <p><strong>Estado:</strong> {{r.id_estado_fk}}</p>
+          <p *ngIf="r.motivo"><strong>Motivo:</strong> {{r.motivo}}</p>
+        </ion-card-content>
+        <div>
+          <button mat-fab class="cancelar-button" (click)="eliminarReserva(r.id_reserva)">
+            <mat-icon class="color-button espacio" fontIcon="delete"></mat-icon>
+            Cancelar reserva
+          </button>
+        </div>
+      </ion-card>
   </div>
-  <div class="ion-padding mis-reservas">
+
+  <div class="ion-padding mis-reservas" *ngIf="BuscarReserva == '2'">
     <ion-card *ngFor="let r of reserva" class="espacio-arriba">
       <ion-card-header>
-        <ion-card-title>RESERVA CONFIRMADA</ion-card-title>
+        <ion-card-title>RESERVAS CONFIRMADAS</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <p><strong>Cliente:</strong> {{ r.id_usuario_fk }}</p>
@@ -22,7 +51,8 @@
         <p><strong>Ubicación:</strong> {{ r.id_mesa_fk | slice:0:-1 }}</p>
         <p><strong>Sillas:</strong> {{ r.id_mesa_fk | slice:-1 }}</p>
         <p><strong>Fecha Creación:</strong> {{ r.f_creacion }}</p>
-        
+        <p><strong>Estado:</strong> {{r.id_estado_fk}}</p>
+        <p *ngIf="r.motivo"><strong>Motivo:</strong> {{r.motivo}}</p>
       </ion-card-content>
       <div>
         <button mat-fab class="cancelar-button" (click)="eliminarReserva(r.id_reserva)">

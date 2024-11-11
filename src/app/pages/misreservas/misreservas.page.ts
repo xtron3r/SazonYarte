@@ -16,10 +16,13 @@ export class MisreservasPage implements OnInit {
     f_creacion:'',
     id_usuario_fk:'',
     id_mesa_fk:'',
-    id_bloque_fk:''
+    id_bloque_fk:'',
+    motivo:'',
+    id_estado_fk:'',
   }];
 
   id_usuario!: number;
+  BuscarReserva: string = '2';
 
   constructor(private menu: MenuController,private bd: ServicioBDService, private alertController: AlertController, private storage: NativeStorage) { 
  
@@ -49,6 +52,22 @@ export class MisreservasPage implements OnInit {
         this.reserva = reservas;
       });
     });
+  }
+
+  BuscarReservas(){
+    if (this.BuscarReserva === '1'){
+      this.bd.listarReservasPorUsuarioDesa(this.id_usuario).then(() => {
+        this.bd.fetchReservas().subscribe((reservas) => {
+          this.reserva = reservas;
+        });
+      });
+    }else{
+      this.bd.listarReservasPorUsuario(this.id_usuario).then(() => {
+        this.bd.fetchReservas().subscribe((reservas) => {
+          this.reserva = reservas;
+        });
+      });
+    }
   }
 
 

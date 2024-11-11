@@ -56,7 +56,9 @@ export class UsuariosPage implements OnInit {
     }
 
     if (usuario.id_estado_fk == "Activado"){
-      this.bd.deshabilitarUsuario('1',usuario.id_usuario)
+      this.bd.deshabilitarUsuario('1',usuario.id_usuario).then(res => {
+        this.bd.DesactivarReservasPorUsuarioDesa(usuario.id_usuario);
+      });
     }else{
       this.bd.deshabilitarUsuario('2',usuario.id_usuario)
     }
