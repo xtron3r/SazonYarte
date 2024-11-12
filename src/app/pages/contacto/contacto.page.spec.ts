@@ -24,4 +24,9 @@ describe('ContactoPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('Mensaje de error en formulario de contacto', () => {
+    component.mensaje = '';
+    expect(component.enviarFormulario()).toBeTruthy();
+  }
+)
 });

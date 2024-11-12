@@ -29,4 +29,9 @@ describe('LoginPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('Validacion login', () => {
+    component.usuario = 'Xtroner123';
+    component.contrasenia = 'Hola123';
+    expect(component.irPagina).toBeTruthy();
+  });
 });

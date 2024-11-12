@@ -43,13 +43,19 @@ describe('RegisterPage', () => {
     component.IrLogin();
 
     expect(component.nombreyApellido).toEqual("Esteban Toledo");
-  });  
+  });  */
 
 it ('Validacion Largo de contraseña', () => {
-  component.contrasenia = "Hola12";
-  component.IrLogin();
-  expect(component.contrasenia.length).toBeLessThanOrEqual(6);
+  component.nombreyApellido = "Esteban Toledo";
+    component.usuario = "Xtroner";
+    component.rut = "123456789";
+    component.contrasenia = "Hola123";
+    component.nuevaContrasenia = component.contrasenia;
+    component.telefono = "123456789";
+    component.correo = "admin@duocuc.cl";
+    component.IrLogin();
+  expect(component.contrasenia.length).toBeGreaterThanOrEqual(6);
   
-}) */
+}) 
 
 });
