@@ -31,8 +31,8 @@ describe('RegisterPage', () => {
   });
 
 
-  /*  // PRUEBAS UNITARIAS 
-  it('Validacion Campo Vacio', () => {
+   // PRUEBAS UNITARIAS 
+ /* it('Validacion Campo Vacio', () => {
     component.nombreyApellido = "Esteban Toledo";
     component.usuario = "Xtroner";
     component.rut = "123456789";
@@ -43,5 +43,13 @@ describe('RegisterPage', () => {
     component.IrLogin();
 
     expect(component.nombreyApellido).toEqual("Esteban Toledo");
-  });  */
+  });  
+
+it ('Validacion Largo de contraseña', () => {
+  component.contrasenia = "Hola12";
+  component.IrLogin();
+  expect(component.contrasenia.length).toBeLessThanOrEqual(6);
+  
+}) */
+
 });
