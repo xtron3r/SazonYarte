@@ -29,9 +29,12 @@ describe('LoginPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('Validacion login', () => {
-    component.usuario = 'Xtroner123';
-    component.contrasenia = 'Hola123';
-    expect(component.irPagina).toBeTruthy();
+  it('Validacion de campos vacios del login',  () => {
+    // Caso 1: Ambos campos vacíos
+    component.usuario = '';
+    component.contrasenia = '';
+    component.irPagina();
+    expect(component.usuario).toBe('');
+    expect(component.contrasenia).toBe('');
   });
 });
