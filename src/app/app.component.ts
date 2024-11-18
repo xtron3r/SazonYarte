@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { register } from 'swiper/element/bundle';
+import { SplashScreen } from '@capacitor/splash-screen';
 register();
 
 @Component({
@@ -10,8 +11,18 @@ register();
 export class AppComponent implements OnInit {
 
 
-  constructor() {}
+  constructor() {
+    this.MostrarSplash();
+  }
 
   ngOnInit() {
+  }
+
+  async MostrarSplash(){
+    await SplashScreen.show({
+      autoHide: true,
+      showDuration: 3000
+    });
+    
   }
 }
