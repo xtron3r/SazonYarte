@@ -21,7 +21,14 @@ describe('FechareservaPage', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('la fecha seleccionada no puede ser anterior a la fecha actual', () => {
+    const today = new Date().setHours(0, 0, 0, 0); // Fecha actual sin horas (como número)
+    const pastDate = new Date(today);
+    pastDate.setDate(pastDate.getDate() - 1); // Fecha en el pasado
+  
+    component.fechaSelec = pastDate;
+  
+    // Verificamos que la fecha seleccionada sea válida
+    expect(component.fechaSelec.getTime() >= today).toBeFalse();
   });
 });

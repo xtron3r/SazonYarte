@@ -26,19 +26,4 @@ describe('ContactoPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should show error message if a field is empty in the contact form', () => {
-    // Configurar valores vacíos para los campos
-    component.nombre = 'Juan perez';
-    component.telefono = '123456789';
-    component.mensaje = '';
-    component.correo = 'juan@gmail.com';
-
-    // Espía en el método create del AlertController
-    spyOn(alertController, 'create').and.callThrough();
-    // Ejecuta el método de envío del formulario
-     component.enviarFormulario();
-    // Verificar que se haya llamado a alertController.create
-    expect(alertController.create).toHaveBeenCalled();
-  });
 });

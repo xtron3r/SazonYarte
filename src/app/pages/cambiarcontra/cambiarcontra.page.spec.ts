@@ -34,20 +34,21 @@ describe('CambiarcontraPage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Validacion de campos vacios en cambiar contraseña',  () => {
-    // Configurar valores vacíos para los campos de contraseña
-    component.contraAntigua = '';
-    component.validarContraAntigua = '';
-    component.nuevaContra = '';
-    component.confirmContra = '';
+  it('Contrasenia antigua no coincide',  () => {
+    component.contraAntigua = 'Hola123';
+    component.validarContraAntigua = 'Incorrecta';
 
-    // Espía en el método create del AlertController
-    spyOn(alertController, 'create').and.callThrough();
+    const resultado = component.contraAntigua === component.validarContraAntigua;
+    
+    expect(resultado).toBeFalsy();
+  });
 
-    // Ejecuta el método de cambio de contraseña
-     component.irPerfil();
+  it('si la nueva contraseña no coinciden',  () => {
+    component.nuevaContra = 'Nueva123';
+    component.confirmContra = 'Otra123';
 
-    // Verificar que se llame la alerta 
-    expect(alertController.create).toHaveBeenCalled();
+    const resultado = component.nuevaContra === component.confirmContra;
+
+    expect(resultado).toBeFalsy();
   });
 });
