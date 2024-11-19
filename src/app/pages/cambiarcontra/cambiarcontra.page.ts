@@ -77,6 +77,14 @@ export class CambiarcontraPage implements OnInit {
       });
       await alert.present(); 
     
+    }else if (this.nuevaContra.length < 6 || this.confirmContra.length < 6) {
+      const alert = await this.alertController.create({
+        header: 'Error en contraseña',
+        message: 'La contraseña debe tener al menos 6 caracteres',
+        buttons: ['OK'],
+        cssClass: 'estilo-alertas',
+      });
+      await alert.present();
     } else{ 
   
       let user = await this.afAuth.currentUser;
