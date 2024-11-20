@@ -684,8 +684,8 @@ export class ServicioBDService {
    });  
   }
 
-  DesactivarReservasPorMesaDesa(id_mesa_fk: number){
-    return this.database.executeSql("UPDATE reserva SET motivo = 'Mesa Deshabilitada', id_estado_fk = 1 WHERE id_mesa_fk = ?", [id_mesa_fk]).then(res => {
+  DesactivarReservasPorMesaDesa(id_mesa_fk: number, motivo: string){
+    return this.database.executeSql("UPDATE reserva SET motivo = ?, id_estado_fk = 1 WHERE id_mesa_fk = ?", [motivo,id_mesa_fk]).then(res => {
       //variable para almacenar el resultado de la consulta
       let items: Reserva[]= [];
       //valido si trae al menos un registro

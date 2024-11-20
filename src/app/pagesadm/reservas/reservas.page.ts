@@ -42,6 +42,8 @@ export class ReservasPage implements OnInit {
     if (reserva.motivo == "Usuario Deshabilitado"){
       this.mostrarAlerta('Alerta', 'El Usuario esta deshabilitado');
       return;
+    } else if (reserva.motivo == "Mesa Deshabilitada"){
+      this.mostrarAlerta('Alerta', 'La mesa esta deshabilitada');
     }
 
     const alert = await this.alertController.create({

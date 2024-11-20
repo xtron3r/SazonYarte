@@ -56,10 +56,11 @@ export class MesasPage implements OnInit {
     this.buscarMesa = "";
     if (mesa.id_estado_fk == "Activado"){
       this.bd.deshabilitarMesa('1',mesa.id_mesa).then(res => {
-        this.bd.DesactivarReservasPorMesaDesa(mesa.id_mesa);
+        this.bd.DesactivarReservasPorMesaDesa(mesa.id_mesa, 'Mesa Deshabilitada');
       });
     }else{
       this.bd.deshabilitarMesa('2',mesa.id_mesa);
+      this.bd.DesactivarReservasPorMesaDesa(mesa.id_mesa, 'Mesa Habilitada');
     }
   }
 
