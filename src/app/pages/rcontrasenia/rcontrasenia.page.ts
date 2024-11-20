@@ -19,10 +19,10 @@ export class RcontraseniaPage implements OnInit {
   }
 
   async enviarCorreo() {
-    if (this.correo == "") {
+    if (this.correo == "" || !this.correo.includes('@')) {
       const alert = await this.alertController.create({
         header: 'Error',
-        message: 'Debe ingresar un correo',
+        message: 'Debe ingresar un correo valido',
         buttons: ['OK'],
         cssClass: 'estilo-alertas'
       });

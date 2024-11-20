@@ -29,7 +29,7 @@ describe('RcontraseniaPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('Validar correo', () => {
+  it('Deberia ser valido si el correo contiene un arroba', () => {
     component.correo = 'prueba@gmail.com';
     expect(component.enviarCorreo()).toBeTruthy();
   }
