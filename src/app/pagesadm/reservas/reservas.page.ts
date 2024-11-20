@@ -38,6 +38,12 @@ export class ReservasPage implements OnInit {
   }
 
   async eliminarReserva(reserva:any) {
+
+    if (reserva.motivo == "Usuario Deshabilitado"){
+      this.mostrarAlerta('Alerta', 'El Usuario esta deshabilitado');
+      return;
+    }
+
     const alert = await this.alertController.create({
       header: 'Reserva',
       message: 'Ingrese el motivo para cambiar el estado de la reserva:',
@@ -75,6 +81,7 @@ export class ReservasPage implements OnInit {
     });
   
     await alert.present();
+    
   }
   async mostrarAlerta(titulo: string, mensaje: string) {
     const alert = await this.alertController.create({

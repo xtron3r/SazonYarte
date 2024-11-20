@@ -1,7 +1,7 @@
  import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, from, map, Observable } from 'rxjs';
 import { Contacto } from './contacto';
 import { Bloque } from './bloque';
 import { Ubicacion } from './ubicacion';
@@ -658,8 +658,8 @@ export class ServicioBDService {
     });
   }
 
-  DesactivarReservasPorUsuarioDesa(id_usuario: number){
-    return this.database.executeSql("UPDATE reserva SET motivo = 'Usuario Deshabilitado', id_estado_fk = 1 WHERE id_usuario_fk = ?", [id_usuario]).then(res => {
+  DesactivarReservasPorUsuarioDesa(id_usuario: number, motivo: string){
+    return this.database.executeSql("UPDATE reserva SET motivo = ?, id_estado_fk = 1 WHERE id_usuario_fk = ?", [motivo,id_usuario]).then(res => {
       //variable para almacenar el resultado de la consulta
       let items: Reserva[]= [];
       //valido si trae al menos un registro
@@ -709,7 +709,6 @@ export class ServicioBDService {
      this.listadoReservas.next(items as any);
    });  
   }
-  
 
   insertarReserva(f_reserva:string, f_creacion: string, motivo:string, id_usuario_fk : number, id_mesa_fk: number, id_bloque_fk: number, id_estado_fk: string) {
     return this.database.executeSql(
