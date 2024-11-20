@@ -49,17 +49,17 @@ export class ServicioBDService {
 
   // Tabla Mesas
 
-  tablaMesas: string = "CREATE TABLE IF NOT EXISTS mesas (id_mesa INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR NOT NULL, c_sillas INTEGER NOT NULL, id_ubi_fk INTEGER, FOREIGN KEY (id_ubi_fk) REFERENCES Ubicacion (id_ubicacion));";
+  tablaMesas: string = "CREATE TABLE IF NOT EXISTS mesas (id_mesa INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR NOT NULL, c_sillas INTEGER NOT NULL, id_ubi_fk INTEGER, id_estado_fk, FOREIGN KEY (id_ubi_fk) REFERENCES Ubicacion (id_ubicacion), FOREIGN KEY (id_estado_fk) REFERENCES estado (id_estado));";
 
   // Mesas Terrazas
-  registroMesaTerraza: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (1, 'Mesa 1', 4, 1)";
-  registroMesaTerraza2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (2, 'Mesa 2', 2, 1)";
-  registroMesaTerraza3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (3, 'Mesa 3', 3, 1)";
+  registroMesaTerraza: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (1, 'Mesa 1', 4, 1,'2')";
+  registroMesaTerraza2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (2, 'Mesa 2', 2, 1,'2')";
+  registroMesaTerraza3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (3, 'Mesa 3', 3, 1,'2')";
 
   // Mesas Locales
-  registroMesaLocal: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (4, 'Mesa 1', 4, 2)";
-  registroMesaLocal2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (5, 'Mesa 2', 5, 2)";
-  registroMesaLocal3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (6, 'Mesa 3', 3, 2)";
+  registroMesaLocal: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (4, 'Mesa 1', 4, 2,'2')";
+  registroMesaLocal2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (5, 'Mesa 2', 5, 2,'2')";
+  registroMesaLocal3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (6, 'Mesa 3', 3, 2,'2')";
 
   // Tabla Reservas
 
@@ -489,7 +489,7 @@ export class ServicioBDService {
 
   // Funciones de mesa
   buscarMesa(id_ubi_fk: string) {
-    return this.database.executeSql('SELECT m.id_mesa, m.nombre, m.c_sillas, u.nombre AS id_ubi_fk FROM mesas m INNER JOIN ubicacion u ON m.id_ubi_fk = u.id_ubicacion WHERE m.id_ubi_fk = ?  ', [id_ubi_fk]).then(res => {
+    return this.database.executeSql('SELECT m.id_mesa, m.nombre, m.c_sillas, u.nombre AS id_ubi_fk, e.nombre AS id_estado_fk   FROM mesas m INNER JOIN ubicacion u ON m.id_ubi_fk = u.id_ubicacion INNER JOIN estado e ON m.id_estado_fk = e.id_estado WHERE m.id_ubi_fk = ?  ', [id_ubi_fk]).then(res => {
       //variable para almacenar el resultado de la consulta
       let items: Mesas[]= [];
       //valido si trae al menos un registro
@@ -501,7 +501,8 @@ export class ServicioBDService {
             id_mesa: res.rows.item(i).id_mesa,
             nombre: res.rows.item(i).nombre,
             c_sillas: res.rows.item(i).c_sillas,
-            id_ubi_fk: res.rows.item(i).id_ubi_fk
+            id_ubi_fk: res.rows.item(i).id_ubi_fk,
+            id_estado_fk: res.rows.item(i).id_estado_fk,
           })
         }
       }
@@ -538,12 +539,11 @@ export class ServicioBDService {
     });
   }
 
-  eliminarMesa(id_mesa:string){
-    return this.database.executeSql('DELETE FROM mesas WHERE id_mesa = ?',[id_mesa]).then(res=>{
-      this.Alerta("Eliminar","Mesa Eliminada");
-      this.buscarMesa(id_mesa);
+  deshabilitarMesa(id_estado_fk:string,id_mesa:string){
+    return this.database.executeSql('UPDATE mesas SET id_estado_fk = ? WHERE id_mesa = ?',[id_estado_fk,id_mesa]).then(res=>{
+      this.Alerta("Mesa","Mesa Modificada");
     }).catch(e=>{
-      this.Alerta('Eliminar', 'Error: ' + JSON.stringify(e));
+      this.Alerta('Desactivar', 'Error: ' + JSON.stringify(e));
     })
   }
   modificarMesa(id_mesa:string, nombre:string, c_sillas: string, id_ubi_fk:string){
@@ -569,7 +569,8 @@ export class ServicioBDService {
           id_mesa: res.rows.item(i).id_mesa,
           nombre: res.rows.item(i).nombre,
           c_sillas: res.rows.item(i).c_sillas,
-          id_ubi_fk: res.rows.item(i).id_ubi_fk
+          id_ubi_fk: res.rows.item(i).id_ubi_fk,
+          id_estado_fk: res.rows.item(i).id_estado_fk,
          });
         }
       }
@@ -682,6 +683,32 @@ export class ServicioBDService {
      this.listadoReservas.next(items as any);
    });  
   }
+
+  DesactivarReservasPorMesaDesa(id_mesa_fk: number){
+    return this.database.executeSql("UPDATE reserva SET motivo = 'Mesa Deshabilitada', id_estado_fk = 1 WHERE id_mesa_fk = ?", [id_mesa_fk]).then(res => {
+      //variable para almacenar el resultado de la consulta
+      let items: Reserva[]= [];
+      //valido si trae al menos un registro
+      if(res.rows.length > 0){
+       //recorro mi resultado
+        for(var i=0; i < res.rows.length; i++){
+         //agrego los registros a mi lista
+         items.push({
+          id_reserva: res.rows.item(i).id_reserva,
+          f_reserva: res.rows.item(i).f_reserva,
+          f_creacion: res.rows.item(i).f_creacion,
+          id_usuario_fk: res.rows.item(i).id_usuario_fk,
+          id_mesa_fk: res.rows.item(i).id_mesa_fk,
+          id_bloque_fk: res.rows.item(i).id_bloque_fk,
+          motivo: res.rows.item(i).motivo,
+          id_estado_fk: res.rows.item(i).id_estado_fk,
+         });
+        }
+      }
+      //actualizar el observable
+     this.listadoReservas.next(items as any);
+   });  
+  }
   
 
   insertarReserva(f_reserva:string, f_creacion: string, motivo:string, id_usuario_fk : number, id_mesa_fk: number, id_bloque_fk: number, id_estado_fk: string) {
@@ -704,10 +731,6 @@ export class ServicioBDService {
       this.Alerta('Reserva', 'Error: ' + JSON.stringify(e));
     })
   }
-
-
-
-
 
   // BLOQUES
 

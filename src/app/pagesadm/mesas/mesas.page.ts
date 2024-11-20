@@ -15,7 +15,8 @@ export class MesasPage implements OnInit {
       id_mesa:'',
       nombre:'',
       c_sillas:'',
-      id_ubi_fk:''
+      id_ubi_fk:'',
+      id_estado_fk:''
     }
   ]
 
@@ -53,7 +54,13 @@ export class MesasPage implements OnInit {
   eliminarMesa(mesa: any){
 
     this.buscarMesa = "";
-    this.bd.eliminarMesa(mesa.id_mesa);
+    if (mesa.id_estado_fk == "Activado"){
+      this.bd.deshabilitarMesa('1',mesa.id_mesa).then(res => {
+        this.bd.DesactivarReservasPorMesaDesa(mesa.id_mesa);
+      });
+    }else{
+      this.bd.deshabilitarMesa('2',mesa.id_mesa);
+    }
   }
 
   irAgregar(){
