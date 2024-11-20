@@ -49,17 +49,17 @@ export class ServicioBDService {
 
   // Tabla Mesas
 
-  tablaMesas: string = "CREATE TABLE IF NOT EXISTS mesas (id_mesa INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR NOT NULL, c_sillas INTEGER NOT NULL, id_ubi_fk INTEGER, id_estado_fk, FOREIGN KEY (id_ubi_fk) REFERENCES Ubicacion (id_ubicacion), FOREIGN KEY (id_estado_fk) REFERENCES estado (id_estado));";
+  tablaMesas: string = "CREATE TABLE IF NOT EXISTS mesas (id_mesa INTEGER NOT NULL PRIMARY KEY, nombre VARCHAR NOT NULL, c_sillas INTEGER NOT NULL, id_ubi_fk INTEGER, id_estado_fk INTEGER, FOREIGN KEY (id_ubi_fk) REFERENCES Ubicacion (id_ubicacion), FOREIGN KEY (id_estado_fk) REFERENCES estado (id_estado));";
 
   // Mesas Terrazas
-  registroMesaTerraza: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (1, 'Mesa 1', 4, 1,'2')";
-  registroMesaTerraza2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (2, 'Mesa 2', 2, 1,'2')";
-  registroMesaTerraza3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (3, 'Mesa 3', 3, 1,'2')";
+  registroMesaTerraza: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk, id_estado_fk) VALUES (1, 'Mesa 1', 4, 1,'2')";
+  registroMesaTerraza2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk, id_estado_fk) VALUES (2, 'Mesa 2', 2, 1,'2')";
+  registroMesaTerraza3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk, id_estado_fk) VALUES (3, 'Mesa 3', 3, 1,'2')";
 
   // Mesas Locales
-  registroMesaLocal: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (4, 'Mesa 1', 4, 2,'2')";
-  registroMesaLocal2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (5, 'Mesa 2', 5, 2,'2')";
-  registroMesaLocal3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk) VALUES (6, 'Mesa 3', 3, 2,'2')";
+  registroMesaLocal: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk, id_estado_fk) VALUES (4, 'Mesa 1', 4, 2,'2')";
+  registroMesaLocal2: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk, id_estado_fk) VALUES (5, 'Mesa 2', 5, 2,'2')";
+  registroMesaLocal3: string = "INSERT or IGNORE INTO mesas(id_mesa, nombre, c_sillas, id_ubi_fk, id_estado_fk) VALUES (6, 'Mesa 3', 3, 2,'2')";
 
   // Tabla Reservas
 
@@ -489,7 +489,7 @@ export class ServicioBDService {
 
   // Funciones de mesa
   buscarMesa(id_ubi_fk: string) {
-    return this.database.executeSql('SELECT m.id_mesa, m.nombre, m.c_sillas, u.nombre AS id_ubi_fk, e.nombre AS id_estado_fk   FROM mesas m INNER JOIN ubicacion u ON m.id_ubi_fk = u.id_ubicacion INNER JOIN estado e ON m.id_estado_fk = e.id_estado WHERE m.id_ubi_fk = ?  ', [id_ubi_fk]).then(res => {
+    return this.database.executeSql('SELECT m.id_mesa, m.nombre, m.c_sillas, u.nombre AS id_ubi_fk, e.nombre AS id_estado_fk FROM mesas m INNER JOIN ubicacion u ON m.id_ubi_fk = u.id_ubicacion INNER JOIN estado e ON m.id_estado_fk = e.id_estado WHERE m.id_ubi_fk = ?  ', [id_ubi_fk]).then(res => {
       //variable para almacenar el resultado de la consulta
       let items: Mesas[]= [];
       //valido si trae al menos un registro
@@ -502,7 +502,7 @@ export class ServicioBDService {
             nombre: res.rows.item(i).nombre,
             c_sillas: res.rows.item(i).c_sillas,
             id_ubi_fk: res.rows.item(i).id_ubi_fk,
-            id_estado_fk: res.rows.item(i).id_estado_fk,
+            id_estado_fk: res.rows.item(i).id_estado_fk
           })
         }
       }
