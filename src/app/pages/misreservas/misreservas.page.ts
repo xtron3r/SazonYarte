@@ -89,7 +89,7 @@ export class MisreservasPage implements OnInit {
           handler: (data) => {
             if (data.motivo) {
               this.bd.ModificarReserva(data.motivo,'1',reserva.id_reserva)
-              this.BuscarReserva = '1'
+              this.BuscarReserva = ''
             } else {
               this.mostrarAlerta('Error', 'Debe ingresar un motivo para cambiar el estado.');
             }
