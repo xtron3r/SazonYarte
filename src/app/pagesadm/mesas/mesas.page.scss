@@ -75,3 +75,16 @@
     --background: #f0f0f0;
     color: black;
 }
+
+.botones-accion-del{
+    width: 150px;
+    background-color: #4e3725;
+    margin-left: 10px;
+    color: white !important;
+
+    .icon-del{
+        color: white;
+        margin: 0px;
+        margin-right: 5px;
+    }
+}
